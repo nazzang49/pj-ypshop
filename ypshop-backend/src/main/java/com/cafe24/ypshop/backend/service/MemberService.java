@@ -28,7 +28,7 @@ public class MemberService {
 	
 	//로그인
 	public boolean 로그인(MemberVO memberVO) {
-		MemberVO authUser = userDao.selectByIdAndPassword(memberVO);
+		MemberVO authUser = userDao.selectById(memberVO);
 		if(authUser!=null) return true;
 		return false;
 	}

@@ -42,52 +42,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 
 <body>
-<script type="text/javascript">
-	var flag;
-	//아이디 중복 체크
-	$(function(){
-		$('#id').change(function(){
-			$('#check-id-btn').show();
-		});
-		$('#check-id-btn').click(function(){
-			//아이디 value
-			var id = $('#id').val();
-			$.ajax({
-				url:"${pageContext.request.contextPath }/api/member/checkid?id="+id,
-				type:"get",
-				dataType:"json",
-				success:function(response){
-					if(response.result!="success"){
-						alert("통신 실패");
-						return;
-					}
-					if(response.data==true){
-						alert("현재 아이디 >> 중복");
-						$('#id').val("");
-						$('#id').focus();
-						flag = false;
-						return;
-					}
-					flag = true;
-					alert("현재 아이디 >> 사용 가능");
-					$('#check-id-btn').hide();
-				},
-				error:function(error){
-					console.log(error);
-				}
-			});
-		});
-	});
-	
-	function joinSubmit(){
-		if(flag){
-			document.getElementByName('joinform').submit();
-		}
-		alert("아이디 중복 체크 필수");
-		return false;
-	}
-</script>
-
 	<!-- mian-content -->
     <div class="main-banner" id="home" style="text-align: center; height: 100px;">
         <!-- header -->
@@ -95,77 +49,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     		<c:param name="menu" value="join"/>
     	</c:import>
     </div>
-	<!--/main-->
+
 	<section class="main-content-w3layouts-agileits">
 		<div class="container">
-			<h3 class="tittle">회원가입</h3>
+			<h3 class="tittle">로그인</h3>
 				<div class="inner-sec" style="width:500px; margin: 30px auto;">
 			<div class="login p-5 bg-light mx-auto mw-100">
-				<form:form modelAttribute="memberVO" name="joinform" action="${pageContext.request.contextPath}/member/join" method="post">
+				<form name="joinform" action="${pageContext.servletContext.contextPath}/member/auth" method="post">
 							<div class="form-row">
 								<div style="width:100%;">
 										<label for="id">아이디</label><br>
-									<form:input name="id" path="id" style="width:250px;"/>
-									<button type="button" class="btn btn-primary submit mb-4" id="check-id-btn" style="height: 40px; margin-top:15px;">아이디 중복 체크</button>
+										<input type="text" id="id" name="id" style="width:100%;">
 								</div>
-								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
-									<form:errors path="id"/>
-								</p>
 							</div>
-							
+							<br>
 							<div class="form-row">
 								<div style="width:100%;">
 										<label for="password">비밀번호</label><br>
-									<form:input path="password" type="password" style="width:95%;"/>
+										<input type="password" id="password" name="password" style="width:100%;">
 								</div>
-								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
-									<form:errors path="password"/>
-								</p>
 							</div>
-							<br>
-							<div class="form-row">
-								<div style="width:100%;">
-										<label for="name">이름</label><br>
-									<form:input path="name" style="width:95%;"/>
-								</div>
-								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
-									<form:errors path="name"/>
-								</p>
-							</div>
-							<br>
-							<div class="form-row">
-								<div style="width:100%;">
-										<label for="address">주소</label><br>
-									<form:input path="address" style="width:95%;"/>
-								</div >
-								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
-									<form:errors path="address"/>
-								</p>
-							</div>
-							<br>
-							<div class="form-row">
-								<div style="width:100%;">
-										<label for="phone">전화번호</label><br>
-									<form:input path="phone" style="width:95%;"/>
-								</div>
-								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
-									<form:errors path="phone"/>
-								</p>
-							</div>
-							<br>
-							<div class="form-row">
-								<div style="width:100%;">
-										<label for="email">이메일</label><br>
-									<form:input path="email" style="width:95%;"/>
-								</div>
-								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
-									<form:errors path="email"/>
-								</p>
-							</div>
+							
 							<div style="text-align: center; margin-top: 30px;">
-								<button type="submit" class="btn btn-primary submit mb-4" style=" width:100%;">회원가입</button>
+								<button type="submit" class="btn btn-primary submit mb-4" style=" width:100%;">로그인</button>
 							</div>
-						</form:form>
+						</form>
 					</div>
 			</div>
 		</div>

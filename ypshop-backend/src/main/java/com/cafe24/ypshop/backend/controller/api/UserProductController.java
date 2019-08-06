@@ -32,11 +32,6 @@ public class UserProductController {
 		
 		List<ProductVO> productList = userProductService.상품목록(productVO);
 
-		if(productList.isEmpty()) {
-			JSONResult result = JSONResult.success("상품 목록 없음");
-			return ResponseEntity.status(HttpStatus.OK).body(result);
-		}
-		
 		//리턴 데이터
 		Map<String, Object> data = new HashMap<>();
 		data.put("productList", productList);
@@ -51,11 +46,6 @@ public class UserProductController {
 		
 		//리턴 데이터
 		Map<String, Object> data = userProductService.상품상세(productVO);
-		
-		if((ProductVO)data.get("pvo")==null) {
-			JSONResult result = JSONResult.success("상품 없음");
-			return ResponseEntity.status(HttpStatus.OK).body(result);
-		}
 		
 		JSONResult result = JSONResult.success(data);
 		return ResponseEntity.status(HttpStatus.OK).body(result);

@@ -1,12 +1,15 @@
 package com.cafe24.ypshop.frontend.security;
 
 import java.util.Collection;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class SecurityUser implements UserDetails {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	//domain field = 부가적으로 보호해야 할 사용자 데이터
 	
 	private Collection<? extends GrantedAuthority> authorities;

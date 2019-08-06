@@ -7,18 +7,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import com.cafe24.ypshop.frontend.repository.MemberDAO;
+import com.cafe24.ypshop.frontend.service.MemberService;
 import com.cafe24.ypshop.frontend.vo.MemberVO;
 
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private MemberDAO memberDAO;
+	private MemberService memberService;
 	
 	@Override
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		MemberVO memberVO = memberDAO.selectSecurityUserById(userName);
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		MemberVO memberVO = memberService.loaduserbyusername(username);
+		
+		System.out.println("로그인 정보 : "+memberVO);
 		
 		SecurityUser securityUser = new SecurityUser();
 

@@ -22,13 +22,13 @@ public class MemberController {
 	
 	//회원_조인_페이지
 	@GetMapping("/join")
-	public String join(@ModelAttribute("memberVo") MemberVO memberVO) {
+	public String join(@ModelAttribute("memberVO") MemberVO memberVO) {
 		return "member/join";
 	}
 	
 	//회원_조인
 	@PostMapping("/join")
-	public String join(@ModelAttribute("memberVo") @Valid MemberVO memberVO,
+	public String join(@ModelAttribute("memberVO") @Valid MemberVO memberVO,
 					   BindingResult br,
 					   Model model) {
 		
@@ -44,10 +44,23 @@ public class MemberController {
 			model.addAttribute("join_result", false);
 			return "member/join";
 		}
+		
 		return "redirect:/member/joinsuccess";
 	}
 	
-	//회원_로그인
+	//회원_조인_성공
+	@GetMapping("/joinsuccess")
+	public String joinsuccess() {
+		return "member/joinsuccess";
+	}
+	
+	//회원_로그인_페이지
+	@GetMapping("/login")
+	public String login() {
+		return "member/login";
+	}
+	
+	//회원_로그인 >> spring security
 	
 	
 }

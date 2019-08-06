@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.cafe24.ypshop.backend.dto.JSONResult;
@@ -42,7 +43,7 @@ public class MemberController {
 	
 	@ApiOperation(value="조인")
 	@PostMapping(value="/join")
-	public ResponseEntity<JSONResult> join(@ModelAttribute @Valid MemberVO memberVO,
+	public ResponseEntity<JSONResult> join(@RequestBody @Valid MemberVO memberVO,
 						   				   BindingResult br) {
 		
 		//valid
@@ -78,33 +79,32 @@ public class MemberController {
 	
 	@ApiOperation(value="로그인")
 	@PostMapping(value="/login")
-	public ResponseEntity<JSONResult> login(@ModelAttribute MemberVO memberVO) {
+	public ResponseEntity<JSONResult> login(@RequestBody MemberVO memberVO) {
+		
+		
+		System.out.println("아이디 : "+memberVO.getId());
 		
 		//valid
-		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-		Set<ConstraintViolation<MemberVO>> validatorResults = validator.validateProperty(memberVO, "id");
-		validatorResults.addAll(validator.validateProperty(memberVO, "password"));
-		if(!validatorResults.isEmpty()) {
-			String msg = "";
-			for(ConstraintViolation<MemberVO> validatorResult : validatorResults) {
-				if("id".equals(validatorResult.getPropertyPath().toString())) {
-					msg = messageSource.getMessage("NotEmpty.memberVO.id", null, LocaleContextHolder.getLocale());
-					break;
-				}else if("password".equals(validatorResult.getPropertyPath().toString())) {
-					msg = messageSource.getMessage("NotEmpty.memberVO.password", null, LocaleContextHolder.getLocale());
-					break;
-				}
-			}
-			JSONResult result = JSONResult.fail(msg);
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
-		}
+//		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+//		Set<ConstraintViolation<MemberVO>> validatorResults = validator.validateProperty(memberVO, "id");
+//		if(!validatorResults.isEmpty()) {
+//			String msg = "";
+//			for(ConstraintViolation<MemberVO> validatorResult : validatorResults) {
+//				if("id".equals(validatorResult.getPropertyPath().toString())) {
+//					msg = messageSource.getMessage("NotEmpty.memberVO.id", null, LocaleContextHolder.getLocale());
+//					break;
+//				}
+//			}
+//			JSONResult result = JSONResult.fail(msg);
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+//		}
 		
-		boolean flag = memberService.로그인(memberVO);
+		memberVO = memberService.회원조회(memberVO);
 		
 		//리턴 데이터
 		Map<String, Object> data = new HashMap<>();
-		data.put("flag", flag);
-		JSONResult result = JSONResult.success(data);
+		data.put("memberVO", memberVO);
+		JSONResult result = JSONResult.success(memberVO);
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	

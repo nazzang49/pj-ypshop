@@ -19,12 +19,12 @@
 		insert into member
 		values(
 		#{id},
-		aes_encrypt(#{password},#{keyValue}),
+		sha2(#{password},512),
 		aes_encrypt(#{name},#{keyValue}),
 		aes_encrypt(#{address},#{keyValue}),
 		aes_encrypt(#{phone},#{keyValue}),
 		aes_encrypt(#{email},#{keyValue}),
-		#{role},
+		default,
 		now())
 	]]>
 	</insert>
@@ -51,6 +51,7 @@
 	<![CDATA[
 		select
 		id,
+		password,
 		cast(aes_decrypt(name, #{keyValue}) as char) as name,
 		cast(aes_decrypt(phone, #{keyValue}) as char) as phone,
 		cast(aes_decrypt(email, #{keyValue}) as char) as email,
