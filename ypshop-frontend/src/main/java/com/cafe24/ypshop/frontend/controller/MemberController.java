@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -42,7 +43,7 @@ public class MemberController {
 		boolean flag = memberService.join(memberVO);
 		if(!flag) {
 			model.addAttribute("join_result", false);
-			return "member/join";
+			return "redirect:/member/join";
 		}
 		
 		return "redirect:/member/joinsuccess";
@@ -62,5 +63,34 @@ public class MemberController {
 	
 	//회원_로그인 >> spring security
 	
+	//회원_조회 및 수정_페이지
+	@GetMapping("/info/{id}")
+	public String info(@PathVariable(value="id") String id, Model model) {
+		MemberVO memberVO = memberService.info(id);
+		model.addAttribute("memberVO", memberVO);
+		return "member/info";
+	}
+	
+	//회원_조회 및 수정
+	@PostMapping("/update")
+	public String update(@ModelAttribute("memberVO") @Valid MemberVO memberVO,
+					     BindingResult br,
+					     Model model) {
+		
+		//valid
+		if(br.hasErrors()) {
+			model.addAttribute(br.getModel());
+			return "member/info";
+		}
+		
+		//backend error
+		boolean flag = memberService.update(memberVO);
+		if(!flag) {
+			model.addAttribute("update_result", false);
+			return "redirect:/member/info/"+memberVO.getId();
+		}
+		model.addAttribute("update_result", true);
+		return "redirect:/";
+	}
 	
 }

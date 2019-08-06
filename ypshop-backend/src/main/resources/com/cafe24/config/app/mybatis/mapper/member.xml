@@ -84,7 +84,6 @@
 	<update id="update" parameterType="membervo">
 	<![CDATA[
 		update member set
-		password=aes_encrypt(#{password}, #{keyValue}),
 		name=aes_encrypt(#{name}, #{keyValue}),
 		address=aes_encrypt(#{address}, #{keyValue}),
 		phone=aes_encrypt(#{phone}, #{keyValue}),

@@ -26,7 +26,7 @@ public class MemberVO {
 	@NotEmpty(message="주소 입력 필수")
 	private String address;
 	
-	@NotEmpty(message="전화번호 입력 필수")
+	@NotEmpty(message="휴대폰 번호 입력 필수")
 	@Pattern(regexp="^01(?:0|1|[6-9])(\\d{3}|\\d{4})(\\d{4})$", message="휴대폰 번호 형식 오류")
 	private String phone;
 	

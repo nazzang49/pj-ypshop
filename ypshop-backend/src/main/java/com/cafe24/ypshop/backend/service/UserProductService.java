@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cafe24.ypshop.backend.repository.CategoryDAO;
 import com.cafe24.ypshop.backend.repository.ImageDAO;
 import com.cafe24.ypshop.backend.repository.ProductDAO;
 import com.cafe24.ypshop.backend.repository.ProductOptionDAO;
+import com.cafe24.ypshop.backend.vo.CategoryVO;
 import com.cafe24.ypshop.backend.vo.ImageVO;
 import com.cafe24.ypshop.backend.vo.ProductOptionVO;
 import com.cafe24.ypshop.backend.vo.ProductVO;
@@ -28,9 +30,17 @@ public class UserProductService {
 	@Autowired
 	private ProductOptionDAO productOptionDao;
 	
+	@Autowired
+	private CategoryDAO categoryDao;
+	
 	//상품 목록
 	public List<ProductVO> 상품목록(ProductVO productVO) {
 		return productDao.selectAllByCategoryNoAndAlignUse(productVO);
+	}
+	
+	//카테고리 목록
+	public List<CategoryVO> 카테고리목록(){
+		return categoryDao.selectAll("", "");
 	}
 	
 	//상품 상세 >> 기본 정보, 이미지, 옵션

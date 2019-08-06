@@ -13,14 +13,11 @@ public class MainService {
 
 	private final RestTemplate restTemplate = new RestTemplate();
 	
-	//메인_상품 목록
-	public List<ProductVO> productList() {
-		JSONResultGoods result = restTemplate.getForObject("http://localhost:8090/ypshop-backend/api/product/list", JSONResultGoods.class);
-		
-		System.out.println("들어온다11");
-		
+	//메인_상품 목록 >> 상품 목록, 카테고리 목록
+	public Map<String, Object> main() {
+		JSONResultGoods result = restTemplate.getForObject("http://localhost:8090/ypshop-backend/api/product/list", JSONResultGoods.class);		
 		Map<String, Object> returnData = (Map<String, Object>)result.getData();
-		return (List<ProductVO>)returnData.get("productList");
+		return returnData;
 	}
 	
 	private static class JSONResultGoods extends JSONResult<Object> {

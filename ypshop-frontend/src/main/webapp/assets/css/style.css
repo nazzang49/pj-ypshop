@@ -142,15 +142,15 @@ nav ul {
 
 /* Positioning the navigation items inline */
 
-nav ul li {
+ul li {
     margin: 0px 1em;
     display: inline-block;
-    float: left;
 }
 
 /* Styling the links */
 
 .menu li a {
+	text-decoration:none;
     font-weight: 600;
     font-size: 0.8em;
     letter-spacing: 2px;
@@ -178,8 +178,8 @@ nav ul li {
 
 /* Background color change on Hover */
 
-nav .menu li a:hover {
-    color: black;
+.menu li a:hover {
+    color: blue;
 }
 
 .menu li.active a {
@@ -259,8 +259,7 @@ li > a:only-child:after {
 
     /* Hide the navigation menu by default */
     /* Also hide the  */
-    .toggle + a,
-    .menu {
+    .toggle + a {
         display: none;
     }
 

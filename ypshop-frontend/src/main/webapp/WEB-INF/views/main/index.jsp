@@ -83,6 +83,14 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 </script>
 <body>
 
+<script>
+	var update_result = ${update_result};
+	
+	if(update_result!=null&&update_result==true){
+		alert("회원 수정 성공");
+	}
+</script>
+
     <!-- mian-content -->
     <div class="main-banner" id="home" style="text-align: center;">
         <!-- header -->
@@ -100,17 +108,28 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
             </div>
         </div>
         <!--// banner-inner -->
-
     </div>
+    
+    <!-- 상품 카테고리 -->
+    <div style="height:100px; background:black;">
+	    <ul class="menu mt-2" id="product-category" style="height:100%; text-align: center;">
+	    	<c:forEach items="${categoryList }" var="cvo">
+	    	<li style="list-style: none; font-size: 25px; margin-top: 30px;"><a href="${pageContext.servletContext.contextPath}">${cvo.name }</a></li>
+	    	</c:forEach>
+	    </ul>
+    </div>
+    
+    
     <!--//main-content-->
         <section class="about py-5">
         <div class="container pb-lg-3">
             <h3 class="tittle text-center">product</h3>
             <div class="row">
+            	<c:forEach items="${productList }" var="pvo">
                 <div class="col-md-4 product-men">
                 	<!-- 상품 목록 -->
                 	
-                	<c:forEach items="${productList }" var="pvo">
+                	
                 	
                 	<div class="product-shoe-info shoe text-center">
                         <div class="men-thumb-item">
@@ -133,45 +152,9 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
                         </div>
                     </div>
                     
-                    </c:forEach>
+                    
                 </div>
-            </div>
-        </div>
-    </section>
-    <!-- //ab -->
-    <!---728x90--->
-    <!--/ab -->
-    <section class="about py-5">
-        <div class="container pb-lg-3">
-            <h3 class="tittle text-center">Popular Products</h3>
-            <div class="row">
-                <div class="col-md-6 latest-left">
-                    <div class="product-shoe-info shoe text-center">
-                        <img src="images/img1.jpg" class="img-fluid" alt="">
-                        <div class="shop-now"><a href="shop.html" class="btn">Shop Now</a></div>
-                    </div>
-                </div>
-                <div class="col-md-6 latest-right">
-                    <div class="row latest-grids">
-                        <div class="latest-grid1 product-men col-12">
-                            <div class="product-shoe-info shoe text-center">
-                                <div class="men-thumb-item">
-                                    <img src="images/img2.jpg" class="img-fluid" alt="">
-                                    <div class="shop-now"><a href="shop.html" class="btn">Shop Now</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="latest-grid2 product-men col-12 mt-lg-4">
-                            <div class="product-shoe-info shoe text-center">
-                                <div class="men-thumb-item">
-                                    <img src="images/img3.jpg" class="img-fluid" alt="">
-                                    <div class="shop-now"><a href="shop.html" class="btn">Shop Now</a></div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
     </section>

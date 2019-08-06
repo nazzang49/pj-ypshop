@@ -80,10 +80,7 @@ public class MemberController {
 	@ApiOperation(value="로그인")
 	@PostMapping(value="/login")
 	public ResponseEntity<JSONResult> login(@RequestBody MemberVO memberVO) {
-		
-		
-		System.out.println("아이디 : "+memberVO.getId());
-		
+				
 		//valid
 //		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 //		Set<ConstraintViolation<MemberVO>> validatorResults = validator.validateProperty(memberVO, "id");
@@ -112,6 +109,9 @@ public class MemberController {
 	@GetMapping(value="/info/{id}")
 	public JSONResult get(@ModelAttribute MemberVO memberVO) {
 		
+		
+		System.out.println("회원 조회 아이디 : "+memberVO.getId());
+		
 		//본인 인증
 		
 		memberVO = memberService.회원조회(memberVO);
@@ -119,13 +119,13 @@ public class MemberController {
 		//리턴 데이터
 		Map<String, Object> data = new HashMap<>();
 		data.put("memberVO", memberVO);
-		JSONResult result = JSONResult.success(data);
+		JSONResult result = JSONResult.success(memberVO);
 		return result;
 	}
 	
 	@ApiOperation(value="회원수정")
-	@PutMapping(value="/update")
-	public ResponseEntity<JSONResult> update(@ModelAttribute @Valid MemberVO memberVO,
+	@PostMapping(value="/update")
+	public ResponseEntity<JSONResult> update(@RequestBody @Valid MemberVO memberVO,
 											 BindingResult br) {
 		
 		//본인 인증

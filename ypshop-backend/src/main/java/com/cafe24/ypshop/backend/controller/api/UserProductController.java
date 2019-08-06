@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cafe24.ypshop.backend.dto.JSONResult;
 import com.cafe24.ypshop.backend.service.UserProductService;
+import com.cafe24.ypshop.backend.vo.CategoryVO;
 import com.cafe24.ypshop.backend.vo.ProductVO;
 
 import io.swagger.annotations.ApiOperation;
@@ -31,10 +32,12 @@ public class UserProductController {
 	public ResponseEntity<JSONResult> getList(@ModelAttribute ProductVO productVO) {
 		
 		List<ProductVO> productList = userProductService.상품목록(productVO);
+		List<CategoryVO> categoryList = userProductService.카테고리목록();
 
 		//리턴 데이터
 		Map<String, Object> data = new HashMap<>();
 		data.put("productList", productList);
+		data.put("categoryList", categoryList);
 		JSONResult result = JSONResult.success(data);
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}

@@ -46,34 +46,70 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="main-banner" id="home" style="text-align: center; height: 100px;">
         <!-- header -->
         <c:import url='/WEB-INF/views/includes/header.jsp'>
-    		<c:param name="menu" value="login"/>
+    		<c:param name="menu" value="join"/>
     	</c:import>
     </div>
-
+    
+	<!--/main-->
 	<section class="main-content-w3layouts-agileits">
 		<div class="container">
-			<h3 class="tittle">로그인</h3>
+			<h3 class="tittle">회원 조회 및 수정</h3>
 				<div class="inner-sec" style="width:500px; margin: 30px auto;">
 			<div class="login p-5 bg-light mx-auto mw-100">
-				<form name="joinform" action="${pageContext.servletContext.contextPath}/member/auth" method="post">
+				<form:form modelAttribute="memberVO" name="joinform" action="${pageContext.request.contextPath}/member/update" method="post">
 							<div class="form-row">
 								<div style="width:100%;">
 										<label for="id">아이디</label><br>
-										<input type="text" id="id" name="id" style="width:100%;">
+									<form:input name="id" path="id" style="width:95%;" value="${memberVO.id}"/>
 								</div>
+								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
+									<form:errors path="id"/>
+								</p>
 							</div>
 							<br>
 							<div class="form-row">
 								<div style="width:100%;">
-										<label for="password">비밀번호</label><br>
-										<input type="password" id="password" name="password" style="width:100%;">
+										<label for="name">이름</label><br>
+									<form:input path="name" style="width:95%;"/>
 								</div>
+								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
+									<form:errors path="name"/>
+								</p>
 							</div>
-							
+							<br>
+							<div class="form-row">
+								<div style="width:100%;">
+										<label for="address">주소</label><br>
+									<form:input path="address" style="width:95%;"/>
+								</div >
+								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
+									<form:errors path="address"/>
+								</p>
+							</div>
+							<br>
+							<div class="form-row">
+								<div style="width:100%;">
+										<label for="phone">전화번호</label><br>
+									<form:input path="phone" style="width:95%;"/>
+								</div>
+								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
+									<form:errors path="phone"/>
+								</p>
+							</div>
+							<br>
+							<div class="form-row">
+								<div style="width:100%;">
+										<label for="email">이메일</label><br>
+									<form:input path="email" style="width:95%;"/>
+								</div>
+								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
+									<form:errors path="email"/>
+								</p>
+							</div>
 							<div style="text-align: center; margin-top: 30px;">
-								<button type="submit" class="btn btn-primary submit mb-4" style=" width:100%;">로그인</button>
+								<button type="submit" class="btn btn-primary submit mb-4" style=" width:100%;">회원수정</button>
 							</div>
-						</form>
+						</form:form>
 					</div>
 			</div>
 		</div>

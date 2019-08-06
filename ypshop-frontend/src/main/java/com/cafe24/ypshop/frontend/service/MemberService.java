@@ -2,8 +2,6 @@ package com.cafe24.ypshop.frontend.service;
 
 import java.util.Arrays;
 import java.util.Map;
-
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -47,10 +45,29 @@ public class MemberService {
 		//getForObject >> Object 타입 결과 리턴 >> 현재 메소드 Map
 		JSONResultMemberVO result = restTemplate.postForObject("http://localhost:8090/ypshop-backend/api/member/login", memberVO, JSONResultMemberVO.class);
 		//response
-		
-		System.out.println("리턴 데이터 : "+result.getData());
-		
+				
 		return result.getData();
+	}
+	
+	//회원_조회
+	public MemberVO info(String id) {
+		JSONResultMemberVO result = restTemplate.getForObject("http://localhost:8090/ypshop-backend/api/member/info/"+id, JSONResultMemberVO.class);
+		return result.getData();
+	}
+	
+	//회원_수정
+	public boolean update(MemberVO memberVO) {
+		restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
+		JSONResultGoods result = restTemplate.postForObject("http://localhost:8090/ypshop-backend/api/member/update", memberVO, JSONResultGoods.class);
+		
+		//backend vaild
+		if("fail".equals(result.getResult())) {
+			return false;
+		}
+		
+		//response
+		Map<String, Object> returnData = (Map<String, Object>)result.getData();
+		return (Boolean)returnData.get("flag");
 	}
 	
 	// DTO Class
