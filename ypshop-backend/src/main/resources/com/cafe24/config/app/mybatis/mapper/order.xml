@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="order">
+
+	<!-- 주문 추가 -->
+	<insert id="insert" parameterType="ordervo">
+	<![CDATA[
+		insert into orders
+		values(
+		null,
+		#{memberId},
+		aes_encrypt(#{customerName}, #{keyValue}),
+		aes_encrypt(#{customerAddress}, #{keyValue}),
+		aes_encrypt(#{customerPhone}, #{keyValue}),
+		aes_encrypt(#{customerEmail}, #{keyValue}),
+		aes_encrypt(#{receiverName}, #{keyValue}),
+		aes_encrypt(#{receiverAddress}, #{keyValue}),
+		aes_encrypt(#{receiverPhone}, #{keyValue}),
+		#{receiverMsg},
+		now(),
+		#{paymentCategory},
+		#{paymentPrice},
+		default)
+	]]>
+	</insert>
+
+	<!-- 주문 상세 추가 -->
+	<insert id="insertOrderDetail" parameterType="orderdetailvo">
+	<![CDATA[
+		insert into orders_detail
+		values(
+		null,
+		#{orderNo},
+		#{productOptionNo},
+		#{productName},
+		#{firstOptionName},
+		#{secondOptionName},
+		#{imageUrl},
+		#{orderAmount},
+		#{orderPrice})
+	]]>
+	</insert>
+	
+	<!-- 주문 번호 -->
+	<select id="selectMaxOrderNo" resultType="long">
+	<![CDATA[
+		select max(no) from orders
+	]]>
+	</select>
+		
+	<!-- (회원) 주문 목록 -->
+	<select id="selectOrderByPeriod" parameterType="ordervo" resultType="ordervo">
+	<![CDATA[
+		select no, memberId, orderDate, paymentCategory, paymentPrice, status
+		from orders
+		where memberId=#{memberId}
+		and orderDate >= date_add(now(), interval #{period} month)
+	]]>
+	</select>
+	
+	<!-- (관리자) 주문 목록 -->
+	<select id="selectAll" parameterType="map" resultType="ordervo">
+	<![CDATA[
+		select
+		no,
+		memberId,
+		cast(aes_decrypt(customerName, #{keyValue}) as char) as customerName,
+		cast(aes_decrypt(customerAddress, #{keyValue}) as char) as customerAddress,
+		cast(aes_decrypt(customerPhone, #{keyValue}) as char) as customerPhone,
+		cast(aes_decrypt(customerEmail, #{keyValue}) as char) as customerEmail,
+		cast(aes_decrypt(receiverName, #{keyValue}) as char) as receiverName,
+		cast(aes_decrypt(receiverAddress, #{keyValue}) as char) as receiverAddress,
+		cast(aes_decrypt(receiverPhone, #{keyValue}) as char) as receiverPhone,
+		receiverMsg,
+		orderDate,
+		paymentCategory,
+		paymentPrice,
+		status
+		from orders
+	]]>
+		<if test="searchType=='memberId'">
+		<![CDATA[
+			where memberId like concat('%',#{searchKwd},'%')
+		]]>
+		</if>
+		<if test="searchType=='orderDate'">
+		<![CDATA[
+			where orderDate like concat('%',#{searchKwd},'%')
+		]]>
+		</if>
+		<if test="searchType=='status'">
+		<![CDATA[
+			where status like concat('%',#{searchKwd},'%')
+		]]>
+		</if>
+		<if test="searchType=='customerName'">
+		<![CDATA[
+			where cast(aes_decrypt(customerName, #{keyValue}) as char) like concat('%',#{searchKwd},'%')
+		]]>
+		</if>
+		<if test="searchType=='receiverName'">
+		<![CDATA[
+			where cast(aes_decrypt(receiverName, #{keyValue}) as char) like concat('%',#{searchKwd},'%')
+		]]>
+		</if>
+	</select>
+	
+	<!-- 주문 상품별 상세 정보 -->
+	<select id="selectOrderDetailByPeriod" parameterType="ordervo" resultType="orderdetailvo">
+	<![CDATA[
+		select od.orderNo, od.productName, od.firstOptionName, od.secondOptionName, od.imageUrl, od.orderAmount, od.orderPrice
+		from orders_detail od, orders o
+		where memberId=#{memberId}
+        and o.no=od.orderNo
+		and o.orderDate >= date_add(now(), interval #{period} month);
+	]]>
+	</select>
+	
+	<!-- 주문 상품별 1차 옵션 -->
+	<select id="selectFirstByCartNo" parameterType="long" resultType="optionvo">
+	<![CDATA[
+		select *
+		from cart c, product_option po, option o
+        where c.productOptionNo=po.no
+        and po.firstOptionNo=o.no
+        and c.no=#{cartNo}
+	]]>
+	</select>
+	
+	<!-- 주문 상품별 2차 옵션 -->
+	<select id="selectSecondByCartNo" parameterType="long" resultType="optionvo">
+	<![CDATA[
+		select *
+		from cart c, product_option po, option o
+        where c.productOptionNo=po.no
+        and po.secondOptionNo=o.no
+        and c.no=#{cartNo}
+	]]>
+	</select>
+	
+	<!-- 주문 상세 추출 >> 상품명, 썸네일 경로 -->
+	<select id="selectByCartNo" parameterType="long" resultType="orderdetailvo">
+	<![CDATA[
+		select c.cartAmount as orderAmount, c.cartPrice as orderPrice, p.name as productName, i.url as imageUrl
+		from cart c, product_option po, product p, image i
+		where c.productOptionNo=po.no
+		and po.productNo=p.no
+		and p.no=i.productNo
+		and c.no=#{cartNo}
+		and i.repOrBasic="R"
+	]]>
+	</select>
+	
+	<!-- 주문 상태 수정 -->
+	<update id="update" parameterType="ordervo">
+	<![CDATA[
+		update orders
+		set status=#{status}
+		where no=#{no}
+	]]>
+	</update>
+	
+</mapper>

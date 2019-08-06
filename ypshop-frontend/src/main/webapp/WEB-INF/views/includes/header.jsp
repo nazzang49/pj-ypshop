@@ -1,0 +1,34 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<header class="header">
+    <div class="container-fluid px-lg-5">
+        <nav class="py-4">
+            <div id="logo">
+                <h1><a href="index.html">CAFE24</a></h1>
+            </div>
+            <label for="drop" class="toggle">Menu</label>
+            <input type="checkbox" id="drop" />
+            <ul class="menu mt-2">
+            	<!-- spring security -->
+            	<c:choose>
+            	<c:when test="${param.menu == 'main' }">
+            		<li class="active"><a href="${pageContext.servletContext.contextPath}">메인</a></li>
+            	    <li><a href="${pageContext.servletContext.contextPath}/member/login">회원 로그인</a></li>
+	                <li><a href="${pageContext.servletContext.contextPath}/member/info">마이페이지</a></li>
+	                <li><a href="${pageContext.servletContext.contextPath}/member/join">회원가입</a></li>
+	                <li><a href="#">운영자 로그인</a></li>
+	            </c:when>
+	            <c:when test="${param.menu == 'join' }">
+            		<li><a href="${pageContext.servletContext.contextPath}">메인</a></li>
+            	    <li><a href="${pageContext.servletContext.contextPath}/member/login">회원 로그인</a></li>
+	                <li><a href="${pageContext.servletContext.contextPath}/member/info">마이페이지</a></li>
+	                <li class="active"><a href="${pageContext.servletContext.contextPath}/member/join">회원가입</a></li>
+	                <li><a href="#">운영자 로그인</a></li>
+	            </c:when>
+	            </c:choose>
+            </ul>
+        </nav>
+    </div>
+</header>

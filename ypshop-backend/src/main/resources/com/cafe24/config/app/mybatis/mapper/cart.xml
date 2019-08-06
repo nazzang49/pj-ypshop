@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cart">
+
+	<!-- 장바구니 추가 -->
+	<insert id="insert" parameterType="cartvo">
+	<![CDATA[
+		insert into cart
+		values(
+		null,
+		#{memberId},
+		#{productOptionNo},
+		#{cartAmount},
+		#{cartPrice})
+	]]>
+	</insert>
+	
+	<!-- 장바구니 목록 -->
+	<select id="selectAllByMemberId" resultType="cartvo">
+	<![CDATA[
+		select A.no, A.firstOptionName, o1.name as secondOptionName, A.productOptionNo, A.cartAmount, A.cartPrice, A.productName
+		from product_option po1, option o1,
+			(select c.no, c.cartAmount, c.cartPrice, c.productOptionNo, p.name as productName, o.name as firstOptionName
+			 from cart c, product p, product_option po, option o
+			 where memberId=#{memberId}
+			 and c.productOptionNo=po.no
+			 and po.firstOptionNo=o.no
+			 and po.productNo=p.no) A
+		where A.productOptionNo=po1.no
+		and po1.secondOptionNo=o1.no;
+	]]>
+	</select>
+	
+	<!-- 장바구니 수정 -->
+	<update id="update" parameterType="cartvo">
+	<![CDATA[
+		update cart set
+		cartAmount=#{cartAmount},
+		productOptionNo=#{productOptionNo}
+		where no=#{no}
+	]]>
+	</update>
+	
+	<!-- 장바구니 삭제 -->
+	<delete id="delete" parameterType="long">
+	<![CDATA[
+		delete
+		from cart
+		where no=#{no}
+	]]>
+	</delete>
+	
+	<!-- 장바구니 >> 주문 -->
+	<select id="selectByNo" parameterType="long" resultType="cartvo">
+	<![CDATA[
+		select *
+		from cart
+		where no=#{no}
+	]]>
+	</select>
+	
+	<!-- 주문 가능 여부 by 수량 비교 -->
+	<select id="selectAmountByNo" parameterType="long" resultType="cartvo">
+	<![CDATA[
+		select c.cartAmount, c.productOptionNo, po.remainAmount as remainAmount
+		from cart c, product_option po
+		where c.productOptionNo=po.no
+		and c.no=#{no}
+	]]>
+	</select>
+	
+
+</mapper>
