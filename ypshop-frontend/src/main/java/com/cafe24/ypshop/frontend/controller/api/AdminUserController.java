@@ -25,9 +25,6 @@ public class AdminUserController {
 						 	  @RequestParam(value="id", required=true, defaultValue="") String id) {
 		
 		boolean flag = adminUserService.delete(id);
-		
-		System.out.println("회원 삭제 결과 : "+flag);
-		
 		JSONResult2 result = JSONResult2.success(flag);
 		return result;
 	}

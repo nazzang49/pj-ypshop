@@ -29,7 +29,7 @@ public class ProductVO {
 	private List<ImageVO> imageList;
 	//상품 옵션
 	private List<OptionVO> optionList;
-	private String ThumbnailUrl;
+	private String thumbnailUrl;
 	
 	public ProductVO() {
 		
@@ -47,10 +47,10 @@ public class ProductVO {
 	}
 	
 	public String getThumbnailUrl() {
-		return ThumbnailUrl;
+		return thumbnailUrl;
 	}
 	public void setThumbnailUrl(String thumbnailUrl) {
-		ThumbnailUrl = thumbnailUrl;
+		this.thumbnailUrl = thumbnailUrl;
 	}
 	public List<ImageVO> getImageList() {
 		return imageList;
@@ -111,6 +111,6 @@ public class ProductVO {
 	public String toString() {
 		return "ProductVO [no=" + no + ", categoryNo=" + categoryNo + ", name=" + name + ", price=" + price
 				+ ", shortDescription=" + shortDescription + ", alignUse=" + alignUse + ", alignNo=" + alignNo
-				+ ", imageList=" + imageList + ", optionList=" + optionList + ", ThumbnailUrl=" + ThumbnailUrl + "]";
+				+ ", imageList=" + imageList + ", optionList=" + optionList + ", thumbnailUrl=" + thumbnailUrl + "]";
 	}
 }

@@ -63,7 +63,7 @@ public class AdminCategoryController {
 		List<CategoryVO> categoryList = adminCategoryService.카테고리목록(searchType, searchKwd);
 		
 		data.put("categoryList", categoryList);
-		JSONResult result = JSONResult.success(data);
+		JSONResult result = JSONResult.success(categoryList);
 		return result;
 	}
 	

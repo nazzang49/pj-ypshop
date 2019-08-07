@@ -152,13 +152,37 @@ if(typeof _bsa !== 'undefined' && _bsa) {
 ga('create', 'UA-30027142-1', 'w3layouts.com');
   ga('send', 'pageview');
 </script>
-
 <body>	
 
-<script>
+<script type="text/javascript">
 
-	//회원목록 by Ajax
+	//회원삭제 by Ajax
+	function removeUser(id){
+		$.ajax({
+			url:"${pageContext.servletContext.contextPath }/api/admin/user/delete?id="+id,
+			type:"get",
+			dataType:"json",
+			success:function(response){
+				if(response.result!="success"){
+					console.error(response.message);
+					return;
+				}
+				if(response.data==false){
+					alert("회원 삭제 실패");
+					return;
+				}
+				alert("회원 삭제 성공");
+			},
+			error:function(xhr, error){
+				console.log("error : "+error);
+			}
+		});
+	}
 	
+	//상품 등록 >> 새창 열기
+	function addProduct(){
+		window.open("${pageContext.servletContext.contextPath }/admin/product/add", "popup", "width=1700, height=800");
+	}
 
 </script>
 <div class="page-container">	
@@ -168,7 +192,7 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 				<div class="header-main">
 					<div class="header-left">
 							<div class="logo-name">
-									 <a href="index.html"> <h1>YPSHOP</h1> 
+									 <a href="index.html"> <h1>YPSHOP</h1>
 									<!--<img id="logo" src="" alt="Logo"/>--> 
 								  </a> 								
 							</div>
@@ -368,78 +392,49 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 		<!-- /script-for sticky-nav -->
 <!--inner block start here-->
 <div class="inner-block">
-<!--market updates updates-->
-	 <div class="market-updates">
-			<div class="col-md-4 market-update-gd" style="float:left;">
-				<div class="market-update-block clr-block-1">
-					<div class="col-md-8 market-update-left">
-						<h3>${map.memberCount }명</h3>
-						<h4>회원 수</h4>
-					</div>
-					<div class="col-md-4 market-update-right">
-						<i class="fa fa-file-text-o"> </i>
-					</div>
-				  <div class="clearfix"> </div>
-				</div>
-			</div>
-			<div class="col-md-4 market-update-gd" style="float:left;">
-				<div class="market-update-block clr-block-2">
-				 <div class="col-md-8 market-update-left">
-					<h3>${map.productCount }개</h3>
-					<h4>등록된 상품 수</h4>
-				  </div>
-					<div class="col-md-4 market-update-right">
-						<i class="fa fa-eye"> </i>
-					</div>
-				  <div class="clearfix"> </div>
-				</div>
-			</div>
-			<div class="col-md-4 market-update-gd" style="float:left;">
-				<div class="market-update-block clr-block-3">
-					<div class="col-md-8 market-update-left">
-						<h3>23</h3>
-						<h4>New Messages</h4>
-					</div>
-					<div class="col-md-4 market-update-right">
-						<i class="fa fa-envelope-o"> </i>
-					</div>
-				  <div class="clearfix"> </div>
-				</div>
-			</div>
-		   <div class="clearfix"> </div>
-		</div>
-<!--market updates end here-->
+
 <!---728x90--->
 
 <!--mainpage chit-chating-->
 <div class="chit-chat-layer1">
 	<div class="col-md-6 chit-chat-layer1-left">
+	
+	<h1 style="margin-bottom: 30px;">상품관리</h1>
                <div class="work-progres">
                             <div class="chit-chat-heading">
-                                  Recent Followers
+                                  상품 목록
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                   <thead>
                                     <tr>
-                                      <th>#</th>
-                                      <th>Project</th>
-                                      <th>Manager</th>                                   
-                                      <th>Status</th>
-                                      <th>Progress</th>
+                                      <th>No.</th>
+                                      <th>AategoryNo.</th>
+                                      <th>Name</th>                                   
+                                      <th>Price</th>
+                                      <th>Description</th>
+                                      <th>AignUse</th>
+                                      <th>AlignNo.</th>
+                                      <th>Remove</th>
                                   </tr>
                               </thead>
                               <tbody>
+                              <c:forEach items="${productList }" var="pvo" varStatus="status">
                                 <tr>
-                                  <td>1</td>
-                                  <td>Face book</td>
-                                  <td>Malorum</td>                                 
-                                                             
-                                  <td><span class="label label-danger">in progress</span></td>
-                                  <td><span class="badge badge-info">50%</span></td>
+                                  <!-- status index -->
+                                  <td>${status.count }</td>
+                                  <td>${pvo.categoryNo }</td>
+                                  <td>${pvo.name }</td>
+                                  <td>${pvo.price }</td>
+                                  <td>${pvo.shortDescription }</td>
+                                  <td>${pvo.alignUse }</td>
+                                  <td>${pvo.alignNo }</td>
+                                  <td><span class="badge badge-info" style="cursor:pointer" onclick="removeUser('${pvo.no}')">상품삭제</span></td>
                               </tr>
+                              </c:forEach>
                           </tbody>
                       </table>
+                      <button style="float:right;" onclick="addProduct()">상품 등록</button>
                   </div>
              </div>
       </div>
@@ -524,64 +519,6 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
       </div>
      <div class="clearfix"> </div>
 </div>
-<!--main page chit chating end here-->
-<!---728x90--->
-
-<!--main page chart start here-->
-<div class="main-page-charts">
-   <div class="main-page-chart-layer1">
-		<div class="col-md-6 chart-layer1-left"> 
-			<div class="glocy-chart">
-			<div class="span-2c">  
-                        <h3 class="tlt">Sales Analytics</h3>
-                        <canvas id="bar" height="300" width="400" style="width: 400px; height: 300px;"></canvas>
-                        <script>
-                            var barChartData = {
-                            labels : ["Jan","Feb","Mar","Apr","May","Jun","jul"],
-                            datasets : [
-                                {
-                                    fillColor : "#FC8213",
-                                    data : [65,59,90,81,56,55,40]
-                                },
-                                {
-                                    fillColor : "#337AB7",
-                                    data : [28,48,40,19,96,27,100]
-                                }
-                            ]
-
-                        };
-                            new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
-
-                        </script>
-                    </div> 			  		   			
-			</div>
-		</div>
-		
-	 <div class="clearfix"> </div>
-  </div>
- </div>
-<!--main page chart layer2-->
-<div class="chart-layer-2">
-	
-	<div class="col-md-6 chart-layer2-right">
-			<div class="prograc-blocks">
-		     <!--Progress bars-->
-	        <div class="home-progres-main">
-	           <h3>Total Sales</h3>
-	         </div>
-	        <div class='bar_group'>
-					<div class='bar_group__bar thin' label='Rating' show_values='true' tooltip='true' value='343'></div>
-					<div class='bar_group__bar thin' label='Quality' show_values='true' tooltip='true' value='235'></div>
-					<div class='bar_group__bar thin' label='Amount' show_values='true' tooltip='true' value='550'></div>
-					<div class='bar_group__bar thin' label='Farming' show_values='true' tooltip='true' value='456'></div>
-		    </div>
-				<script src="https://p.w3layouts.com/demos/28-03-2016/shoppy/web/js/bars.js"></script>
-
-	      <!--//Progress bars-->
-	      </div>
-	</div>
-  <div class="clearfix"> </div>
-</div>
 
 </div>
 <!--inner block end here-->
@@ -601,8 +538,8 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 			  </a> </div>		  
 		    <div class="menu">
 		      <ul id="menu" >
-		        <li id="menu-home" id="member-list"><a href="${pageContext.request.contextPath}/admin/user"><i class="fa fa-tachometer"></i><span>회원관리</span></a></li>
-		        <li><a href="${pageContext.request.contextPath}/admin/product"><i class="fa fa-cogs"></i><span>상품관리</span><span class="fa fa-angle-right" style="float: right"></span></a>
+		        <li id="menu-home" id="member-list"><a href="index.html"><i class="fa fa-tachometer"></i><span>회원관리</span></a></li>
+		        <li><a href="#"><i class="fa fa-cogs"></i><span>상품관리</span><span class="fa fa-angle-right" style="float: right"></span></a>
 		          <ul>
 		            <li><a href="grids.html">Grids</a></li>
 		            <li><a href="portlet.html">Portlets</a></li>

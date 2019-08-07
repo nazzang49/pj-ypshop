@@ -76,7 +76,7 @@ public class AdminProductController {
 		//리턴 데이터
 		Map<String, Object> data = new HashMap<>();
 		data.put("productList", productList);
-		JSONResult result = JSONResult.success(data);
+		JSONResult result = JSONResult.success(productList);
 		return result;
 	}
 	
@@ -86,6 +86,10 @@ public class AdminProductController {
 						  				  		 BindingResult br) {
 		
 		//관리자 인증
+		
+		System.out.println("백엔드 들어온다"+productVO.toString());
+		
+		
 		
 		//valid
 		if(br.hasErrors()) {
@@ -103,7 +107,7 @@ public class AdminProductController {
 		//리턴 데이터
 		Map<String, Object> data = new HashMap<>();
 		data.put("flag", flag);
-		JSONResult result = JSONResult.success(data);
+		JSONResult result = JSONResult.success(flag);
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	

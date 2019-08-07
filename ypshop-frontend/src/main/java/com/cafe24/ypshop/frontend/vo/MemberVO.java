@@ -13,7 +13,7 @@ public class MemberVO {
 	private String id;
 	
 	//비밀번호 >> 영문, 특수기호, 숫자 혼합
-	@Pattern(regexp="(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,20}", message="비밀번호는 알파벳, 숫자, 특수문자를 조합 필수") 
+	@Pattern(regexp="(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,20}", message="비밀번호는 알파벳, 숫자, 특수문자 조합 필수") 
 	@Length(min=8, max=20, message="비밀번호의 길이는 최소 2, 최대 15")
 	private String password;
 	
