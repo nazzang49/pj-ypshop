@@ -1,5 +1,7 @@
 package com.cafe24.ypshop.frontend.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +20,10 @@ public class AdminMainController {
 	//메인_상품 수, 회원 수
 	@RequestMapping({"", "/", "main"})
 	public String main(@AuthUser SecurityUser securityUser, Model model) {
-				
-//		model.addAttribute("productList", (List<ProductVO>)returnData.get("productList"));
-//		model.addAttribute("categoryList", (List<CategoryVO>)returnData.get("categoryList"));
+		
+		Map<String, Long> map = adminMainService.getProductMemberCount();
+		model.addAttribute("map", map);
+		
 		return "admin/admin-index";
 	}
 	

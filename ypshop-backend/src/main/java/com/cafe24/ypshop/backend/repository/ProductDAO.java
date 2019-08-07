@@ -66,4 +66,8 @@ public class ProductDAO {
 		return sqlSession.selectOne("product.selectProductDetailByNo", productVO);
 	}
 	
+	//(관리자) 상품 갯수
+	public Long getCount() {
+		return sqlSession.selectOne("product.getCount"); 
+	}
 }

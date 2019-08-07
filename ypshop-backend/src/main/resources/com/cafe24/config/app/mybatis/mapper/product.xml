@@ -155,5 +155,13 @@
 		where no=#{no}
 	]]>
 	</select>
+	
+	<!-- 카운트 -->
+	<select id="getCount" resultType="long">
+	<![CDATA[
+		select count(*)
+		from product
+	]]>
+	</select>
 
 </mapper>

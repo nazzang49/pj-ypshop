@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,12 +46,12 @@ public class AdminUserController {
 		//리턴 데이터
 		Map<String, Object> data = new HashMap<>();
 		data.put("memberList", memberList);
-		JSONResult result = JSONResult.success(data);
+		JSONResult result = JSONResult.success(memberList);
 		return result;
 	}
 	
 	@ApiOperation(value="회원 삭제")
-	@DeleteMapping(value="/delete")
+	@GetMapping(value="/delete")
 	public JSONResult deleteUser(@RequestParam(value="id", required=true, defaultValue="") List<String> userIdList) {
 		
 		//관리자 인증
@@ -59,10 +60,12 @@ public class AdminUserController {
 		
 		boolean flag = adminUserService.회원삭제(userIdList);
 		
+		System.out.println("백엔드 삭제 결과 : "+flag);
+		
 		//리턴 데이터
 		Map<String, Object> data = new HashMap<>();
 		data.put("flag", flag);
-		JSONResult result = JSONResult.success(data);
+		JSONResult result = JSONResult.success(flag);
 		return result;
 	}
 	

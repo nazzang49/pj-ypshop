@@ -23,7 +23,7 @@
 	                </sec:authorize>
 	                <sec:authorize access="!isAuthenticated()">
 	                <li><a href="${pageContext.servletContext.contextPath}/member/join">회원가입</a></li>
-	                <li><a href="${pageContext.servletContext.contextPath}/member/login">회원 로그인</a></li>
+	                <li><a href="${pageContext.servletContext.contextPath}/member/login">로그인</a></li>
 	                </sec:authorize>
 	                <sec:authorize access="hasRole('ADMIN')">
 	                <li><a href="${pageContext.servletContext.contextPath}/admin">관리자 페이지</a></li>
@@ -37,7 +37,7 @@
 	                </sec:authorize>
 	                <sec:authorize access="!isAuthenticated()">
 	                <li class="active"><a href="${pageContext.servletContext.contextPath}/member/join">회원가입</a></li>
-	                <li><a href="${pageContext.servletContext.contextPath}/member/login">회원 로그인</a></li>
+	                <li><a href="${pageContext.servletContext.contextPath}/member/login">로그인</a></li>
 	                </sec:authorize>
 	                <li><a href="#">관리자 로그인</a></li>
 	            </c:when>
@@ -49,7 +49,7 @@
 	                </sec:authorize>
 	                <sec:authorize access="!isAuthenticated()">
 	                <li><a href="${pageContext.servletContext.contextPath}/member/join">회원가입</a></li>
-	                <li><a href="${pageContext.servletContext.contextPath}/member/login">회원 로그인</a></li>
+	                <li><a href="${pageContext.servletContext.contextPath}/member/login">로그인</a></li>
 	                </sec:authorize>
 	                <li><a href="#">관리자 로그인</a></li>
 	            </c:when>
@@ -61,7 +61,7 @@
 	                </sec:authorize>
 	                <sec:authorize access="!isAuthenticated()">
 	                <li><a href="${pageContext.servletContext.contextPath}/member/join">회원가입</a></li>
-	                <li class="active"><a href="${pageContext.servletContext.contextPath}/member/login">회원 로그인</a></li>
+	                <li class="active"><a href="${pageContext.servletContext.contextPath}/member/login">로그인</a></li>
 	                </sec:authorize>
 	            </c:when>
 	            </c:choose>

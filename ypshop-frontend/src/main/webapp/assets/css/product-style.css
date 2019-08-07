@@ -120,8 +120,7 @@ input[type="submit"],a,.entry.value-minus,.entry.value-plus{
 	color:#fe6f45;
 }
 .agileinfo_search{
-	float:right;
-	width:50%;
+	width:100%;
 }
 .agileinfo_search input[type="search"] {
     outline: none;

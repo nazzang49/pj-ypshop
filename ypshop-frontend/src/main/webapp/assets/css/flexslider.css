@@ -63,9 +63,9 @@ html[xmlns] .slides {display: block;}
     color: #fff;
 	text-decoration: none;
 }
-.flex-direction-nav .flex-prev:before{
-	content:"\f177";
-}
+/* .flex-direction-nav .flex-prev:before{ */
+/* 	content:"\f177"; */
+/* } */
 .flex-direction-nav .flex-next {
 	right: 6.6%;
     bottom: 19%;
@@ -74,9 +74,9 @@ html[xmlns] .slides {display: block;}
 	left: 84.3%;
     bottom: 15%;
 }
-.flex-direction-nav .flex-next:before{
-	content:"\f178";
-}
+/* .flex-direction-nav .flex-next:before{ */
+/* 	content:"\f178"; */
+/* } */
 .flexslider:hover .flex-next {opacity: 1;}
 .flexslider:hover .flex-prev {opacity: 1;}
 .flexslider:hover .flex-next:hover, .flexslider:hover .flex-prev:hover {opacity: 1;}

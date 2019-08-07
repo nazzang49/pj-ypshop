@@ -11,9 +11,9 @@ public class AdminMainService {
 	private final RestTemplate restTemplate = new RestTemplate();
 	
 	//메인_상품 수, 회원 수
-	public Map<String, Object> main() {
-		JSONResultGoods result = restTemplate.getForObject("http://localhost:8090/ypshop-backend/api/product/list", JSONResultGoods.class);		
-		Map<String, Object> returnData = (Map<String, Object>)result.getData();
+	public Map<String, Long> getProductMemberCount() {
+		JSONResultGoods result = restTemplate.getForObject("http://localhost:8090/ypshop-backend/api/admin/main", JSONResultGoods.class);		
+		Map<String, Long> returnData = (Map<String, Long>)result.getData();
 		return returnData;
 	}
 	

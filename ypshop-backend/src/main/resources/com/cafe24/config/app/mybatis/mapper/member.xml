@@ -175,4 +175,13 @@
 	]]>
 	</delete>
 	
+	<!-- 카운트  >> 관리자 제외 -->
+	<select id="getCount" resultType="long">
+	<![CDATA[
+		select count(*)
+		from member
+		where role="USER"
+	]]>
+	</select>
+	
 </mapper>

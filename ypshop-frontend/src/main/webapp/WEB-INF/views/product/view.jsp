@@ -30,6 +30,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		function hideURLbar() {
 			window.scrollTo(0, 1);
 		}
+		
 	</script>
 	<link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel='stylesheet' type='text/css' />
 	<link href="${pageContext.request.contextPath}/assets/css/single.css" rel='stylesheet' type='text/css' />
@@ -44,6 +45,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 
 <body>
+
+<script>
+	
+	//장바구니 추가 by Ajax
+	
+	
+
+</script>
+
 	<!-- mian-content -->
     <div class="main-banner" id="home" style="text-align: center; height: 100px;">
         <!-- header -->
@@ -54,16 +64,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 	<div class="main">
 <!---728x90--->
-
-
-	${ imageList}
-	${ productOptionList}
-	${ productVO.name}
-
-
 		<h1>상품 상세</h1>
 <!---728x90--->
 
+
+		<!-- 이미지 슬라이더 -->
 		<div class="w3_agile_main_grids">
 			<div class="w3layouts_main_grid_left">
 				<section class="slider">
@@ -71,7 +76,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<ul class="slides">
 							<li>
 								<div class="w3ls_main_grid_left_grid">
-									<img src="images/1.jpg" alt=" " />
+									<img src="${pageContext.request.contextPath}/assets/images/main-header-bg.jpg" alt="상품 이미지" />
 								</div>
 							</li>
 							<li>
@@ -92,37 +97,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="w3l_main_grid_right_grid">
 						<div class="agileinfo_search">
 							<form action="#" method="post">
-								<input type="search" name="Search" placeholder="Search..." required="">
-								<input type="submit" value=" ">
+								<input type="search" name="searchKwd" placeholder="타입별 상품 검색" required="">
+								<input type="submit" value="search" style="color:white;">
 							</form>
 						</div>
 						<div class="clear"> </div>
 					<div class="w3_agileits_main_grid_right_info">
-						<h2>Women's and Men's Wear</h2>
-						<h3>Nulla consequat metus sit amet sodales gravida.</h3>
-						<p>Nullam sem nisi, imperdiet vitae accumsan et, pellentesque vitae turpis. 
-							Cum sociis natoque penatibus et magnis dis parturient montes.</p>
+						<h2>${productVO.name }</h2>
+						<h3>Description</h3>
+						<p>${productVO.shortDescription }</p>
 					</div>
 					<div class="agile_occasion_quantity">
 						<div class="agile_occasion_quantity_left">
-							<h4>Occasion</h4>
+							<!-- 1개씩 추가 가정 -->
+							<h4>상품 옵션별 재고 현황</h4>
 							<div class="agileits_w3layouts_radio_button">
+								<c:forEach items="${productOptionList }" var="productOptionVO">
 								<div class="w3_agile_radio">
-									<label class="radio"><input type="radio" name="radio" checked=""><i></i>Casual Wear</label>
-								</div>
-								<div class="w3_agile_radio">
-									<label class="radio"><input type="radio" name="radio"><i></i>Party Wear</label>
-								</div>
-								<div class="w3_agile_radio">
-									<label class="radio"><input type="radio" name="radio"><i></i>Formal Wear</label>
+									<label class="radio"><input type="radio" name="productoption" checked=""><i></i>
+									${productOptionVO.firstOptionName }, ${productOptionVO.secondOptionName }, ${productOptionVO.remainAmount }</label>
 								</div>
 								<div class="clear"> </div>
+								</c:forEach>
 							</div>
 						</div>
 						<div class="agile_occasion_quantity_right">
-							<h4>Quality</h4>
+							<h4>수량</h4>
 							<div class="w3layouts_quality"> 
-								<div class="w3_quality_select">                           
+								<div class="w3_quality_select">
 									<div class="entry value-minus">&nbsp;</div>
 									<div class="entry value"><span>1</span></div>
 									<div class="entry value-plus active">&nbsp;</div>
@@ -133,25 +135,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 					<div class="agile_price_social">
 						<div class="agile_price">
-							<h3>$159.00</h3>
+							<h3>${productVO.price }원</h3>
 						</div>
 						<div class="w3_agile_social">
 							<ul>
-								<li><a href="#" class="fa fa-facebook icon facebook"> </a></li>
-								<li><a href="#" class="fa fa-twitter icon twitter"> </a></li>
-								<li><a href="#" class="fa fa-google-plus icon googleplus"> </a></li>
-								<li><a href="#" class="fa fa-dribbble icon dribbble"> </a></li>
-								<li><a href="#" class="fa fa-rss icon rss"> </a></li> 
+								<li><span>1회 최대 주문 가능 수량 10개</span></li> 
 							</ul>
 						</div>
 						<div class="clear"> </div>
 					</div>
 					<div class="w3_agileits_add_to_cart">
 						<div class="w3_cart">
-							<a href="#">add to bag<i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
-						</div>
-						<div class="w3l_wishlist">
-							<a href="#">add to wishlist<i class="fa fa-heart-o" aria-hidden="true"></i></a>
+							<a href="#">add to cart</a>
 						</div>
 						<div class="clear"> </div>
 					</div>

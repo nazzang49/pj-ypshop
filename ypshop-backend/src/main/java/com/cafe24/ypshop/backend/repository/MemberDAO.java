@@ -76,6 +76,11 @@ public class MemberDAO {
 		return sqlSession.delete("member.deleteByAdmin", id)==1;
 	}
 	
+	//(관리자) 회원 수
+	public Long getCount() {
+		return sqlSession.selectOne("member.getCount"); 
+	}
+	
 	//spring security
 	public MemberVO selectSecurityUserById(String id) {
 		Map<String, String> map = new HashMap<>();
