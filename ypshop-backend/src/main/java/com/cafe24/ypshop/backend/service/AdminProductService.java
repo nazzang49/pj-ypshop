@@ -37,7 +37,7 @@ public class AdminProductService {
 	
 	//상품 추가
 	@Transactional
-	public boolean 상품추가(ProductVO productVO) {
+	public Long 상품추가(ProductVO productVO) {
 		//진열번호 >> 동일 카테고리 기준
 		Long alignNo = productDao.selectMaxAlignNo(productVO);
 		productVO.setAlignNo(++alignNo);
@@ -61,7 +61,7 @@ public class AdminProductService {
 			optionVO.setProductNo(productNo);
 			optionDao.insert(optionVO);
 		}
-		return true;
+		return productNo;
 	}
 	
 	//상품 수정

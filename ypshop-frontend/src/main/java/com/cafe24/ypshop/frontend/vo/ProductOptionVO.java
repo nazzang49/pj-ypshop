@@ -6,11 +6,9 @@ public class ProductOptionVO {
 
 	private Long no;
 	private Long productNo;
-	//1차 옵션
-	@NotNull
+	//1차 옵션 null 가능 >> 색상만 존재하고, 사이즈가 없는 경우
 	private Long firstOptionNo;
-	//2차 옵션
-	@NotNull
+	//2차 옵션 null 가능 >> 사이즈만 존재하고, 색상이 없는 경우
 	private Long secondOptionNo;
 	//재고수량 >> 비재고 -1
 	@NotNull

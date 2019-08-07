@@ -12,11 +12,11 @@
 
 <script>
 
-var flag = ${flag};
+var productNo = ${productNo};
 
-if(flag){
+if(productNo!=null){
 	alert("상품 추가 성공");
-	window.close();
+	location.href = "${pageContext.request.contextPath}/admin/product/"+productNo+"/productOption/add";
 }else{
 	alert("상품 추가 실패");
 	history.back();

@@ -16,6 +16,11 @@
 		#{alignUse},
 		#{alignNo})
 	]]>
+		<selectKey resultType="long" keyProperty="no" order="AFTER">
+			<![CDATA[
+				SELECT LAST_INSERT_ID()
+			]]>
+		</selectKey>
 	</insert>
 	
 	<!-- 상품추가 >> 상품 번호 리턴 -->

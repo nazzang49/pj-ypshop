@@ -98,20 +98,11 @@ input[type="submit"]:hover{
  		$('#add-image').append(htmls);
  	}
  	
- 	function addOption(){
- 		var optionCount = document.getElementsByName('option').length;
- 		if(optionCount==10){
- 			alert("추가 이미지 최대 10개");
- 			return;
- 		}
- 		var htmls = '<div style="margin-bottom: 20px;"><input type="radio" name="depth" value="1"> 1차 옵션 <input type="radio" name="depth" value="2"> 2차 옵션 <input type="text" name="option" style="width:150px; height:30px;" value=""/></div>';
- 		$('#add-option').append(htmls);
- 	}
  </script>
 
 
 <div class="mToggleBar eToggle selected ec-product-register-toggle">
-    <h2>기본 정보</h2>
+    <h2>상품 옵션 정보</h2>
     <div class="ctrl">
         <span><button type="button"><em>열기</em></button></span>
     </div>
@@ -123,10 +114,9 @@ input[type="submit"]:hover{
     
     	<!-- 상품 등록 form >> 사진 포함 -->
     	<form action="${pageContext.request.contextPath}/admin/product/add" method="post" name="product-add-form" enctype="multipart/form-data">
-    	
     	 
         <table border="1" summary="">
-            <caption>상품 기본 정보</caption>
+            <caption>상품 옵션 정보</caption>
             <colgroup>
                 <col style="width:190px;" />
                 <col style="width:308px;" />
@@ -134,109 +124,49 @@ input[type="submit"]:hover{
             </colgroup>
             <tbody>
             <tr>
-                <th scope="row">카테고리 </th>
+                <th scope="row">상품 1차 옵션 목록</th>
                 <td colspan="2">
-                	<select name="categoryNo">
-                		<c:forEach items="${categoryList }" var="cvo">
-                			<option value="${cvo.no }">${cvo.name }</option>
+                	<select name="firstOptionNo">
+                		<c:forEach items="${optionList }" var="ovo">
+                			<c:if test="${ovo.depth == 1}">
+                			<option value="${ovo.no }">${ovo.name }</option>
+                			</c:if>
                 		</c:forEach>
                 	</select>
                 </td>
             </tr>
             <tr>
-                <th scope="row">상품명 </th>
+                <th scope="row">상품 2차 옵션 목록</th>
+                <td colspan="2">
+                	<select name="secondOptionNo">
+                		<c:forEach items="${optionList }" var="ovo">
+                			<c:if test="${ovo.depth == 2}">
+                			<option value="${ovo.no }">${ovo.name }</option>
+                			</c:if>
+                		</c:forEach>
+                	</select>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">재고 수량 </th>
                 <td colspan="2">
                     <div class="overlapTip">
-                        <input type="text" name="name" id="product_name" placeholder="예시) 청바지" style="width:500px;"/>
+                        <input type="text" name="remainAmount" id="product_name" style="width:150px;"/>
                     </div>
-                    <span class="txtByte" title="현재글자수/최대글자수">[ <strong>0</strong> / 250 ]</span>
                 </td>
             </tr>
             <tr>
-                <th scope="row">상품 가격 </th>
+                <th scope="row">판매 가능 수량 </th>
                 <td colspan="2">
                     <input type="hidden" name="product_tax_type" value="A">
-                    <input type="text" name="price" style="width:150px;" value="">
-                    원
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">상품 요약설명</th>
-                <td colspan="2">
-                    <input type="text" name="shortDescription" style="width:80%;" value="" maxcount="255"/>
-                    <span class="txtByte" title="현재글자수/최대글자수">[ <strong>0</strong> / 255 ]</span>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">진열구분</th>
-                <td colspan="2">
-                    <input type="radio" name="alignUse" value="Y"> 진열 O <br>
-                	<input type="radio" name="alignUse" value="N"> 진열 X
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">이미지</th>
-                <td>
-                    <span class="txtStrong">썸네일 이미지</span>
-                    
-                    
-                    <input type="file" name="thumbnailUrl">
-                    
-                     <!--참고: 이미지 등록 전-->
-                     
-                    <div class="mThumb gLarge gDouble" id="ec-product-register-image-empty" >
-                        <div class="btnAdd" id="ec-product-register-detail-image-upload">
-                        	
-                        </div>
-                    </div>
-                    <!-- 참고: 이미지 등록 후 -->
-                    <div class="mThumb gLarge gDouble" id="ec-product-register-image-exist" style="display: none;">
-                        <div class="thumb">
-                            <img src="/web/product/big/" alt="" id="ec-product-register-image"/>
-                        </div>
-                        <div class="button">
-                            <button type="button" class="btnEdit" id="ec-product-register-image-modify"><span class="icoEdit"></span>변경</button>
-                            <button type="button" class="btnDelete" id="ec-product-register-image-delete"><span class="icoDelete"></span>삭제</button>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="mThumbs eImgSort" id="ec-product-register-addimage-list">
-                        <ul id="extraImage">
-                            
-                            <li  id="ec-product-register-addimage-upload">
-                                
-                                <div>
-                                <button type="button" onclick="addImage()" style="background:black; padding: 15px; color: white; margin-left:15px;">이미지 추가(최대 10개)</button>
-                                </div>
-                                
-                                <div id="add-image">
-                                	
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-             <th scope="row">옵션</th>
-                <td colspan="2">
-                <button type="button" onclick="addOption()" style="background:black; padding: 15px; color: white; margin-bottom:20px;">옵션 추가(1차, 2차 선택)</button>
-                <div id="add-option">
-                	<div>
-                	<input type="radio" name="depth" value="1"> 1차 옵션
-                	<input type="radio" name="depth" value="2"> 2차 옵션
-                	<input type="text" name="option" style="width:200px; height:30px;" value=""/>
-                	
-                	</div>
-                </div>
+                    <input type="text" name="availableAmount" style="width:150px;" value="">
                 </td>
             </tr>
             </tbody>
         </table>
         
         <div style="text-align: center; margin-top: 40px;">
-        	<input type="submit" value="상품 등록">
+        	<input type="submit" value="상품 옵션 등록">
         </div>
         
         </form>

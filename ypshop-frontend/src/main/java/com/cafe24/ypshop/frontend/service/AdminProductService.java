@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cafe24.ypshop.frontend.dto.JSONResult;
 import com.cafe24.ypshop.frontend.vo.CategoryVO;
 import com.cafe24.ypshop.frontend.vo.MemberVO;
+import com.cafe24.ypshop.frontend.vo.OptionVO;
 import com.cafe24.ypshop.frontend.vo.ProductVO;
 
 @Service
@@ -37,19 +38,29 @@ public class AdminProductService {
 	}
 	
 	//관리자_상품 추가
-	public Boolean add(ProductVO productVO) {
+	public Long add(ProductVO productVO) {
 		restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
 		JSONResultGoods result = restTemplate.postForObject("http://localhost:8090/ypshop-backend/api/admin/product/add", productVO, JSONResultGoods.class);		
 		return result.getData();
 	}
 	
-	private static class JSONResultGoods extends JSONResult<Boolean> {
+	//관리자_상품옵션 추가_페이지_옵션 목록
+	public List<OptionVO> optionList(Long productNo) {
+		JSONResultOptionList result = restTemplate.getForObject("http://localhost:8090/ypshop-backend/api/admin/product/"+productNo+"/option/list", JSONResultOptionList.class);		
+		return result.getData();
+	}
+	
+	
+	private static class JSONResultGoods extends JSONResult<Long> {
 	}
 	
 	private static class JSONResultProductList extends JSONResult<List<ProductVO>> {
 	}
 	
 	private static class JSONResultCategoryList extends JSONResult<List<CategoryVO>> {
+	}
+	
+	private static class JSONResultOptionList extends JSONResult<List<OptionVO>> {
 	}
 	
 	public String restore(MultipartFile multipartFile) {

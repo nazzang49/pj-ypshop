@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -96,28 +97,25 @@ public class AdminProductController {
 		productVO.setName(name);
 		productVO.setShortDescription(shortDescription);
 		
-		boolean flag = adminProductService.add(productVO);
+		Long productNo = adminProductService.add(productVO);
 		
-		if(!flag) {
-			model.addAttribute("flag", false);
-		}
-		
-		model.addAttribute("flag", true);
+		model.addAttribute("productNo", productNo);
 		
 		return "admin/admin-product-add-success";
 	}
 	
 	//관리자_상품옵션추가_페이지
-	@GetMapping("/{productNo}/productOption/add")
-	public String productOptionAdd(@AuthUser SecurityUser securityUser, Model model) {
+	@GetMapping("/product/{productNo}/productOption/add")
+	public String productOptionAdd(@AuthUser SecurityUser securityUser, Model model,
+								   @PathVariable(value="productNo") Long productNo) {
 		
-		//현재 상품의 상품 옵션
-		List<CategoryVO> categoryList = adminProductService.categoryList();
+		//현재 상품의 옵션 목록 >> 조합
+		List<OptionVO> optionList = adminProductService.optionList(productNo);
 		
-		System.out.println("카테고리 리스트 사이즈 : "+categoryList.size());
+		System.out.println("카테고리 리스트 사이즈 : "+optionList.size());
 		
-		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("optionList", optionList);
 		
-		return "admin/admin-product-add";
+		return "admin/admin-product-option-add";
 	}
 }

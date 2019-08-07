@@ -102,12 +102,12 @@ public class AdminProductController {
 		}
 		
 		//상품 추가 성공 >> 상품 번호 리턴
-		boolean flag = adminProductService.상품추가(productVO);
+		Long productNo = adminProductService.상품추가(productVO);
 		
 		//리턴 데이터
 		Map<String, Object> data = new HashMap<>();
-		data.put("flag", flag);
-		JSONResult result = JSONResult.success(flag);
+		data.put("productNo", productNo);
+		JSONResult result = JSONResult.success(productNo);
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	
@@ -249,7 +249,7 @@ public class AdminProductController {
 		//리턴 데이터
 		Map<String, Object> data = new HashMap<>();
 		data.put("optionList", optionList);
-		JSONResult result = JSONResult.success(data);
+		JSONResult result = JSONResult.success(optionList);
 		return result;
 	}
 	
