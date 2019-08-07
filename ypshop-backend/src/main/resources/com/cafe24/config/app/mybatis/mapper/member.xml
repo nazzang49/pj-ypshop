@@ -111,9 +111,9 @@
 		cast(aes_decrypt(phone, #{keyValue}) as char) as phone,
 		cast(aes_decrypt(email, #{keyValue}) as char) as email,
 		cast(aes_decrypt(address, #{keyValue}) as char) as address,
-		regDate,
-		role
+		regDate
 		from member
+		where role="USER"
 	]]>
 		<if test="searchType=='id'">
 		<![CDATA[

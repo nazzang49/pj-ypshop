@@ -45,16 +45,16 @@ public class UserProductService {
 	
 	//상품 상세 >> 기본 정보, 이미지, 옵션
 	@Transactional
-	public Map<String, Object> 상품상세(ProductVO prodcutVO) {
+	public Map<String, Object> 상품상세(ProductVO productVO) {
 		//기본 정보
-		ProductVO pvo = productDao.selectProductDetailByNo(prodcutVO);
+		productVO = productDao.selectProductDetailByNo(productVO);
 		//상품별 이미지
-		List<ImageVO> imageList = imageDao.selectAllImageByProductNo(prodcutVO.getNo());
+		List<ImageVO> imageList = imageDao.selectAllImageByProductNo(productVO.getNo());
 		//상품별 옵션
-		List<ProductOptionVO> productOptionList = productOptionDao.selectAllProductOptionByNo(prodcutVO);
+		List<ProductOptionVO> productOptionList = productOptionDao.selectAllProductOptionByNo(productVO);
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("pvo", pvo);
+		map.put("productVO", productVO);
 		map.put("imageList", imageList);
 		map.put("productOptionList", productOptionList);
 		

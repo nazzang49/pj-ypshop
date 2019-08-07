@@ -1,12 +1,9 @@
 package com.cafe24.ypshop.frontend.service;
 
-import java.util.List;
 import java.util.Map;
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.cafe24.ypshop.frontend.dto.JSONResult;
-import com.cafe24.ypshop.frontend.vo.ProductVO;
 
 @Service
 public class MainService {

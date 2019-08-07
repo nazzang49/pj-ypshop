@@ -20,7 +20,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		MemberVO memberVO = memberService.loaduserbyusername(username);
 		
-		System.out.println("로그인 정보 : "+memberVO);
+		System.out.println("로그인 정보 : "+memberVO.toString());
+		
+		//현재 로그인 = 관리자 >> prefix
+		if(memberVO.getRole().equals("ADMIN")) {
+			memberVO.setRole("ROLE_ADMIN");
+		}
 		
 		SecurityUser securityUser = new SecurityUser();
 

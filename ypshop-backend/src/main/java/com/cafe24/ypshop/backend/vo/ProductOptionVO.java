@@ -18,6 +18,8 @@ public class ProductOptionVO {
 	//판매가능수량 >> 비재고 -1
 	@NotNull
 	private Long availableAmount;
+	private String firstOptionName;
+	private String secondOptionName;
 	
 	public ProductOptionVO() {
 		
@@ -68,12 +70,25 @@ public class ProductOptionVO {
 	public void setAvailableAmount(Long availableAmount) {
 		this.availableAmount = availableAmount;
 	}
+	public String getFirstOptionName() {
+		return firstOptionName;
+	}
+	public void setFirstOptionName(String firstOptionName) {
+		this.firstOptionName = firstOptionName;
+	}
+	public String getSecondOptionName() {
+		return secondOptionName;
+	}
+	public void setSecondOptionName(String secondOptionName) {
+		this.secondOptionName = secondOptionName;
+	}
 
 	@Override
 	public String toString() {
 		return "ProductOptionVO [no=" + no + ", productNo=" + productNo + ", firstOptionNo=" + firstOptionNo
 				+ ", secondOptionNo=" + secondOptionNo + ", remainAmount=" + remainAmount + ", availableAmount="
-				+ availableAmount + "]";
+				+ availableAmount + ", firstOptionName=" + firstOptionName + ", secondOptionName=" + secondOptionName
+				+ "]";
 	}
 		
 }

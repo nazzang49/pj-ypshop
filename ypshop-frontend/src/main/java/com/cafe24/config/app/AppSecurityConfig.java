@@ -58,8 +58,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		//2. ADMIN Authorization = 관리자 권한 인증 >> 3개 방법
 		//.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-		.antMatchers("/admin/**").hasAuthority("ADMIN")
-		//.antMatchers("/admin**").hasRole("ADMIN")
+		//.antMatchers("/admin/**").hasAuthority("ADMIN")
+		.antMatchers("/admin/**").hasRole("ADMIN")
 		
 		//3. 그 외 나머지 모두 허용 >> 2개 방법
 		//.antMatchers("/**").permitAll()

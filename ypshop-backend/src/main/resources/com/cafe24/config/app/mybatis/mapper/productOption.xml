@@ -26,12 +26,16 @@
 	]]>
 	</delete>
 	
-	<!-- (회원) 상품옵션 목록 -->
+	<!-- (회원) 상품옵션 목록 >> 1차 및 2차 옵션명, 재고수량 -->
 	<select id="selectAllProductOptionByNo" parameterType="productvo" resultType="productoptionvo">
 	<![CDATA[
-		select *
-		from product_option
-		where productNo=#{no}
+		select A.firstOptionName as firstOptionName, o1.name as secondOptionName, A.remainAmount, po1.no
+		from product_option po1, option o1, (select o.name as firstOptionName, po.no as productOptionNo, po.remainAmount
+									 from product_option po, option o
+									 where po.firstOptionNo=o.no
+									 and po.productNo=#{no}) A
+		where A.productOptionNo=po1.no
+		and po1.secondOptionNo=o1.no
 	]]>
 	</select>
 	
