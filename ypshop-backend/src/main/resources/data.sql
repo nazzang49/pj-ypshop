@@ -1,6 +1,6 @@
 -- 관리자 및 회원 초기화
-insert into member values("user1", aes_encrypt("jy@park2@@","shop-keyValue"), aes_encrypt("user1","shop-keyValue"), aes_encrypt("부산","shop-keyValue"), aes_encrypt("010","shop-keyValue"), aes_encrypt("user1@shop.com","shop-keyValue"), "ADMIN", now());
-insert into member values("user2", aes_encrypt("jy@park2@@","shop-keyValue"), aes_encrypt("user2","shop-keyValue"), aes_encrypt("부산","shop-keyValue"), aes_encrypt("010","shop-keyValue"), aes_encrypt("user2@shop.com","shop-keyValue"), "USER", now());
+insert into member values("user1", sha2("jy@park2@@",512), aes_encrypt("user1","shop-keyValue"), aes_encrypt("부산","shop-keyValue"), aes_encrypt("010","shop-keyValue"), aes_encrypt("user1@shop.com","shop-keyValue"), "ADMIN", now());
+insert into member values("user2", sha2("jy@park2@@",512), aes_encrypt("user2","shop-keyValue"), aes_encrypt("부산","shop-keyValue"), aes_encrypt("010","shop-keyValue"), aes_encrypt("user2@shop.com","shop-keyValue"), "USER", now());
 
 -- 카테고리 초기화
 insert into category values(null,"category1-1",1,1);
