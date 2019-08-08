@@ -316,15 +316,15 @@ public class AdminProductController {
 		
 		//valid by JS
 		
-		System.out.println("1차 옵션 사이즈 : "+productOptionDTO.getFirstOptionNoList().size());
-//		System.out.println("2차 옵션 사이즈 : "+secondOptionNoList.size());
-		
-//		boolean flag = adminProductOptionService.상품옵션추가(firstOptionNoList, secondOptionNoList, remainAmountList, productNo);
+		boolean flag = adminProductOptionService.상품옵션추가(productOptionDTO.getFirstOptionNoList(),
+														   productOptionDTO.getSecondOptionNoList(),
+														   productOptionDTO.getRemainAmountList(),
+														   productNo);
 		
 		//리턴 데이터
 		Map<String, Object> data = new HashMap<>();
-		data.put("flag", true);
-		JSONResult result = JSONResult.success(true);
+		data.put("flag", flag);
+		JSONResult result = JSONResult.success(flag);
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	

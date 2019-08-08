@@ -25,6 +25,7 @@ public class AdminProductOptionService {
 		return false;
 	}
 	
+	//번호가 0이면 null로 변경
 	@Transactional
 	public boolean 상품옵션추가(List<Long> firstOptionNoList,
 							 List<Long> secondOptionNoList,
@@ -34,9 +35,16 @@ public class AdminProductOptionService {
 		boolean flag = true;
 		
 		for(int i=0;i<firstOptionNoList.size();i++) {
+			
+			Long firstOptionNo = firstOptionNoList.get(i);
+			Long secondOptionNo = secondOptionNoList.get(i);
+			
+			if(firstOptionNo==0L) firstOptionNo=null;
+			if(secondOptionNo==0L) secondOptionNo=null;
+			
 			flag = productOptionDao.insertProductOption(new ProductOptionVO(productNo,
-																	 firstOptionNoList.get(i),
-																	 secondOptionNoList.get(i),
+																	 firstOptionNo,
+																	 secondOptionNo,
 																	 remainAmountList.get(i),
 																	 remainAmountList.get(i)));
 		}

@@ -297,8 +297,8 @@ ALTER TABLE `option`
 CREATE TABLE `product_option` (
 	`no`              INT UNSIGNED NOT NULL COMMENT '번호', -- 번호
 	`productNo`       INT UNSIGNED NOT NULL COMMENT '상품번호', -- 상품번호
-	`firstOptionNo`   INT UNSIGNED NOT NULL COMMENT '1차 옵션', -- 1차 옵션
-	`secondOptionNo`  INT UNSIGNED NOT NULL COMMENT '2차 옵션', -- 2차 옵션
+	`firstOptionNo`   INT UNSIGNED NULL     COMMENT '1차 옵션', -- 1차 옵션
+	`secondOptionNo`  INT UNSIGNED NULL     COMMENT '2차 옵션', -- 2차 옵션
 	`remainAmount`    INT UNSIGNED NOT NULL COMMENT '재고 수량(-1이면 비재고)', -- 재고 수량(-1이면 비재고)
 	`availableAmount` INT UNSIGNED NOT NULL COMMENT '판매 가능 수량(-1이면 비재고)' -- 판매 가능 수량(-1이면 비재고)
 )

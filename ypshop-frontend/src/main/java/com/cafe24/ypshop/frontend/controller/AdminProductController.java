@@ -129,8 +129,9 @@ public class AdminProductController {
 								   @PathVariable(value="productNo") Long productNo) {
 		
 		//상품옵션 추가
-		adminProductService.productOptionAdd(firstOptionNoList, secondOptionNoList, remainAmountList, productNo);
+		boolean flag = adminProductService.productOptionAdd(firstOptionNoList, secondOptionNoList, remainAmountList, productNo);
 		
+		model.addAttribute("flag", flag);
 		
 		return "admin/admin-product-option-add-success";
 	}
