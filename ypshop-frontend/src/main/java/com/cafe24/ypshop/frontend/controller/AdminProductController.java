@@ -129,10 +129,7 @@ public class AdminProductController {
 								   @PathVariable(value="productNo") Long productNo) {
 		
 		//상품옵션 추가
-		
-		for(Long no : secondOptionNoList) {
-			System.out.println("2차 옵션 번호 : "+no);
-		}
+		adminProductService.productOptionAdd(firstOptionNoList, secondOptionNoList, remainAmountList, productNo);
 		
 		
 		return "admin/admin-product-option-add-success";

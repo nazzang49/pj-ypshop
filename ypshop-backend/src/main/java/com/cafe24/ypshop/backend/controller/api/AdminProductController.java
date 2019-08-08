@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cafe24.ypshop.backend.dto.ImageDTO;
 import com.cafe24.ypshop.backend.dto.JSONResult;
+import com.cafe24.ypshop.backend.dto.ProductOptionDTO;
 import com.cafe24.ypshop.backend.service.AdminImageService;
 import com.cafe24.ypshop.backend.service.AdminOptionService;
 import com.cafe24.ypshop.backend.service.AdminProductOptionService;
@@ -308,24 +309,22 @@ public class AdminProductController {
 	//상품옵션 추가
 	@ApiOperation(value="상품옵션 추가")
 	@PostMapping(value="/{productNo}/productOption/add")
-	public ResponseEntity<JSONResult> productOptionAdd(@RequestParam(value="firstOptionNo", required=false) List<Long> firstOptionNoList,
-													   @RequestParam(value="secondOptionNo", required=false) List<Long> secondOptionNoList,
-													   @RequestParam(value="remainAmount", required=true, defaultValue="0") List<Long> remainAmountList,
+	public ResponseEntity<JSONResult> productOptionAdd(@RequestBody ProductOptionDTO productOptionDTO,
 											   		   @PathVariable(value="productNo") Long productNo) {
 
 		//관리자 인증
 		
 		//valid by JS
 		
-		System.out.println("1차 옵션 사이즈 : "+firstOptionNoList.size());
-		System.out.println("2차 옵션 사이즈 : "+secondOptionNoList.size());
+		System.out.println("1차 옵션 사이즈 : "+productOptionDTO.getFirstOptionNoList().size());
+//		System.out.println("2차 옵션 사이즈 : "+secondOptionNoList.size());
 		
-		boolean flag = adminProductOptionService.상품옵션추가(firstOptionNoList, secondOptionNoList, remainAmountList, productNo);
+//		boolean flag = adminProductOptionService.상품옵션추가(firstOptionNoList, secondOptionNoList, remainAmountList, productNo);
 		
 		//리턴 데이터
 		Map<String, Object> data = new HashMap<>();
-		data.put("flag", flag);
-		JSONResult result = JSONResult.success(data);
+		data.put("flag", true);
+		JSONResult result = JSONResult.success(true);
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	

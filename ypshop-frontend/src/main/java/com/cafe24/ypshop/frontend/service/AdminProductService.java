@@ -7,12 +7,16 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import org.springframework.http.HttpEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cafe24.ypshop.frontend.dto.JSONResult;
+import com.cafe24.ypshop.frontend.dto.ProductOptionDTO;
 import com.cafe24.ypshop.frontend.vo.CategoryVO;
 import com.cafe24.ypshop.frontend.vo.MemberVO;
 import com.cafe24.ypshop.frontend.vo.OptionVO;
@@ -52,22 +56,36 @@ public class AdminProductService {
 	
 	//관리자_상품옵션_중복체크
 	public Boolean checkExist(Long firstOptionNo, Long secondOptionNo) {
-		JSONResultCheckExist result = restTemplate.getForObject("http://localhost:8090/ypshop-backend/api/admin/product/option?firstOptionNo="+firstOptionNo+"&secondOptionNo="+secondOptionNo,
+		JSONResultCheckExist result = restTemplate.getForObject("http://localhost:8090/ypshop-backend/api/admin/product/productOption/checkExist?firstOptionNo="+firstOptionNo+"&secondOptionNo="+secondOptionNo,
 																JSONResultCheckExist.class);
 		return result.getData();
 	}
 	
 	//관리자_상품옵션_추가
-//	public Long productOptionAdd() {
-//		restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
-//		JSONResultGoods result = restTemplate.postForObject("http://localhost:8090/ypshop-backend/api/admin/product/add", productVO, JSONResultGoods.class);		
-//		return result.getData();
-//	}
+	public Boolean productOptionAdd(List<Long> firstOptionNoList, List<Long> secondOptionNoList, List<Long> remainAmountList, Long productNo) {
+		restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
+		
+		ProductOptionDTO productOptionDTO = new ProductOptionDTO();
+		productOptionDTO.setFirstOptionNoList(firstOptionNoList);
+		productOptionDTO.setSecondOptionNoList(secondOptionNoList);
+		productOptionDTO.setRemainAmountList(remainAmountList);
+		
+//		MultiValueMap<String, List<Long>> parameters = new LinkedMultiValueMap<>();
+//		parameters.add("firstOptionNoList", firstOptionNoList);
+//		parameters.add("secondOptionNoList", secondOptionNoList);
+//		parameters.add("remainAmountList", remainAmountList);
+		
+		JSONResultProductOptionAdd result = restTemplate.postForObject("http://localhost:8090/ypshop-backend/api/admin/product/"+productNo+"/productOption/add", productOptionDTO, JSONResultProductOptionAdd.class);		
+		return result.getData();
+	}
 	
 	private static class JSONResultGoods extends JSONResult<Long> {
 	}
 	
 	private static class JSONResultCheckExist extends JSONResult<Boolean> {
+	}
+	
+	private static class JSONResultProductOptionAdd extends JSONResult<Boolean> {
 	}
 	
 	private static class JSONResultProductList extends JSONResult<List<ProductVO>> {
