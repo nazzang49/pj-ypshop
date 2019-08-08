@@ -44,7 +44,7 @@ public class UserOrderController {
 	
 	@ApiOperation(value="장바구니 추가")
 	@PostMapping(value="/cart/add")
-	public ResponseEntity<JSONResult> cartAdd(@ModelAttribute @Valid CartVO cartVO,
+	public ResponseEntity<JSONResult> cartAdd(@RequestBody @Valid CartVO cartVO,
 											  BindingResult br) {
 		
 		//본인 인증
@@ -63,7 +63,7 @@ public class UserOrderController {
 		
 		Map<String, Object> data = new HashMap<>();
 		data.put("flag", flag);
-		JSONResult result = JSONResult.success(data);
+		JSONResult result = JSONResult.success(flag);
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	

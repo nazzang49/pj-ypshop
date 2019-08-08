@@ -34,7 +34,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			securityUser.setUsername(memberVO.getId()); 			//principal
 			//권한 저장 >> admin 페이지 이동 시 검증 필요
 			securityUser.setAuthorities(Arrays.asList(new SimpleGrantedAuthority(memberVO.getRole())));
-			
 		}
 		return securityUser;
 	}

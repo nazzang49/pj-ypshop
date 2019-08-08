@@ -26,11 +26,7 @@ public class UserProductController {
 	public String view(@PathVariable(value="no") Long no, Model model) {
 		
 		Map<String, Object> map = userProductService.getProductDetail(no);
-		
-		//2. 상품 옵션
 		List<ImageVO> imageList = (List<ImageVO>)map.get("imageList");
-		
-		//3. 상품 이미지
 		List<ProductOptionVO> productOptionList = (List<ProductOptionVO>)map.get("productOptionList");
 		
 		model.addAttribute("productVO", map.get("productVO"));
