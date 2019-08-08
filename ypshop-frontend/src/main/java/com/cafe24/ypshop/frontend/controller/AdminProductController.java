@@ -115,7 +115,26 @@ public class AdminProductController {
 		System.out.println("카테고리 리스트 사이즈 : "+optionList.size());
 		
 		model.addAttribute("optionList", optionList);
+		model.addAttribute("productNo", productNo);
 		
 		return "admin/admin-product-option-add";
+	}
+	
+	//관리자_상품옵션추가
+	@PostMapping("/product/{productNo}/productOption/add")
+	public String productOptionAdd(@AuthUser SecurityUser securityUser, Model model,
+								   @RequestParam(value="firstOptionNo", required=true, defaultValue="0") List<Long> firstOptionNoList,
+								   @RequestParam(value="secondOptionNo", required=true, defaultValue="0") List<Long> secondOptionNoList,
+								   @RequestParam(value="remainAmount", required=true, defaultValue="0") List<Long> remainAmountList,
+								   @PathVariable(value="productNo") Long productNo) {
+		
+		//상품옵션 추가
+		
+		for(Long no : secondOptionNoList) {
+			System.out.println("2차 옵션 번호 : "+no);
+		}
+		
+		
+		return "admin/admin-product-option-add-success";
 	}
 }

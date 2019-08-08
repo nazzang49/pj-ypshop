@@ -288,17 +288,37 @@ public class AdminProductController {
 		return result;
 	}
 	
+	//상품옵션_중복체크
+	@ApiOperation(value="상품옵션_중복체크")
+	@GetMapping(value= "/productOption/checkExist")
+	public JSONResult productOptionCheckExist(@RequestParam(value="firstOptionNo", required=true, defaultValue="0") Long firstOptionNo,
+											  @RequestParam(value="secondOptionNo", required=true, defaultValue="0") Long secondOptionNo) {
+		
+		//관리자 인증
+	
+		boolean flag = adminProductOptionService.상품옵션중복체크(firstOptionNo, secondOptionNo);
+		
+		//리턴 데이터
+		Map<String, Object> data = new HashMap<>();
+		data.put("flag", flag);
+		JSONResult result = JSONResult.success(flag);
+		return result;
+	}
+	
 	//상품옵션 추가
 	@ApiOperation(value="상품옵션 추가")
 	@PostMapping(value="/{productNo}/productOption/add")
-	public ResponseEntity<JSONResult> productOptionAdd(@RequestParam(value="firstOptionNo", required=true, defaultValue="0") List<Long> firstOptionNoList,
-													   @RequestParam(value="secondOptionNo", required=true, defaultValue="0") List<Long> secondOptionNoList,
+	public ResponseEntity<JSONResult> productOptionAdd(@RequestParam(value="firstOptionNo", required=false) List<Long> firstOptionNoList,
+													   @RequestParam(value="secondOptionNo", required=false) List<Long> secondOptionNoList,
 													   @RequestParam(value="remainAmount", required=true, defaultValue="0") List<Long> remainAmountList,
 											   		   @PathVariable(value="productNo") Long productNo) {
 
 		//관리자 인증
 		
 		//valid by JS
+		
+		System.out.println("1차 옵션 사이즈 : "+firstOptionNoList.size());
+		System.out.println("2차 옵션 사이즈 : "+secondOptionNoList.size());
 		
 		boolean flag = adminProductOptionService.상품옵션추가(firstOptionNoList, secondOptionNoList, remainAmountList, productNo);
 		

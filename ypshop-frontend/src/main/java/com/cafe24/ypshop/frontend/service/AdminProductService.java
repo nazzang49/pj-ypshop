@@ -50,8 +50,24 @@ public class AdminProductService {
 		return result.getData();
 	}
 	
+	//관리자_상품옵션_중복체크
+	public Boolean checkExist(Long firstOptionNo, Long secondOptionNo) {
+		JSONResultCheckExist result = restTemplate.getForObject("http://localhost:8090/ypshop-backend/api/admin/product/option?firstOptionNo="+firstOptionNo+"&secondOptionNo="+secondOptionNo,
+																JSONResultCheckExist.class);
+		return result.getData();
+	}
+	
+	//관리자_상품옵션_추가
+//	public Long productOptionAdd() {
+//		restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
+//		JSONResultGoods result = restTemplate.postForObject("http://localhost:8090/ypshop-backend/api/admin/product/add", productVO, JSONResultGoods.class);		
+//		return result.getData();
+//	}
 	
 	private static class JSONResultGoods extends JSONResult<Long> {
+	}
+	
+	private static class JSONResultCheckExist extends JSONResult<Boolean> {
 	}
 	
 	private static class JSONResultProductList extends JSONResult<List<ProductVO>> {

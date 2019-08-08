@@ -88,14 +88,60 @@ input[type="submit"]:hover{
 <script type="text/javascript">
 
 
- 	function addImage(){
- 		var imageCount = document.getElementsByName('image').length;
- 		if(imageCount==10){
- 			alert("추가 이미지 최대 10개");
+ 	function addProductOption(){
+ 		var productOptionCount = document.getElementsByName('productOption').length;
+ 		if(productOptionCount==10){
+ 			alert("상품옵션 최대 10개");
  			return;
  		}
- 		var htmls = "<input type='file' name='image' style='padding:0; margin-left:15px;'>";
- 		$('#add-image').append(htmls);
+ 		
+ 		var htmls = "";
+ 		htmls += '<table border="1" summary="">'
+        htmls += '<caption>상품 옵션 정보</caption><colgroup><col style="width:190px;" /><col style="width:308px;" /><col style="width:auto;" />'
+        htmls += '</colgroup><tbody><tr><th scope="row">상품 1차 옵션 목록</th><td colspan="2"><select name="firstOptionNo" class="firstOptionNo"><option value="0">1차 옵션 선택</option><c:forEach items="${optionList }" var="ovo">'
+        htmls += '<c:if test="${ovo.depth == 1}"><option value="${ovo.no }">${ovo.name }</option></c:if></c:forEach>'
+        htmls += '</select></td></tr><tr><th scope="row">상품 2차 옵션 목록</th><td colspan="2"><select name="secondOptionNo" class="secondOptionNo"><option value="0">2차 옵션 선택</option>'
+        htmls += '<c:forEach items="${optionList }" var="ovo"><c:if test="${ovo.depth == 2}"><option value="${ovo.no }">${ovo.name }</option>'
+        htmls += '</c:if></c:forEach></select></td></tr><tr><th scope="row">재고 수량 </th><td colspan="2">'
+        htmls += '<div class="overlapTip"><input type="text" name="remainAmount" id="product_name" style="width:150px;"/></div>'
+        htmls += '</td></tr></tbody></table>';
+ 		
+        
+        $('#add-productOption').append(htmls);
+ 	}
+ 	
+ 	//상품옵션 중복 체크
+ 	function checkExist(){
+ 		
+ 		//1차 및 2차 옵션 여러개 배열로 처리
+ 		var firstOptionNo = document.getElementsByName('firstOptionNo');
+ 		var secondOptionNo = document.getElementsByName('secondOptionNo');
+ 		var productNo = ${productNo};
+ 		
+ 		//1개씩 중복 체크
+ 		for(var i=0;i<firstOptionNo.length;i++) {
+ 			$.ajax({
+ 				url:"${pageContext.request.contextPath }/api/admin/product/"+productNo+"/productOption/checkExist",
+ 				type:"get",
+ 				dataType:"json",
+ 				success:function(response){
+ 					if(response.result!="success"){
+ 						alert("통신 실패");
+ 						return false;
+ 					}
+ 					if(response.data==true){
+ 						alert((i+1)+"번째 상품옵션 >> 중복 >> 재선택 필수");
+ 						return false;
+ 					}
+ 				},
+ 				error:function(error){
+ 					console.log(error);
+ 				}
+ 			});
+ 		}
+ 		alert("상품옵션 중복 없음");
+ 		//중복 없으면 submit
+ 		return true;
  	}
  	
  </script>
@@ -112,8 +158,16 @@ input[type="submit"]:hover{
     <div class="mBoard typeWrite">
     
     
+    <button type="button" onclick="addProductOption()" style="background:black; padding: 15px; color: white; margin-left:15px; margin-bottom:30px;">상품옵션 추가</button>
+    
+    	
     	<!-- 상품 등록 form >> 사진 포함 -->
-    	<form action="${pageContext.request.contextPath}/admin/product/add" method="post" name="product-add-form" enctype="multipart/form-data">
+    	<form action="${pageContext.request.contextPath}/admin/product/${productNo }/productOption/add"
+    		  method="post"
+    		  id="product-option-form"
+    		  onsubmit="return checkExist()">
+    	 
+    	 <div id="add-productOption">
     	 
         <table border="1" summary="">
             <caption>상품 옵션 정보</caption>
@@ -126,7 +180,9 @@ input[type="submit"]:hover{
             <tr>
                 <th scope="row">상품 1차 옵션 목록</th>
                 <td colspan="2">
-                	<select name="firstOptionNo">
+                	<select name="firstOptionNo" class="firstOptionNo">
+                	<!-- 옵션 없는 경우 디폴트 -->
+                	<option value="0">1차 옵션 없음</option>
                 		<c:forEach items="${optionList }" var="ovo">
                 			<c:if test="${ovo.depth == 1}">
                 			<option value="${ovo.no }">${ovo.name }</option>
@@ -138,7 +194,9 @@ input[type="submit"]:hover{
             <tr>
                 <th scope="row">상품 2차 옵션 목록</th>
                 <td colspan="2">
-                	<select name="secondOptionNo">
+                	<select name="secondOptionNo" class="secondOptionNo">
+                	<!-- 옵션 없는 경우 디폴트 -->
+                	<option value="0">2차 옵션 없음</option>
                 		<c:forEach items="${optionList }" var="ovo">
                 			<c:if test="${ovo.depth == 2}">
                 			<option value="${ovo.no }">${ovo.name }</option>
@@ -155,21 +213,18 @@ input[type="submit"]:hover{
                     </div>
                 </td>
             </tr>
-            <tr>
-                <th scope="row">판매 가능 수량 </th>
-                <td colspan="2">
-                    <input type="hidden" name="product_tax_type" value="A">
-                    <input type="text" name="availableAmount" style="width:150px;" value="">
-                </td>
-            </tr>
             </tbody>
         </table>
+        
+        
+         </div>
         
         <div style="text-align: center; margin-top: 40px;">
         	<input type="submit" value="상품 옵션 등록">
         </div>
-        
+          
         </form>
+      
     </div>
     <li id="ec-product-register-addimage-template" style="display: none;">
         <div class="mThumb gSmall" >

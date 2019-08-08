@@ -26,6 +26,16 @@
 	]]>
 	</delete>
 	
+	<!-- 상품옵션_중복체크 -->
+	<select id="checkExist" parameterType="map" resultType="productoptionvo">
+	<![CDATA[
+		select *
+		from product_option
+		where firstOptionNo=#{firstOptionNo}
+		and secondOptionNo=#{secondOptionNo}
+	]]>
+	</select>
+	
 	<!-- (회원) 상품옵션 목록 >> 1차 및 2차 옵션명, 재고수량 -->
 	<select id="selectAllProductOptionByNo" parameterType="productvo" resultType="productoptionvo">
 	<![CDATA[

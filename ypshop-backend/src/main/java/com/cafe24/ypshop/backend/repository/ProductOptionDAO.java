@@ -1,6 +1,8 @@
 package com.cafe24.ypshop.backend.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,14 @@ public class ProductOptionDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+	//(관리자) 상품옵션_중복체크
+	public ProductOptionVO checkExist(Long firstOptionNo, Long secondOptionNo) {
+		Map<String, Long> map = new HashMap<String, Long>();
+		map.put("firstOptionNo", firstOptionNo);
+		map.put("secondOptionNo", secondOptionNo);
+		return sqlSession.selectOne("productOption.checkExist", map);
+	}
 	
 	//(관리자) 상품옵션 추가
 	public boolean insertProductOption(ProductOptionVO productOptionVO) {
@@ -35,4 +45,5 @@ public class ProductOptionDAO {
 	public boolean updateRemainAmount(CartVO cartVO) {
 		return sqlSession.update("productOption.updateRemainAmount", cartVO)==1;
 	}
+	
 }

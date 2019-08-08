@@ -16,6 +16,15 @@ public class AdminProductOptionService {
 	@Autowired
 	private ProductOptionDAO productOptionDao;
 	
+	//상품옵션_중복체크
+	public boolean 상품옵션중복체크(Long firstOptionNo, Long secondOptionNo) {
+		ProductOptionVO productOptionVO = productOptionDao.checkExist(firstOptionNo, secondOptionNo);
+		if(productOptionVO!=null) {
+			return true;
+		}
+		return false;
+	}
+	
 	@Transactional
 	public boolean 상품옵션추가(List<Long> firstOptionNoList,
 							 List<Long> secondOptionNoList,
