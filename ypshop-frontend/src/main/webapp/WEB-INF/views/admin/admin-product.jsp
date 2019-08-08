@@ -107,6 +107,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--skycons-icons-->
 <script src="https://p.w3layouts.com/demos/28-03-2016/shoppy/web/js/skycons.js"></script>
 <!--//skycons-icons-->
+
+
+
 </head>
 <body>
 <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script><script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
@@ -154,6 +157,7 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 </script>
 <body>	
 
+
 <script type="text/javascript">
 
 	//회원삭제 by Ajax
@@ -196,18 +200,18 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 									<!--<img id="logo" src="" alt="Logo"/>--> 
 								  </a> 								
 							</div>
+							<form>
+								<select name="searchType" style="float:left; margin-top:9px; padding: 9px 0;">
+									<option value="">검색 타입</option>
+									<option value="name">이름</option>
+									<option value="id">아이디</option>
+								</select>
 							<!--search-box, 회원 기준-->
-								<div class="search-box">
-									<form>
-										<select name="searchType">
-											<option value="">검색 타입</option>
-											<option value="name">이름</option>
-											<option value="id">아이디</option>
-										</select>	
+								<div class="search-box" style="width: 300px;">
 										<input type="text" placeholder="search" name="searchKwd" required="">	
-										<input type="submit" value="검색">
-									</form>
+										<button class="btn btn-info" type="submit" style="float:right;">검색</button>
 								</div><!--//end-search-box-->
+								</form>
 							<div class="clearfix"> </div>
 						 </div>
 						 <div class="header-right">
@@ -345,30 +349,6 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 								</ul>
 								<div class="clearfix"> </div>
 							</div>
-							<!--notification menu end -->
-							<div class="profile_details">		
-								<ul>
-									<li class="dropdown profile_details_drop">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-											<div class="profile_img">	
-												<span class="prfil-img"><img src="images/p1.png" alt=""> </span> 
-												<div class="user-name">
-													<p>Malorum</p>
-													<span>Administrator</span>
-												</div>
-												<i class="fa fa-angle-down lnr"></i>
-												<i class="fa fa-angle-up lnr"></i>
-												<div class="clearfix"></div>	
-											</div>	
-										</a>
-										<ul class="dropdown-menu drp-mnu">
-											<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li> 
-											<li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li> 
-											<li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
-										</ul>
-									</li>
-								</ul>
-							</div>
 							<div class="clearfix"> </div>				
 						</div>
 				     <div class="clearfix"> </div>	
@@ -399,7 +379,7 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 <div class="chit-chat-layer1">
 	<div class="col-md-6 chit-chat-layer1-left">
 	
-	<h1 style="margin-bottom: 30px;">상품관리</h1>
+	<h1 style="margin-top:100px; margin-bottom:30px;">상품관리</h1>
                <div class="work-progres">
                             <div class="chit-chat-heading">
                                   상품 목록
@@ -409,7 +389,7 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
                                   <thead>
                                     <tr>
                                       <th>No.</th>
-                                      <th>AategoryNo.</th>
+                                      <th>CategoryNo.</th>
                                       <th>Name</th>                                   
                                       <th>Price</th>
                                       <th>Description</th>
@@ -434,7 +414,7 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
                               </c:forEach>
                           </tbody>
                       </table>
-                      <button style="float:right;" onclick="addProduct()">상품 등록</button>
+                      <button class="btn btn-primary" style="float:right;" onclick="addProduct()">상품 등록</button>
                   </div>
              </div>
       </div>
@@ -532,57 +512,9 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 </div>
 </div>
 <!--slider menu-->
-    <div class="sidebar-menu">
-		  	<div class="logo"> <a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> <a href="#"> <span id="logo" ></span> 
-			      <!--<img id="logo" src="" alt="Logo"/>--> 
-			  </a> </div>		  
-		    <div class="menu">
-		      <ul id="menu" >
-		        <li id="menu-home" id="member-list"><a href="index.html"><i class="fa fa-tachometer"></i><span>회원관리</span></a></li>
-		        <li><a href="#"><i class="fa fa-cogs"></i><span>상품관리</span><span class="fa fa-angle-right" style="float: right"></span></a>
-		          <ul>
-		            <li><a href="grids.html">Grids</a></li>
-		            <li><a href="portlet.html">Portlets</a></li>
-		          </ul>
-		        </li>
-		        <li id="menu-comunicacao" ><a href="#"><i class="fa fa-book nav_icon"></i><span>Element</span><span class="fa fa-angle-right" style="float: right"></span></a>
-		          <ul id="menu-comunicacao-sub" >
-		            <li id="menu-mensagens" style="width: 120px" ><a href="buttons.html">Buttons</a>		              
-		            </li>
-		            <li id="menu-arquivos" ><a href="typography.html">Typography</a></li>
-		            <li id="menu-arquivos" ><a href="icons.html">Icons</a></li>
-		          </ul>
-		        </li>
-		          <li><a href="maps.html"><i class="fa fa-map-marker"></i><span>Maps</span></a></li>
-		        <li id="menu-academico" ><a href="#"><i class="fa fa-file-text"></i><span>Pages</span><span class="fa fa-angle-right" style="float: right"></span></a>
-		          <ul id="menu-academico-sub" >
-		          	 <li id="menu-academico-boletim" ><a href="login.html">Login</a></li>
-		            <li id="menu-academico-avaliacoes" ><a href="signup.html">Sign Up</a></li>		           
-		          </ul>
-		        </li>
-		        
-		        <li><a href="charts.html"><i class="fa fa-bar-chart"></i><span>Charts</span></a></li>
-		        <li><a href="#"><i class="fa fa-envelope"></i><span>Mailbox</span><span class="fa fa-angle-right" style="float: right"></span></a>
-		        	 <ul id="menu-academico-sub" >
-			            <li id="menu-academico-avaliacoes" ><a href="inbox.html">Inbox</a></li>
-			            <li id="menu-academico-boletim" ><a href="inbox-details.html">Compose email</a></li>
-		             </ul>
-		        </li>
-		         <li><a href="#"><i class="fa fa-cog"></i><span>System</span><span class="fa fa-angle-right" style="float: right"></span></a>
-		         	 <ul id="menu-academico-sub" >
-			            <li id="menu-academico-avaliacoes" ><a href="404.html">404</a></li>
-			            <li id="menu-academico-boletim" ><a href="blank.html">Blank</a></li>
-		             </ul>
-		         </li>
-		         <li><a href="#"><i class="fa fa-shopping-cart"></i><span>E-Commerce</span><span class="fa fa-angle-right" style="float: right"></span></a>
-		         	<ul id="menu-academico-sub" >
-			            <li id="menu-academico-avaliacoes" ><a href="product.html">Product</a></li>
-			            <li id="menu-academico-boletim" ><a href="price.html">Price</a></li>
-		             </ul>
-		         </li>
-		      </ul>
-		    </div>
-	 </div>
+
+    <c:import url='/WEB-INF/views/includes/admin-menu.jsp'/>
+    
 	<div class="clearfix"> </div>
 </div>
 <!--slide bar menu end here-->

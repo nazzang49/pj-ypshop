@@ -63,8 +63,8 @@ public class AdminProductController {
 					  @RequestParam(value="image") List<MultipartFile> imageList,
 					  @RequestParam(value="thumbnailUrl") MultipartFile thumbnailUrl,
 					  @RequestParam(value="categoryNo", required=true, defaultValue="") Long categoryNo,
-					  @RequestParam(value="depth", required=true, defaultValue="") List<Long> depthList,
-					  @RequestParam(value="option", required=true, defaultValue="") List<String> optionList,
+					  @RequestParam(value="firstOption", required=true, defaultValue="") List<String> firstOptionList,
+					  @RequestParam(value="secondOption", required=true, defaultValue="") List<String> secondOptionList,
 					  @RequestParam(value="alignUse", required=true, defaultValue="Y") String alignUse,
 					  Model model) {
 		
@@ -85,8 +85,14 @@ public class AdminProductController {
 		
 		//옵션 1개 이상
 		List<OptionVO> optionVoList = new ArrayList<>();
-		for(int i=0; i<depthList.size(); i++) {
-			optionVoList.add(new OptionVO(null, optionList.get(i), depthList.get(i)));
+		//1차
+		for(int i=0; i<firstOptionList.size(); i++) {
+			optionVoList.add(new OptionVO(null, firstOptionList.get(i), 1L));
+		}
+		
+		//2차
+		for(int i=0; i<secondOptionList.size(); i++) {
+			optionVoList.add(new OptionVO(null, secondOptionList.get(i), 2L));
 		}
 		
 		productVO.setCategoryNo(categoryNo);

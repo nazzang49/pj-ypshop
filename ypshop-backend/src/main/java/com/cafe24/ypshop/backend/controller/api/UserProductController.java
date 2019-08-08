@@ -31,9 +31,11 @@ public class UserProductController {
 	@GetMapping(value={"/list/{categoryNo}","/list"})
 	public ResponseEntity<JSONResult> getList(@ModelAttribute ProductVO productVO) {
 		
+		//썸네일 경로 포함
 		List<ProductVO> productList = userProductService.상품목록(productVO);
 		List<CategoryVO> categoryList = userProductService.카테고리목록();
-
+		
+		
 		//리턴 데이터
 		Map<String, Object> data = new HashMap<>();
 		data.put("productList", productList);

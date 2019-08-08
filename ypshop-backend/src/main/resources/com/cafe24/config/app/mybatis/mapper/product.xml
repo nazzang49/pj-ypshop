@@ -132,21 +132,23 @@
 	<!-- (회원) 상품 목록 -->
 	<select id="selectAllByCategoryNoAndAlignUse" parameterType="productvo" resultType="productvo">
 	<![CDATA[
-		select *
-		from product
+		select p.no, p.name, p.shortDescription, p.price, p.categoryNo, i.url as thumbnailUrl
+		from product p, image i
+		where p.no=i.productNo
+		and i.repOrBasic='R'
 	]]>
 		<choose>
 		<when test="categoryNo!=null">
 	<![CDATA[
-		where categoryNo=#{categoryNo}
-		and alignUse="Y"
-		order by alignNo desc
+		and p.categoryNo=#{categoryNo}
+		and p.alignUse="Y"
+		order by p.alignNo desc
 	]]>
 		</when>
 		<otherwise>
 	<![CDATA[
-		where alignUse="Y"
-		order by no desc
+		and p.alignUse="Y"
+		order by p.no desc
 	]]>
 		</otherwise>
 		</choose>

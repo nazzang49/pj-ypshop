@@ -25,8 +25,8 @@ import com.cafe24.ypshop.frontend.vo.ProductVO;
 @Service
 public class AdminProductService {
 
-	private static final String SAVE_PATH = "/mysite-uploads";
-	private static final String URL = "/images";
+	private static final String SAVE_PATH = "/shop-uploads";
+	private static final String URL = "/image";
 	private final RestTemplate restTemplate = new RestTemplate();
 	
 	//관리자_상품 목록
@@ -122,7 +122,7 @@ public class AdminProductService {
 			os.write(fileData);
 			os.close();
 			
-			url = URL + "/" + saveFileName;
+			url = URL + SAVE_PATH + "/" + saveFileName;
 			
 		} catch (IOException e) {
 			throw new RuntimeException("Fileupload error:" + e);

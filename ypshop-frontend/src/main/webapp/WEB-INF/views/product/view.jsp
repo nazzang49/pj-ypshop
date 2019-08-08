@@ -46,6 +46,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <body>
 
+
+
 <script>
 	
 	//장바구니 추가 by Ajax
@@ -74,21 +76,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<section class="slider">
 					<div class="flexslider">
 						<ul class="slides">
+						<c:forEach items="${imageList }" var="ivo">
 							<li>
+								<!-- 썸네일 이미지 -->
 								<div class="w3ls_main_grid_left_grid">
-									<img src="${pageContext.request.contextPath}/assets/images/main-header-bg.jpg" alt="상품 이미지" />
+									<img src="${pageContext.request.contextPath}/assets${ivo.url}" alt="상품 이미지" style="padding-right:48px;"/>
 								</div>
 							</li>
-							<li>
-								<div class="w3ls_main_grid_left_grid">
-									<img src="images/2.jpg" alt=" " />
-								</div>
-							</li>
-							<li>
-								<div class="w3ls_main_grid_left_grid">
-									<img src="images/3.jpg" alt=" " />
-								</div>
-							</li>
+						</c:forEach>
 						</ul>
 					</div>
 				</section>
@@ -110,12 +105,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="agile_occasion_quantity">
 						<div class="agile_occasion_quantity_left">
 							<!-- 1개씩 추가 가정 -->
-							<h4>상품 옵션별 재고 현황</h4>
+							<h4>상품 옵션 및 재고 현황</h4>
 							<div class="agileits_w3layouts_radio_button">
 								<c:forEach items="${productOptionList }" var="productOptionVO">
 								<div class="w3_agile_radio">
 									<label class="radio"><input type="radio" name="productoption" checked=""><i></i>
-									${productOptionVO.firstOptionName }, ${productOptionVO.secondOptionName }, ${productOptionVO.remainAmount }</label>
+									${productOptionVO.firstOptionName }, ${productOptionVO.secondOptionName } / ${productOptionVO.remainAmount }</label>
 								</div>
 								<div class="clear"> </div>
 								</c:forEach>
@@ -123,7 +118,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="agile_occasion_quantity_right">
 							<h4>수량</h4>
-							<div class="w3layouts_quality"> 
+							<div class="w3layouts_quality">
 								<div class="w3_quality_select">
 									<div class="entry value-minus">&nbsp;</div>
 									<div class="entry value"><span>1</span></div>

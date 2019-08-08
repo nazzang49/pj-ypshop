@@ -78,6 +78,15 @@ input[type="submit"]:hover{
 	background:#0911EB;
 }
 
+.chkbox{
+	border:2px solid black;
+}
+
+input[type="text"]{
+	height: 40px;
+	width: 500px;
+}
+
 </style>
 
 
@@ -86,6 +95,27 @@ input[type="submit"]:hover{
 
 
 <script type="text/javascript">
+
+	//진열구분
+	$(function(){
+		$('.chkbox').click(function(){
+			//모든 라디오 버튼 해제
+			$('.radio-btn').attr('checked', false);
+			$('.chkbox').css('background-color', 'white');
+			$('.chkbox').css('color','black');
+			$('.chkbox').css('border','1px solid black');
+			$('.chkbox').css('font-weight','normal');
+			
+			//현재 클릭한 라디오 버튼 체크
+			var chkboxId = '#'+$(this).attr('for');
+			
+			$(chkboxId).attr('checked', true);
+			$(this).css('background-color','#43A5FF');
+			$(this).css('border','none');
+			$(this).css('color','white');
+			$(this).css('font-weight','bold');
+		});
+	})
 
 
  	function addImage(){
@@ -98,14 +128,26 @@ input[type="submit"]:hover{
  		$('#add-image').append(htmls);
  	}
  	
- 	function addOption(){
- 		var optionCount = document.getElementsByName('option').length;
+	//1차 옵션 추가
+ 	function addFirstOption(){
+ 		var optionCount = document.getElementsByName('firstOption').length;
  		if(optionCount==10){
- 			alert("추가 이미지 최대 10개");
+ 			alert("추가 옵션 최대 10개");
  			return;
  		}
- 		var htmls = '<div style="margin-bottom: 20px;"><input type="radio" name="depth" value="1"> 1차 옵션 <input type="radio" name="depth" value="2"> 2차 옵션 <input type="text" name="option" style="width:150px; height:30px;" value=""/></div>';
- 		$('#add-option').append(htmls);
+ 		var htmls = '<div><input type="text" name="firstOption" style="width:200px;" value="" placeholder="옵션명 입력"/></div>';
+ 		$('#add-firstoption').append(htmls);
+ 	}
+ 	
+	//2차 옵션 추가
+ 	function addSecondOption(){
+ 		var optionCount = document.getElementsByName('secondOption').length;
+ 		if(optionCount==10){
+ 			alert("추가 옵션 최대 10개");
+ 			return;
+ 		}
+ 		var htmls = '<div><input type="text" name="secondOption" style="width:200px;" value="" placeholder="옵션명 입력"/></div>';
+ 		$('#add-secondoption').append(htmls);
  	}
  </script>
 
@@ -147,48 +189,43 @@ input[type="submit"]:hover{
                 <th scope="row">상품명 </th>
                 <td colspan="2">
                     <div class="overlapTip">
-                        <input type="text" name="name" id="product_name" placeholder="예시) 청바지" style="width:500px;"/>
+                        <input type="text" name="name" id="product_name" placeholder="예시) 청바지"/>
                     </div>
-                    <span class="txtByte" title="현재글자수/최대글자수">[ <strong>0</strong> / 250 ]</span>
                 </td>
             </tr>
             <tr>
-                <th scope="row">상품 가격 </th>
+                <th scope="row">상품 가격(원)</th>
                 <td colspan="2">
                     <input type="hidden" name="product_tax_type" value="A">
-                    <input type="text" name="price" style="width:150px;" value="">
-                    원
+                    <input type="text" name="price" value="">
                 </td>
             </tr>
             <tr>
                 <th scope="row">상품 요약설명</th>
                 <td colspan="2">
-                    <input type="text" name="shortDescription" style="width:80%;" value="" maxcount="255"/>
-                    <span class="txtByte" title="현재글자수/최대글자수">[ <strong>0</strong> / 255 ]</span>
+                    <input type="text" name="shortDescription" value=""/>
                 </td>
             </tr>
-            <tr>
+            <tr style="height:70px;">
                 <th scope="row">진열구분</th>
                 <td colspan="2">
-                    <input type="radio" name="alignUse" value="Y"> 진열 O <br>
-                	<input type="radio" name="alignUse" value="N"> 진열 X
+                	<div style="margin-top: 15px;">
+                    <label for="checkbox-8" style="border:1px solid black; padding: 15px 25px;" class="btn btn-default chkbox">진열 YES</label>
+					<input type="radio" style="display:none;" name="alignUse" id="checkbox-8" class="radio-btn" value="Y">
+					
+					<label for="checkbox-9" style="border:1px solid black; padding: 15px 25px;" class="btn btn-default chkbox">진열 NO</label>
+					<input type="radio" style="display:none;" name="alignUse" id="checkbox-9" class="radio-btn" value="N">
+					</div>
                 </td>
             </tr>
             <tr>
                 <th scope="row">이미지</th>
                 <td>
-                    <span class="txtStrong">썸네일 이미지</span>
+                    <span class="txtStrong">썸네일</span>
                     
                     
                     <input type="file" name="thumbnailUrl">
                     
-                     <!--참고: 이미지 등록 전-->
-                     
-                    <div class="mThumb gLarge gDouble" id="ec-product-register-image-empty" >
-                        <div class="btnAdd" id="ec-product-register-detail-image-upload">
-                        	
-                        </div>
-                    </div>
                     <!-- 참고: 이미지 등록 후 -->
                     <div class="mThumb gLarge gDouble" id="ec-product-register-image-exist" style="display: none;">
                         <div class="thumb">
@@ -206,7 +243,7 @@ input[type="submit"]:hover{
                             
                             <li  id="ec-product-register-addimage-upload">
                                 
-                                <div>
+                                <div style="margin-bottom: 15px;">
                                 <button type="button" onclick="addImage()" style="background:black; padding: 15px; color: white; margin-left:15px;">이미지 추가(최대 10개)</button>
                                 </div>
                                 
@@ -219,15 +256,23 @@ input[type="submit"]:hover{
                 </td>
             </tr>
             <tr>
-             <th scope="row">옵션</th>
+             <th scope="row">1차 옵션(색상)</th>
                 <td colspan="2">
-                <button type="button" onclick="addOption()" style="background:black; padding: 15px; color: white; margin-bottom:20px;">옵션 추가(1차, 2차 선택)</button>
-                <div id="add-option">
+                <button type="button" onclick="addFirstOption()" style="background:black; padding: 15px; color: white; margin-bottom:20px;">옵션 추가(1차)</button>
+                <div id="add-firstoption">
                 	<div>
-                	<input type="radio" name="depth" value="1"> 1차 옵션
-                	<input type="radio" name="depth" value="2"> 2차 옵션
-                	<input type="text" name="option" style="width:200px; height:30px;" value=""/>
-                	
+        	       	<input type="text" name="firstOption" style="width:200px;" value="" placeholder="옵션명 입력"/>
+                	</div>
+                </div>
+                </td>
+            </tr>
+            <tr>
+             <th scope="row">2차 옵션(사이즈)</th>
+                <td colspan="2">
+                <button type="button" onclick="addSecondOption()" style="background:black; padding: 15px; color: white; margin-bottom:20px;">옵션 추가(2차)</button>
+                <div id="add-secondoption">
+                	<div>
+           	    	<input type="text" name="secondOption" style="width:200px;" value="" placeholder="옵션명 입력"/>
                 	</div>
                 </div>
                 </td>

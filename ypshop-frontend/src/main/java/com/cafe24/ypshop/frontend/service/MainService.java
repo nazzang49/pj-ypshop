@@ -10,7 +10,7 @@ public class MainService {
 
 	private final RestTemplate restTemplate = new RestTemplate();
 	
-	//메인_상품 목록 >> 상품 목록, 카테고리 목록
+	//메인_상품 목록 >> 상품 목록, 카테고리 목록, 썸네일 목록
 	public Map<String, Object> main() {
 		JSONResultGoods result = restTemplate.getForObject("http://localhost:8090/ypshop-backend/api/product/list", JSONResultGoods.class);		
 		Map<String, Object> returnData = (Map<String, Object>)result.getData();

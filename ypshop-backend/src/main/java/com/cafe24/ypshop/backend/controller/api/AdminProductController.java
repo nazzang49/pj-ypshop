@@ -72,6 +72,7 @@ public class AdminProductController {
 		
 		//관리자 인증
 		
+		//썸네일 경로 포함
 		List<ProductVO> productList = adminProductService.상품목록(categoryNo, searchType, searchKwd);
 		
 		//리턴 데이터

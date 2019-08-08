@@ -27,8 +27,6 @@ public class UserProductController {
 		
 		Map<String, Object> map = userProductService.getProductDetail(no);
 		
-		//1. 상품 기본
-		
 		//2. 상품 옵션
 		List<ImageVO> imageList = (List<ImageVO>)map.get("imageList");
 		
