@@ -39,6 +39,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
 	    rel="stylesheet">
 	<script src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
+	
+	<!-- 다음 주소 API -->
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	
+<style>
+input {
+	height:40px;
+}
+
+</style>
 </head>
 
 <body>
@@ -88,6 +98,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	}
 </script>
 
+<script>
+	//다음 주소 API
+	function getAddress(){
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            //우편번호
+	        	var zipcode = data.zonecode;
+	            //도로명 주소
+				var roadAddr = data.roadAddress;
+				
+		        var newAddr = "("+zipcode+") "+roadAddr;
+		        
+		        //주소 입력 후, disabled 설정
+		        document.getElementById('address').value = newAddr;
+	        	
+	        }
+	    }).open();
+	}
+</script>
+
 	<!-- mian-content -->
     <div class="main-banner" id="home" style="text-align: center; height: 100px;">
         <!-- header -->
@@ -105,7 +135,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="form-row">
 								<div style="width:100%;">
 										<label for="id">아이디</label><br>
-									<form:input name="id" path="id" style="width:250px;"/>
+									<form:input name="id" path="id" style="width:250px; height:40px;" placeholder="영문, 한글"/>
 									<button type="button" class="btn btn-primary submit mb-4" id="check-id-btn" style="height: 40px; margin-top:15px;">아이디 중복 체크</button>
 								</div>
 								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
@@ -116,7 +146,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="form-row">
 								<div style="width:100%;">
 										<label for="password">비밀번호</label><br>
-									<form:input path="password" type="password" style="width:95%;"/>
+									<form:input path="password" type="password" style="width:95%;" placeholder="영문, 숫자, 특수기호"/>
 								</div>
 								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
 									<form:errors path="password"/>
@@ -126,7 +156,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="form-row">
 								<div style="width:100%;">
 										<label for="name">이름</label><br>
-									<form:input path="name" style="width:95%;"/>
+									<form:input path="name" style="width:95%;" placeholder="영문, 한글"/>
 								</div>
 								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
 									<form:errors path="name"/>
@@ -136,8 +166,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="form-row">
 								<div style="width:100%;">
 										<label for="address">주소</label><br>
-									<form:input path="address" style="width:95%;"/>
+									<form:input path="address" style="width:95%;" placeholder="아래 주소 검색 이용"/>
 								</div >
+								<button type="button" class="btn btn-info" onclick="getAddress()" style="margin-top:20px; width:95%">주소 검색</button>
 								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
 									<form:errors path="address"/>
 								</p>
@@ -146,7 +177,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="form-row">
 								<div style="width:100%;">
 										<label for="phone">전화번호</label><br>
-									<form:input path="phone" style="width:95%;"/>
+									<form:input path="phone" style="width:95%;" placeholder="- 기호 생략"/>
 								</div>
 								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
 									<form:errors path="phone"/>
@@ -156,7 +187,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="form-row">
 								<div style="width:100%;">
 										<label for="email">이메일</label><br>
-									<form:input path="email" style="width:95%;"/>
+									<form:input path="email" style="width:95%;" placeholder="test@test.com 형식"/>
 								</div>
 								<p style="font-weight:bold; color:red; text-align:left; padding:0; margin:0;">
 									<form:errors path="email"/>

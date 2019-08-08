@@ -1,14 +1,12 @@
 package com.cafe24.ypshop.frontend.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cafe24.ypshop.frontend.dto.JSONResult2;
-import com.cafe24.ypshop.frontend.security.AuthUser;
 import com.cafe24.ypshop.frontend.security.SecurityUser;
 import com.cafe24.ypshop.frontend.service.UserOrderService;
 
@@ -27,12 +25,8 @@ public class UserOrderController {
 							   @RequestParam(value="cartPrice", required=true, defaultValue="0") Long cartPrice) {
 		
 		
-		System.out.println("들어온다 프런트 엔드");
-		
 		//현재 로그인 아이디 추출
 		String memberId = (String)securityUser.getUsername();
-		
-		System.out.println("로그인 아이디 : "+memberId);
 		
 		
 		boolean flag = userOrderService.addCart(memberId, productOptionNo, cartAmount, cartPrice);

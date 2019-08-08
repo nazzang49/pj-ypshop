@@ -214,7 +214,7 @@ CREATE TABLE `product` (
 	`categoryNo`       INT UNSIGNED   NOT NULL COMMENT '카테고리번호', -- 카테고리번호
 	`name`             VARCHAR(50)    NOT NULL COMMENT '상품명', -- 상품명
 	`price`            INT UNSIGNED   NOT NULL COMMENT '상품가격', -- 상품가격
-	`shortDescription` VARCHAR(300)   NOT NULL COMMENT '상품 간단 설명', -- 상품 간단 설명
+	`shortDescription` LONGTEXT   	  NOT NULL COMMENT '상품 간단 설명', -- 상품 간단 설명
 	`alignUse`         ENUM('Y', 'N') NOT NULL DEFAULT 'Y' COMMENT '진열 구분', -- 진열 구분
 	`alignNo`          INT UNSIGNED   NOT NULL COMMENT '진열 순서' -- 진열 순서
 )

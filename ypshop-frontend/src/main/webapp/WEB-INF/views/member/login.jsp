@@ -3,6 +3,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 <%@ page import="com.cafe24.ypshop.frontend.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -39,10 +42,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
 	    rel="stylesheet">
 	<script src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
+	
 </head>
 
 <body>
-	<!-- mian-content -->
+
+ <%
+    String clientId = "JKX_G4a7I3XWnU1fAqpv";
+    String redirectURI = URLEncoder.encode("http://localhost:8090/ypshop-frontend/", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+    apiURL += "&client_id=" + clientId;
+    apiURL += "&redirect_uri=" + redirectURI;
+    apiURL += "&state=" + state;
+    session.setAttribute("state", state);
+ %>
+ 	<!-- mian-content -->
     <div class="main-banner" id="home" style="text-align: center; height: 100px;">
         <!-- header -->
         <c:import url='/WEB-INF/views/includes/header.jsp'>
@@ -59,19 +75,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="form-row">
 								<div style="width:100%;">
 										<label for="id">아이디</label><br>
-										<input type="text" id="id" name="id" style="width:100%;">
+										<input type="text" id="id" name="id" style="height:40px; width:100%;">
 								</div>
 							</div>
 							<br>
 							<div class="form-row">
 								<div style="width:100%;">
 										<label for="password">비밀번호</label><br>
-										<input type="password" id="password" name="password" style="width:100%;">
+										<input type="password" id="password" name="password" style="height:40px; width:100%;">
 								</div>
 							</div>
+							<div style="margin-top:20px;">
+								 <a href="<%=apiURL%>"><img height="70px;" width="100%" src="${pageContext.servletContext.contextPath}/assets/images/naver-logo.PNG"/></a>
+								 </div>
+								<!-- 네이버아이디로로그인 버튼 노출 영역 -->
+								<script type="text/javascript">
+							 		var naver_id_login = new naver_id_login("Client ID", "CallBack URL");	// Client ID, CallBack URL 삽입
+																		// 단 'localhost'가 포함된 CallBack URL
+							 		var state = naver_id_login.getUniqState();
+									
+							 		naver_id_login.setButton("white", 2, 40);
+							 		naver_id_login.setDomain("서비스 URL");	//  URL
+							 		naver_id_login.setState(state);
+							 		naver_id_login.setPopup();
+							 		naver_id_login.init_naver_id_login();
+								</script>
+							
 							
 							<div style="text-align: center; margin-top: 30px;">
-								<button type="submit" class="btn btn-primary submit mb-4" style=" width:100%;">로그인</button>
+								<button type="submit" class="btn btn-primary submit mb-4" style="height: 60px; width:100%; font-size:20px;">로그인</button>
 							</div>
 						</form>
 					</div>

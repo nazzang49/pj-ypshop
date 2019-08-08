@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.cafe24.ypshop.frontend.service.MainService;
 import com.cafe24.ypshop.frontend.vo.CategoryVO;
@@ -28,6 +29,13 @@ public class MainController {
 		
 		model.addAttribute("productList", (List<ProductVO>)returnData.get("productList"));
 		model.addAttribute("categoryList", (List<CategoryVO>)returnData.get("categoryList"));
+		return "main/index";
+	}
+	
+	//네이버_사용자 정보 조회
+	@RequestMapping("/naver_info")
+	public String naver(@RequestParam(value="access_token", required=true, defaultValue="") String accessToken) {
+		mainService.getNaverInfo(accessToken);
 		return "main/index";
 	}
 	
