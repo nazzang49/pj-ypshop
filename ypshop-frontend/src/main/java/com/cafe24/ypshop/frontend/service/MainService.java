@@ -25,9 +25,7 @@ public class MainService {
 	
 	//네이버_사용자 정보 조회
 	public boolean getNaverInfo(String accessToken) {
-		
-		System.out.println("액세스 토큰 : "+accessToken);
-		
+				
 		String token = accessToken;// 네이버 로그인 접근 토큰;
         String header = "Bearer " + token; // Bearer 다음에 공백 추가
         

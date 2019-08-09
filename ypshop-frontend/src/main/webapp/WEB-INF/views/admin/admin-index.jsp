@@ -402,6 +402,21 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 <!--market updates end here-->
 <!---728x90--->
 
+<div>
+	
+	<%
+		out.println(request.getParameter("result"));
+	%>
+
+	
+	<form action="${pageContext.request.contextPath}/admin/naverSearch" method="post">
+	<input type="text" name="searchKwd" id="search-by-naver">
+	<input type="submit" value="네이버 쇼핑 인사이트 검색">
+	</form>
+
+</div>
+
+
 <!--mainpage chit-chating-->
 <div class="chit-chat-layer1">
 	<div class="col-md-6 chit-chat-layer1-left">

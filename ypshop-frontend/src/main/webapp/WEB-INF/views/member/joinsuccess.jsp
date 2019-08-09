@@ -88,6 +88,7 @@ if(code!=null){
       int responseCode = con.getResponseCode();
       BufferedReader br;
       System.out.print("responseCode="+responseCode);
+      
       if(responseCode==200) { // 정상 호출
         br = new BufferedReader(new InputStreamReader(con.getInputStream()));
       } else {  // 에러 발생
@@ -104,7 +105,6 @@ if(code!=null){
     	  
     	CustomJsonParse cjp = new CustomJsonParse();
     	access_token = cjp.getAccessToken(res.toString());
-    	out.println(res.toString());
     	
     	//문자 발송
     	MemberService.joinSuccessSms(access_token);
@@ -118,8 +118,8 @@ if(code!=null){
 %>
 
 <script>
-// 	alert("회원가입 성공 >> 메인 이동");
-// 	location.href="${pageContext.request.contextPath}";
+	alert("회원가입 성공 >> solapi 웹문자 발송 완료 및 메인 이동");
+	location.href="${pageContext.request.contextPath}";
 </script>
 
 </body>
