@@ -39,4 +39,21 @@ public class CustomJsonParse {
 	return code;
 	}
 	
+	public String getNaverSearchResult(String data){
+
+		String code = "";
+
+		try {
+
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(data);
+			code = jsonObject.get("startDate").toString();
+			
+		} catch (Exception e) {
+			code = null;
+	}
+		
+	return code;
+	}
+	
 }

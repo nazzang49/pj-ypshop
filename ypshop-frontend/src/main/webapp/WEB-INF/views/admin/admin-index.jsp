@@ -405,7 +405,13 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 <div>
 	
 	<%
-		out.println(request.getParameter("result"));
+// 		out.println(request.getParameter("result"));
+	
+		CustomJsonParse cjp = new CustomJsonParse();
+		String startDate = cjp.getNaverSearchResult(request.getParameter("result"));
+		
+		
+		out.println(startDate);
 	%>
 
 	
@@ -547,7 +553,7 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
                             datasets : [
                                 {
                                     fillColor : "#FC8213",
-                                    data : [65,59,90,81,56,55,40]
+                                    data : [20,59,90,81,56,55,40]
                                 },
                                 {
                                     fillColor : "#337AB7",

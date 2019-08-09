@@ -39,7 +39,7 @@ public class AdminMainService {
 
 		try {
 			String apiURL = "https://openapi.naver.com/v1/datalab/shopping/categories";
-			String body = "{\"gender\":\"m\",\"endDate\":\"2017-09-30\",\"keyword\":\"suit\",\"category\":[{\"name\":\"패션의류\",\"param\":[\"50000000\"]}],\"device\":\"pc\",\"startDate\":\"2017-08-01\",\"timeUnit\":\"month\",\"_debug\":false,\"_unsafe\":false,\"_cnt\":false}";
+			String body = "{\"gender\":\"m\",\"endDate\":\"2017-09-30\",\"keyword\":\""+searchKwd+"\",\"category\":[{\"name\":\"패션의류\",\"param\":[\"50000000\"]}, {\"name\":\"화장품/미용\",\"param\":[\"50000002\"]}],\"device\":\"pc\",\"startDate\":\"2017-08-01\",\"timeUnit\":\"week\",\"_debug\":false,\"_unsafe\":false,\"_cnt\":false}";
 			URL url = new URL(apiURL);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			
