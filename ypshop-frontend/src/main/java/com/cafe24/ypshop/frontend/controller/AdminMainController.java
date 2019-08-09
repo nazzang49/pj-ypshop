@@ -30,14 +30,4 @@ public class AdminMainController {
 		return "admin/admin-index";
 	}
 	
-	@RequestMapping("/sms/test")
-	public String smsTest(@AuthUser SecurityUser securityUser,
-						  @RequestParam(value="access_token", required=true, defaultValue="") String accessToken,
-			  			  @RequestParam(value="text", required=true, defaultValue="") String text) throws IOException {
-
-		adminMainService.smsTest(accessToken, text);
-
-		return "admin/admin-index";
-}
-	
 }

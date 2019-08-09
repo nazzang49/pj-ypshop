@@ -1,5 +1,9 @@
 package com.cafe24.ypshop.frontend.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.ypshop.frontend.service.MemberService;
 import com.cafe24.ypshop.frontend.vo.MemberVO;
@@ -31,7 +36,7 @@ public class MemberController {
 	@PostMapping("/join")
 	public String join(@ModelAttribute("memberVO") @Valid MemberVO memberVO,
 					   BindingResult br,
-					   Model model) {
+					   Model model) throws UnsupportedEncodingException {
 		
 		//valid
 		if(br.hasErrors()) {
@@ -46,10 +51,13 @@ public class MemberController {
 			return "redirect:/member/join";
 		}
 		
-		return "redirect:/member/joinsuccess";
-	}
+		String redirect = URLEncoder.encode("http://localhost:8090/ypshop-frontend/member/joinsuccess","utf-8");
+		
+		//get 방식 code 전송
+		return "redirect:/member/joinsuccess?flag=true&redirect="+redirect;
+	}	
 	
-	//회원_조인_성공
+	//회원_조인_성공 >> 문자 발송
 	@GetMapping("/joinsuccess")
 	public String joinsuccess() {
 		return "member/joinsuccess";

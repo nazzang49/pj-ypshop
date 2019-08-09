@@ -22,4 +22,21 @@ public class CustomJsonParse {
 	return accessToken;
 	}
 	
+	public String getCode(String data){
+
+		String code = "";
+
+		try {
+
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(data);
+			code = jsonObject.get("code").toString();
+			
+		} catch (Exception e) {
+			code = null;
+	}
+		
+	return code;
+	}
+	
 }
