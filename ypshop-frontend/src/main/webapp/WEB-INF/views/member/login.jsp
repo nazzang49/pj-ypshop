@@ -48,6 +48,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 
  <%
+ 	//네이버 아이디 로그인
     String clientId = "JKX_G4a7I3XWnU1fAqpv";
     String redirectURI = URLEncoder.encode("http://localhost:8090/ypshop-frontend/", "UTF-8");
     SecureRandom random = new SecureRandom();
@@ -58,6 +59,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     apiURL += "&state=" + state;
     session.setAttribute("state", state);
  %>
+
+ 
  	<!-- mian-content -->
     <div class="main-banner" id="home" style="text-align: center; height: 100px;">
         <!-- header -->

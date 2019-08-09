@@ -1,11 +1,14 @@
 package com.cafe24.ypshop.frontend.controller;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.cafe24.ypshop.frontend.security.AuthUser;
 import com.cafe24.ypshop.frontend.security.SecurityUser;
 import com.cafe24.ypshop.frontend.service.AdminMainService;
@@ -26,5 +29,15 @@ public class AdminMainController {
 		
 		return "admin/admin-index";
 	}
+	
+	@RequestMapping("/sms/test")
+	public String smsTest(@AuthUser SecurityUser securityUser,
+						  @RequestParam(value="access_token", required=true, defaultValue="") String accessToken,
+			  			  @RequestParam(value="text", required=true, defaultValue="") String text) throws IOException {
+
+		adminMainService.smsTest(accessToken, text);
+
+		return "admin/admin-index";
+}
 	
 }

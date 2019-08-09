@@ -89,72 +89,7 @@ input[type="text"]{
 
 </style>
 
-<link
-         href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css"
-         rel="stylesheet">
-      <script
-         src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 
-      <script>
-         $(document).ready(function() {
-            var fileExtension = [ '.jpg', '.png', '.jpeg', '.gif', ];
-            $('#summernote').summernote({ // summernote를 사용하기 위한 선언
-               height : 300,
-               lang : 'ko-KR',
-               toolbar : [
-                  ['style',
-                     [
-                     'bold',
-                     'italic',
-                     'underline',
-                     'clear' 
-                     ]
-                  ],
-                  [
-                  'font',
-                     [
-                     'strikethrough',
-                     'superscript',
-                     'subscript' 
-                     ] 
-                  ],
-                  [ 'fontsize',
-                  [ 'fontname', 'fontsize' ] ],
-                  [ 'color', [ 'color' ] ],
-                  [ 'para', [ 'ul', 'ol', 'paragraph' ] ],
-                  [ 'height', [ 'height' ] ],
-                  [ 'insert', [ 'picture',
-                              'link',
-                              'video',
-                              'table',
-                              'hr' ] ] ],
-                  callbacks : { 
-                     onImageUpload : function(files, editor, welEditable) {
-                        
-                        for (var i = files.length - 1; i >= 0; i--) {
-                           for (var j = 0; j < fileExtension.length; j++) {
-                              var extleng = files[i].name.length;
-                              var extdot = files[i].name
-                                    .lastIndexOf('.');
-                              var ext = files[i].name.substring( extdot, extleng ).toLowerCase();
-                              console.log(ext + ' / ' + fileExtension[j])
-                              if (ext == fileExtension[j]) {
-                                 sendFile( files[i], this );
-                              }
-                           }
-                        }
-                     },
-
-                           onMediaDelete : function(target) {
-                              alert(target[0].src);
-                              deleteFile(target[0].src);
-                              console.log(target[0].src)
-                           }
-
-                        }
-                     });
-               });
-      </script>
 
 
 </head>
@@ -271,7 +206,7 @@ input[type="text"]{
             <tr>
                 <th scope="row">상품 요약설명</th>
                 <td colspan="2">
-                    <textarea id="summernote" name="shortDescription" ></textarea>
+                    <textarea id="summernote" name="shortDescription" style="width:500px; height:300px;"></textarea>
                 </td>
             </tr>
             <tr style="height:70px;">
