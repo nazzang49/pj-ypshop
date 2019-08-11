@@ -26,6 +26,10 @@ public class CartVO {
 	private String secondOptionName;
 	//상품옵션별 재고수량
 	private Long remainAmount;
+	//상품 썸네일
+	private String thumbnailUrl;
+	//상품번호
+	private Long productNo;
 		
 	public Long getOrderNo() {
 		return orderNo;
@@ -87,13 +91,24 @@ public class CartVO {
 	public void setRemainAmount(Long remainAmount) {
 		this.remainAmount = remainAmount;
 	}
-	
+	public String getThumbnailUrl() {
+		return thumbnailUrl;
+	}
+	public void setThumbnailUrl(String thumbnailUrl) {
+		this.thumbnailUrl = thumbnailUrl;
+	}
+	public Long getProductNo() {
+		return productNo;
+	}
+	public void setProductNo(Long productNo) {
+		this.productNo = productNo;
+	}
 	@Override
 	public String toString() {
 		return "CartVO [no=" + no + ", memberId=" + memberId + ", productOptionNo=" + productOptionNo + ", cartAmount="
 				+ cartAmount + ", cartPrice=" + cartPrice + ", orderNo=" + orderNo + ", productName=" + productName
 				+ ", firstOptionName=" + firstOptionName + ", secondOptionName=" + secondOptionName + ", remainAmount="
-				+ remainAmount + "]";
+				+ remainAmount + ", thumbnailUrl=" + thumbnailUrl + ", productNo=" + productNo + "]";
 	}
 	
 }

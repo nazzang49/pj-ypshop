@@ -85,7 +85,6 @@
     	  
     	CustomJsonParse cjp = new CustomJsonParse();
     	access_token = cjp.getAccessToken(res.toString());
-    	out.println(res.toString());
       }
     } catch (Exception e) {
       System.out.println(e);
@@ -146,8 +145,6 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 	}
 </script>
 
-<a href="${pageContext.servletContext.contextPath}/naver_info?access_token=<%=access_token %>">네이버 블로그 카테고리 목록</a>
-
     <!-- mian-content -->
     <div class="main-banner" id="home" style="text-align: center;">
         <!-- header -->
@@ -187,7 +184,7 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
                 	<!-- 상품 목록 -->
                 	<div class="product-shoe-info shoe text-center">
                         <div class="men-thumb-item">
-                            <img src="${pageContext.servletContext.contextPath}/assets${pvo.thumbnailUrl}" class="img-fluid" alt="">
+                            <img src="${pageContext.servletContext.contextPath}/assets${pvo.thumbnailUrl}" class="img-fluid" style="margin-bottom:20px;">
                             <span class="product-new-top">${pvo.name }</span>
                         </div>
                         <div class="item-info-product">

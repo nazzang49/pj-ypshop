@@ -67,6 +67,7 @@ public class UserOrderController {
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	
+	//회원별 장바구니 목록
 	@ApiOperation(value="장바구니 목록")
 	@GetMapping(value="/cart/{memberId}")
 	public JSONResult getCartList(@ModelAttribute CartVO cartVO) {
@@ -78,7 +79,7 @@ public class UserOrderController {
 		
 		Map<String, Object> data = new HashMap<>();
 		data.put("cartList", cartList);
-		JSONResult result = JSONResult.success(data);
+		JSONResult result = JSONResult.success(cartList);
 		return result;
 	}
 	
@@ -108,16 +109,18 @@ public class UserOrderController {
 	}
 	
 	@ApiOperation(value="장바구니 삭제")
-	@DeleteMapping(value="/cart/delete")
-	public JSONResult cartDelete(@RequestParam(value="no", required=true, defaultValue="0") List<Long> cartNoList) {
+	@PostMapping(value="/cart/delete")
+	public JSONResult cartDelete(@RequestBody List<Long> cartNoList) {
 		
 		//본인 인증
+		
+		System.out.println("삭제 리스트 : "+cartNoList.get(0));
 		
 		boolean flag = userCartService.장바구니삭제(cartNoList);
 		
 		Map<String, Object> data = new HashMap<>();
 		data.put("flag", flag);
-		JSONResult result = JSONResult.success(data);
+		JSONResult result = JSONResult.success(flag);
 		return result;
 	}
 	

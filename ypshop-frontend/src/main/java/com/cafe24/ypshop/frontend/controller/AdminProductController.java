@@ -45,10 +45,7 @@ public class AdminProductController {
 	public String add(@AuthUser SecurityUser securityUser, Model model) {
 		
 		//카테고리 목록
-		List<CategoryVO> categoryList = adminProductService.categoryList();
-		
-		System.out.println("카테고리 리스트 사이즈 : "+categoryList.size());
-		
+		List<CategoryVO> categoryList = adminProductService.categoryList();		
 		model.addAttribute("categoryList", categoryList);
 		
 		return "admin/admin-product-add";

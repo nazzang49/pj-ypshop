@@ -10,11 +10,13 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.cafe24.ypshop.frontend.dto.JSONResult;
+import com.cafe24.ypshop.frontend.vo.CartVO;
 import com.cafe24.ypshop.frontend.vo.MemberVO;
 
 //회원
@@ -79,6 +81,12 @@ public class MemberService {
 		return (Boolean)returnData.get("flag");
 	}
 	
+	//회원_마이페이지_장바구니 목록
+	public List<CartVO> cartList(String id){
+		JSONResultCartList result = restTemplate.getForObject("http://localhost:8090/ypshop-backend/api/order/cart/"+id, JSONResultCartList.class);
+		return result.getData();
+	}
+	
 	//회원가입_문자 발송 by solapi
 	public static boolean joinSuccessSms(String accessToken) throws IOException {
 
@@ -115,6 +123,9 @@ public class MemberService {
 	}
 	
 	private static class JSONResultMemberVO extends JSONResult<MemberVO> {
+	}
+	
+	private static class JSONResultCartList extends JSONResult<List<CartVO>> {
 	}
 	
 }

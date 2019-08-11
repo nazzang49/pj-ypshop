@@ -1,14 +1,13 @@
 package com.cafe24.ypshop.frontend.service;
 
 import java.util.Arrays;
-import java.util.Map;
+import java.util.List;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.cafe24.ypshop.frontend.dto.JSONResult;
 import com.cafe24.ypshop.frontend.vo.CartVO;
-import com.cafe24.ypshop.frontend.vo.MemberVO;
 
 @Service
 public class UserOrderService {
@@ -33,7 +32,15 @@ public class UserOrderService {
 		return result.getData();
 	}
 	
+	//장바구니_삭제
+	public boolean deleteCart(List<Long> noList) {
+		restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
+		JSONResultGoods result = restTemplate.postForObject("http://localhost:8090/ypshop-backend/api/order/cart/delete", noList, JSONResultGoods.class);
+		return result.getData();
+	}
+	
 	private static class JSONResultGoods extends JSONResult<Boolean> {
 	}
+	
 	
 }

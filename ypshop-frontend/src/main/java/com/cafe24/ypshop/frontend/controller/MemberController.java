@@ -1,8 +1,8 @@
 package com.cafe24.ypshop.frontend.controller;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.ypshop.frontend.service.MemberService;
+import com.cafe24.ypshop.frontend.vo.CartVO;
 import com.cafe24.ypshop.frontend.vo.MemberVO;
 
 @Controller
@@ -99,6 +99,17 @@ public class MemberController {
 		}
 		model.addAttribute("update_result", true);
 		return "redirect:/";
+	}
+	
+	//회원_마이페이지 >> 장바구니 목록
+	@GetMapping("/mypage/{id}")
+	public String mypage(@PathVariable(value="id") String id, Model model) {
+		List<CartVO> cartList = memberService.cartList(id);
+		
+		System.out.println("장바구니 목록 사이즈 : "+cartList.size());
+			
+		model.addAttribute("cartList", cartList);
+		return "member/mypage";
 	}
 	
 }

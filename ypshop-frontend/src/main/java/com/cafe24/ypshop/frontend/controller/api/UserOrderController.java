@@ -1,7 +1,10 @@
 package com.cafe24.ypshop.frontend.controller.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +20,7 @@ public class UserOrderController {
 	@Autowired
 	private UserOrderService userOrderService;
 	
-	//회원_조인_아이디중복체크
+	//회원_장바구니 추가
 	@PostMapping("/cart/add")
 	public JSONResult2 addCart(@AuthenticationPrincipal SecurityUser securityUser,
 							   @RequestParam(value="productOptionNo", required=true, defaultValue="0") Long productOptionNo,
@@ -30,6 +33,21 @@ public class UserOrderController {
 		
 		
 		boolean flag = userOrderService.addCart(memberId, productOptionNo, cartAmount, cartPrice);
+		
+		JSONResult2 result = JSONResult2.success(flag);
+		return result;
+	}
+	
+	//회원_장바구니 삭제
+	@GetMapping("/cart/delete")
+	public JSONResult2 deleteCart(@RequestParam(value="noList", required=true, defaultValue="0") List<Long> noList) {
+		
+		
+		System.out.println("들어온다 : "+noList.get(0));
+		
+		boolean flag = userOrderService.deleteCart(noList);
+		
+		
 		
 		JSONResult2 result = JSONResult2.success(flag);
 		return result;

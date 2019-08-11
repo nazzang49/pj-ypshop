@@ -19,16 +19,18 @@
 	<!-- 장바구니 목록 -->
 	<select id="selectAllByMemberId" resultType="cartvo">
 	<![CDATA[
-		select A.no, A.firstOptionName, o1.name as secondOptionName, A.productOptionNo, A.cartAmount, A.cartPrice, A.productName
+		select A.no, A.firstOptionName, o1.name as secondOptionName, A.productOptionNo, A.cartAmount, A.cartPrice, A.productName, A.thumbnailUrl, A.productNo
 		from product_option po1, option o1,
-			(select c.no, c.cartAmount, c.cartPrice, c.productOptionNo, p.name as productName, o.name as firstOptionName
-			 from cart c, product p, product_option po, option o
+			(select c.no, c.cartAmount, c.cartPrice, c.productOptionNo, p.name as productName, p.no as productNo, o.name as firstOptionName, i.url as thumbnailUrl
+			 from cart c, product p, product_option po, option o, image i
 			 where memberId=#{memberId}
 			 and c.productOptionNo=po.no
 			 and po.firstOptionNo=o.no
-			 and po.productNo=p.no) A
+			 and po.productNo=p.no
+			 and p.no=i.productNo
+			 and i.repOrBasic='R') A
 		where A.productOptionNo=po1.no
-		and po1.secondOptionNo=o1.no;
+		and po1.secondOptionNo=o1.no
 	]]>
 	</select>
 	

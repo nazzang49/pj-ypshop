@@ -410,8 +410,9 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 		CustomJsonParse cjp = new CustomJsonParse();
 		String startDate = cjp.getNaverSearchResult(request.getParameter("result"));
 		
+		out.println("<br>");
 		
-		out.println(startDate);
+// 		out.println(startDate);
 	%>
 
 	
