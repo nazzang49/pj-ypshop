@@ -43,13 +43,45 @@
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
     <!-- //Fonts -->
 
+<style>
+
+.pagination li a{
+	margin:0;
+	text-decoration: none;
+	border:1px lightgray solid;
+	color:black;
+	padding:8px;
+	background: white;
+	border-radius:0.25em;
+	font-size:15px;
+	-webkit-transition: 0.5s;
+}
+
+.pagination li a:hover{
+	background:gray;
+	color:white;
+
+}
+
+.brand-items{
+	text-align: center;
+}
+
+.brand-items div{
+	display: inline;
+}
+
+</style>
+
 </head>
 
 <body>
 
+
+
  <%
-    String clientId = "JKX_G4a7I3XWnU1fAqpv";//애플리케이션 클라이언트 아이디값";
-    String clientSecret = "RBlOVgmo_s";//애플리케이션 클라이언트 시크릿값";
+    String clientId = "JKX_G4a7I3XWnU1fAqpv";//애플리케이션 클라이언트 아이디값"
+    String clientSecret = "RBlOVgmo_s";//애플리케이션 클라이언트 시크릿값"
     String code = request.getParameter("code");
     String state = request.getParameter("state");
     String redirectURI = URLEncoder.encode("http://localhost:8090/ypshop-frontend/", "UTF-8");
@@ -184,7 +216,8 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
                 	<!-- 상품 목록 -->
                 	<div class="product-shoe-info shoe text-center">
                         <div class="men-thumb-item">
-                            <img src="${pageContext.servletContext.contextPath}/assets${pvo.thumbnailUrl}" class="img-fluid" style="margin-bottom:20px;">
+                            <img src="${pageContext.servletContext.contextPath}/assets${pvo.thumbnailUrl}" class="img-fluid"
+                            style="margin-bottom:20px; width:318px; height:406px;">
                             <span class="product-new-top">${pvo.name }</span>
                         </div>
                         <div class="item-info-product">
@@ -208,6 +241,27 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
                 </c:forEach>
             </div>
         </div>
+        <c:if test="${pageVO.count!=null}">
+			<!-- pager 추가 -->
+				<nav style="width:200px; margin:40px auto;">
+				<ul class="pagination">
+					<li style="width:100px;">
+						<c:if test='${pageVO.startPage > pageVO.pageBlock }'>
+							<a href="${pageContext.servletContext.contextPath }?pageNum=${pageVO.startPage-pageVO.pageBlock}"><span aria-hidden="true">&larr;</span> Previous</a>
+						</c:if>
+					</li>
+					<!-- begin = startPage / end = endPage -->
+					<c:forEach var="i" begin="${pageVO.startPage }" end="${pageVO.endPage }">
+						<li class="selected"><a href="${pageContext.servletContext.contextPath }?pageNum=${i}">${i}</a></li>
+					</c:forEach>
+					<li style="width:80px;">
+						<c:if test='${pageVO.endPage < pageVO.pageCount }'>
+							<a href="${pageContext.servletContext.contextPath }?pageNum=${pageVO.startPage+pageVO.pageBlock}">Next <span aria-hidden="true">&rarr;</span></a>
+						</c:if>
+					</li>
+				</ul>
+				</nav>
+		</c:if>
     </section>
     <!-- //ab -->
     <!-- brands -->

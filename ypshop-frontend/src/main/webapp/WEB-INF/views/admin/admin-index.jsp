@@ -116,6 +116,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--skycons-icons-->
 <script src="https://p.w3layouts.com/demos/28-03-2016/shoppy/web/js/skycons.js"></script>
 <!--//skycons-icons-->
+
+
+<style>
+
+div.market-update-block h4{
+	margin-bottom:15px;
+}
+
+</style>
+
+
+
 </head>
 <body>
 <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script><script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
@@ -180,165 +192,9 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 	   <div class="mother-grid-inner">
             <!--header start here-->
 				<div class="header-main">
-					<div class="header-left">
-							<div class="logo-name">
-									 <a href="index.html"> <h1>YPSHOP</h1> 
-									<!--<img id="logo" src="" alt="Logo"/>--> 
-								  </a> 								
-							</div>
-							
-							<form>
-								<select name="searchType" style="float:left; margin-top:9px; padding: 9px 0;">
-									<option value="">검색 타입</option>
-									<option value="name">이름</option>
-									<option value="id">아이디</option>
-								</select>
-							<!--search-box, 회원 기준-->
-								<div class="search-box" style="width: 300px;">
-										<input type="text" placeholder="search" name="searchKwd" required="">	
-										<button class="btn btn-info" type="submit" style="float:right;">검색</button>
-								</div><!--//end-search-box-->
-								</form>
-							<div class="clearfix"> </div>
-						 </div>
-						 <div class="header-right">
-							<div class="profile_details_left"><!--notifications of menu start -->
-								<ul class="nofitications-dropdown">
-									<li class="dropdown head-dpdn">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">3</span></a>
-										<ul class="dropdown-menu">
-											<li>
-												<div class="notification_header">
-													<h3>You have 3 new messages</h3>
-												</div>
-											</li>
-											<li><a href="#">
-											   <div class="user_img"><img src="images/p4.png" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor</p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											   <div class="clearfix"></div>	
-											</a></li>
-											<li class="odd"><a href="#">
-												<div class="user_img"><img src="images/p2.png" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor </p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											  <div class="clearfix"></div>	
-											</a></li>
-											<li><a href="#">
-											   <div class="user_img"><img src="images/p3.png" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor</p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											   <div class="clearfix"></div>	
-											</a></li>
-											<li>
-												<div class="notification_bottom">
-													<a href="#">See all messages</a>
-												</div> 
-											</li>
-										</ul>
-									</li>
-									<li class="dropdown head-dpdn">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">3</span></a>
-										<ul class="dropdown-menu">
-											<li>
-												<div class="notification_header">
-													<h3>You have 3 new notification</h3>
-												</div>
-											</li>
-											<li><a href="#">
-												<div class="user_img"><img src="images/p5.png" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor</p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											  <div class="clearfix"></div>	
-											 </a></li>
-											 <li class="odd"><a href="#">
-												<div class="user_img"><img src="images/p6.png" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor</p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											   <div class="clearfix"></div>	
-											 </a></li>
-											 <li><a href="#">
-												<div class="user_img"><img src="images/p7.png" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor</p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											   <div class="clearfix"></div>	
-											 </a></li>
-											 <li>
-												<div class="notification_bottom">
-													<a href="#">See all notifications</a>
-												</div> 
-											</li>
-										</ul>
-									</li>	
-									<li class="dropdown head-dpdn">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">9</span></a>
-										<ul class="dropdown-menu">
-											<li>
-												<div class="notification_header">
-													<h3>You have 8 pending task</h3>
-												</div>
-											</li>
-											<li><a href="#">
-												<div class="task-info">
-													<span class="task-desc">Database update</span><span class="percentage">40%</span>
-													<div class="clearfix"></div>	
-												</div>
-												<div class="progress progress-striped active">
-													<div class="bar yellow" style="width:40%;"></div>
-												</div>
-											</a></li>
-											<li><a href="#">
-												<div class="task-info">
-													<span class="task-desc">Dashboard done</span><span class="percentage">90%</span>
-												   <div class="clearfix"></div>	
-												</div>
-												<div class="progress progress-striped active">
-													 <div class="bar green" style="width:90%;"></div>
-												</div>
-											</a></li>
-											<li><a href="#">
-												<div class="task-info">
-													<span class="task-desc">Mobile App</span><span class="percentage">33%</span>
-													<div class="clearfix"></div>	
-												</div>
-											   <div class="progress progress-striped active">
-													 <div class="bar red" style="width: 33%;"></div>
-												</div>
-											</a></li>
-											<li><a href="#">
-												<div class="task-info">
-													<span class="task-desc">Issues fixed</span><span class="percentage">80%</span>
-												   <div class="clearfix"></div>	
-												</div>
-												<div class="progress progress-striped active">
-													 <div class="bar  blue" style="width: 80%;"></div>
-												</div>
-											</a></li>
-											<li>
-												<div class="notification_bottom">
-													<a href="#">See all pending tasks</a>
-												</div> 
-											</li>
-										</ul>
-									</li>	
-								</ul>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="clearfix"> </div>				
-						</div>
-				     <div class="clearfix"> </div>	
+					
+					<c:import url='/WEB-INF/views/includes/admin-header.jsp'/>
+					
 				</div>
 <!--heder end here-->
 <!-- script-for sticky-nav -->
@@ -360,7 +216,7 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 <!--inner block start here-->
 <div class="inner-block">
 <!--market updates updates-->
-	 <div class="market-updates">
+	 <div class="market-updates" style="margin-top:40px;">
 			<div class="col-md-4 market-update-gd" style="float:left;">
 				<div class="market-update-block clr-block-1">
 					<div class="col-md-8 market-update-left">
@@ -388,8 +244,8 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 			<div class="col-md-4 market-update-gd" style="float:left;">
 				<div class="market-update-block clr-block-3">
 					<div class="col-md-8 market-update-left">
-						<h3>23</h3>
-						<h4>New Messages</h4>
+						<h3>${map.orderCount }건</h3>
+						<h4>처리 중인 주문 수</h4>
 					</div>
 					<div class="col-md-4 market-update-right">
 						<i class="fa fa-envelope-o"> </i>
@@ -414,12 +270,6 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 		
 // 		out.println(startDate);
 	%>
-
-	
-	<form action="${pageContext.request.contextPath}/admin/naverSearch" method="post">
-	<input type="text" name="searchKwd" id="search-by-naver">
-	<input type="submit" value="네이버 쇼핑 인사이트 검색">
-	</form>
 
 </div>
 

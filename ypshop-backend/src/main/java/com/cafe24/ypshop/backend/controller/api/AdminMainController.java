@@ -25,7 +25,7 @@ public class AdminMainController {
 	public JSONResult getProductMemberCount() {
 		
 		//리턴 데이터
-		Map<String, Long> data = adminMainService.상품_회원_카운트();
+		Map<String, Long> data = adminMainService.상품_회원_주문_카운트();
 		
 		JSONResult result = JSONResult.success(data);
 		return result;

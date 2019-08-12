@@ -130,7 +130,7 @@
 	</update>
 	
 	<!-- (회원) 상품 목록 -->
-	<select id="selectAllByCategoryNoAndAlignUse" parameterType="productvo" resultType="productvo">
+	<select id="selectAllByCategoryNoAndAlignUse" parameterType="map" resultType="productvo">
 	<![CDATA[
 		select p.no, p.name, p.shortDescription, p.price, p.categoryNo, i.url as thumbnailUrl
 		from product p, image i
@@ -152,6 +152,9 @@
 	]]>
 		</otherwise>
 		</choose>
+		<![CDATA[
+			limit #{start}, #{end}
+		]]>
 	</select>
 	
 	<!-- (회원) 상품 상세 -->
@@ -163,11 +166,20 @@
 	]]>
 	</select>
 	
-	<!-- 카운트 -->
-	<select id="getCount" resultType="long">
+	<!-- 전체 상품 갯수 -->
+	<select id="getCount" resultType="int">
 	<![CDATA[
 		select count(*)
 		from product
+	]]>
+	</select>
+	
+	<!-- 진열 상품 갯수 -->
+	<select id="getCountByAlignUse" resultType="int">
+	<![CDATA[
+		select count(*)
+		from product
+		where alignUse='Y'
 	]]>
 	</select>
 

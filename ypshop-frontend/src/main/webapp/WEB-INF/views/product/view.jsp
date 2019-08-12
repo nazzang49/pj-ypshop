@@ -104,8 +104,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			//재고수량 비교
 			var remainAmount = $('#remainAmount'+productOptionNo).val();
 			
-			alert("재고 수량 : "+remainAmount);
-			
 			if(cartAmount > remainAmount){
 				$('.value').html(remainAmount);
 				alert('재고 부족');
@@ -119,7 +117,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			}
 			cartAmount++;
 			
-			alert("카트 수량 : "+cartAmount);
 			$('#cartAmount').val(cartAmount);
 		});
 	})

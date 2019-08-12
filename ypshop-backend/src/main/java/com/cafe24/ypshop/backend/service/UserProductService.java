@@ -34,8 +34,8 @@ public class UserProductService {
 	private CategoryDAO categoryDao;
 	
 	//상품 목록
-	public List<ProductVO> 상품목록(ProductVO productVO) {
-		return productDao.selectAllByCategoryNoAndAlignUse(productVO);
+	public List<ProductVO> 상품목록(int start, int end, Long categoryNo) {
+		return productDao.selectAllByCategoryNoAndAlignUse(start, end, categoryNo);
 	}
 	
 	//카테고리 목록

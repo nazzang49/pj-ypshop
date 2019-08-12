@@ -24,7 +24,7 @@ public class ProductDAO {
 	
 	//(관리자) 상품 추가 >> 상품 번호 리턴
 	public Long selectMaxProductNo() {
-		return sqlSession.selectOne("product.selectMaxProductNo"); 
+		return sqlSession.selectOne("product.selectMaxProductNo");
 	}
 	
 	//(관리자) 진열 순서
@@ -57,8 +57,17 @@ public class ProductDAO {
 	}
 	
 	//(고객) 상품 목록
-	public List<ProductVO> selectAllByCategoryNoAndAlignUse(ProductVO productVO) {
-		return sqlSession.selectList("product.selectAllByCategoryNoAndAlignUse", productVO);
+	public List<ProductVO> selectAllByCategoryNoAndAlignUse(int start, int end, Long categoryNo) {
+		Map<String, Object> map = new HashMap<>();
+		
+		System.out.println("start : "+start);
+		System.out.println("end : "+end);
+		
+		
+		map.put("start", start);
+		map.put("end", end);
+		map.put("categoryNo", categoryNo);
+		return sqlSession.selectList("product.selectAllByCategoryNoAndAlignUse", map);
 	}
 	
 	//(고객 및 관리자) 상품 상세
@@ -67,7 +76,12 @@ public class ProductDAO {
 	}
 	
 	//(관리자) 상품 갯수
-	public Long getCount() {
+	public int getCount() {
 		return sqlSession.selectOne("product.getCount"); 
+	}
+	
+	//(회원) 상품 갯수
+	public int getCountByAlignUse() {
+		return sqlSession.selectOne("product.getCountByAlignUse"); 
 	}
 }

@@ -161,4 +161,13 @@
 	]]>
 	</update>
 	
+	<!-- 카운트 >> 배송 완료 제외 -->
+	<select id="getCount" resultType="long">
+	<![CDATA[
+		select count(*)
+		from orders
+		where status != '배송 완료'
+	]]>
+	</select>
+	
 </mapper>

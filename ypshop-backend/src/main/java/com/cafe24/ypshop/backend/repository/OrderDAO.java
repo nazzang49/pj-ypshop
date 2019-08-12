@@ -68,6 +68,11 @@ public class OrderDAO {
 		return sqlSession.selectList("order.selectAll", map);
 	}
 	
+	//(관리자) 주문 수
+	public Long getCount() {
+		return sqlSession.selectOne("order.getCount"); 
+	}
+	
 	//(관리자) 주문 상태 수정
 	public boolean update(OrderVO orderVO){
 		return sqlSession.update("order.update", orderVO)==1;
