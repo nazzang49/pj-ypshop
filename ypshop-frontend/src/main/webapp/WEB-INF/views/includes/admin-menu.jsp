@@ -21,7 +21,7 @@
 					class="fa fa-file-text"></i><span>옵션관리</span></a></li>
 
 			<li><a href="charts.html"><i class="fa fa-bar-chart"></i><span>이미지관리</span></a></li>
-			<li><a href="#"><i class="fa fa-envelope"></i><span>주문관리</span></a>
+			<li><a href="${pageContext.request.contextPath}/admin/order"><i class="fa fa-envelope"></i><span>주문관리</span></a>
 
 			</li>
 			<li><a href="#"><i class="fa fa-cog"></i><span>System</span></a>

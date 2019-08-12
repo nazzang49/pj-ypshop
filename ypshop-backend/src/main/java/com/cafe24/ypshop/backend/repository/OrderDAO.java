@@ -73,9 +73,12 @@ public class OrderDAO {
 		return sqlSession.selectOne("order.getCount"); 
 	}
 	
-	//(관리자) 주문 상태 수정
-	public boolean update(OrderVO orderVO){
-		return sqlSession.update("order.update", orderVO)==1;
+	//(관리자) 주문 상태 수정 by orderNo
+	public boolean update(Long no, String status){
+		Map<String, Object> map = new HashMap<>();
+		map.put("no", no);
+		map.put("status", status);
+		return sqlSession.update("order.update", map)==1;
 	}
 	
 }

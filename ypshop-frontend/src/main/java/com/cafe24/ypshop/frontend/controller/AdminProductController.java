@@ -31,10 +31,7 @@ public class AdminProductController {
 	//관리자_상품관리
 	@GetMapping("/product")
 	public String productList(@AuthUser SecurityUser securityUser, Model model) {
-		List<ProductVO> productList = adminProductService.productList();
-		
-		System.out.println("상품 리스트 사이즈 : "+productList.size());
-		
+		List<ProductVO> productList = adminProductService.productList();		
 		model.addAttribute("productList", productList);
 		
 		return "admin/admin-product";

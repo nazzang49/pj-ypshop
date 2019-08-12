@@ -153,7 +153,7 @@
 	</select>
 	
 	<!-- 주문 상태 수정 -->
-	<update id="update" parameterType="ordervo">
+	<update id="update" parameterType="map">
 	<![CDATA[
 		update orders
 		set status=#{status}

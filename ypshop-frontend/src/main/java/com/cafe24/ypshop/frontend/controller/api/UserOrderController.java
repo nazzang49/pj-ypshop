@@ -30,10 +30,7 @@ public class UserOrderController {
 		
 		//현재 로그인 아이디 추출
 		String memberId = (String)securityUser.getUsername();
-		
-		
 		boolean flag = userOrderService.addCart(memberId, productOptionNo, cartAmount, cartPrice);
-		
 		JSONResult2 result = JSONResult2.success(flag);
 		return result;
 	}
@@ -41,14 +38,7 @@ public class UserOrderController {
 	//회원_장바구니 삭제
 	@GetMapping("/cart/delete")
 	public JSONResult2 deleteCart(@RequestParam(value="noList", required=true, defaultValue="0") List<Long> noList) {
-		
-		
-		System.out.println("들어온다 : "+noList.get(0));
-		
 		boolean flag = userOrderService.deleteCart(noList);
-		
-		
-		
 		JSONResult2 result = JSONResult2.success(flag);
 		return result;
 	}

@@ -3,6 +3,8 @@ package com.cafe24.ypshop.backend.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.cafe24.ypshop.backend.repository.OrderDAO;
 import com.cafe24.ypshop.backend.vo.OrderVO;
 
@@ -19,8 +21,12 @@ public class AdminOrderService {
 	}
 	
 	//주문 상태 수정
-	public boolean 주문상태수정(OrderVO orderVO) {
-		return orderDao.update(orderVO);
+	@Transactional
+	public boolean 주문상태수정(List<Long> orderNoList, String status) {
+		for(Long no : orderNoList) {
+			orderDao.update(no, status);
+		}
+		return true;
 	}
 	
 }
