@@ -42,9 +42,6 @@ public class UserOrderService {
 		for(int i=0;i<orderVO.getCartNoList().size();i++) {
 			CartVO cartVO = cartDao.selectAmountByNo(orderVO.getCartNoList().get(i));
 			
-			System.out.println("cartAmount : "+cartVO.getCartAmount());
-			System.out.println("remainAmount : "+cartVO.getRemainAmount());
-			
 			if(cartVO.getCartAmount()>cartVO.getRemainAmount()) {
 				returnMsg.append((i+1)+"번 ");
 			}

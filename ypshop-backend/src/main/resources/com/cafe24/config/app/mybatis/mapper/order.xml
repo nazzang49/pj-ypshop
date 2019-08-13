@@ -109,7 +109,7 @@
 	<!-- 주문 상품별 상세 정보 -->
 	<select id="selectOrderDetailByPeriod" parameterType="ordervo" resultType="orderdetailvo">
 	<![CDATA[
-		select od.orderNo, od.productName, od.firstOptionName, od.secondOptionName, od.imageUrl, od.orderAmount, od.orderPrice
+		select od.no, od.orderNo, od.productName, od.firstOptionName, od.secondOptionName, od.imageUrl, od.orderAmount, od.orderPrice
 		from orders_detail od, orders o
 		where memberId=#{memberId}
         and o.no=od.orderNo

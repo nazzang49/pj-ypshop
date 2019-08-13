@@ -192,8 +192,7 @@ input[type="text"]{
     	<!-- 상품 등록 form >> 사진 포함 -->
     	<form action="${pageContext.request.contextPath}/member/order/add" method="post" name="product-add-form">
     	
-    	 
-        <table border="1" summary="">
+    	<table border="1" summary="">
             <caption>상품 기본 정보</caption>
             <colgroup>
                 <col style="width:190px;" />
@@ -201,6 +200,40 @@ input[type="text"]{
                 <col style="width:auto;" />
             </colgroup>
             <tbody>
+            <tr>
+                <th scope="row">장바구니에서 선택한 상품 리스트</th>
+                <td colspan="2">
+                    <div class="mBoard gScroll gCellNarrow">
+                        <table border="1" summary="" class="eChkColor">
+                            <caption>회원 목록</caption>
+                            <thead>
+                            <tr style="font-size:20px;">
+                            <th>상품 썸네일</th>
+                            <th>상품명</th>
+                            <th>상품 가격</th>
+                            <th>상품 옵션</th>
+                            <th>수량</th>
+                            </tr>
+                            </thead>
+                             
+                            <tbody class="center">
+                            <c:forEach items="${cartList }" var="cvo" varStatus="status">
+                            <tr style="font-size:15px;">
+                            
+                            <!-- 장바구니 여러개 삭제 -->
+                            <td><img src="${pageContext.servletContext.contextPath}/assets${cvo.thumbnailUrl}" style="width:90px; height:90px;"></img></td>
+                            <td><a href="${pageContext.servletContext.contextPath}/product/view/${cvo.productNo}" style="text-decoration: underline;">${cvo.productName }</a></td>
+                            <td>${cvo.cartPrice }원</td>
+                            <td>${cvo.firstOptionName } / ${cvo.secondOptionName }</td>
+                            <td>${cvo.cartAmount }<input type="hidden" name="cartNo" value="${cvo.no }"></td>
+                            </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-primary" style="float:right; display:none; margin:10px;" id="update-btn" onclick="updateStatus()">선택 상품 주문</button>
+                    </div>
+                </td>
+            </tr>
             <tr>
                 <th scope="row">주문자 이름</th>
                 <td colspan="2">
@@ -270,10 +303,10 @@ input[type="text"]{
                 <td colspan="2">
                 	<div style="margin-top: 15px;">
                     <label for="checkbox-8" style="border:1px solid black; padding: 15px 25px; width:170px;" class="btn btn-default chkbox">무통장 입금</label>
-					<input type="radio" style="display:none;" name="paymentCategory" id="checkbox-8" class="radio-btn" value="Y">
+					<input type="radio" style="display:none;" name="paymentCategory" id="checkbox-8" class="radio-btn" value="무통장 입금">
 					
 					<label for="checkbox-9" style="border:1px solid black; padding: 15px 25px; width:170px;" class="btn btn-default chkbox">계좌이체</label>
-					<input type="radio" style="display:none;" name="paymentCategory" id="checkbox-9" class="radio-btn" value="N">
+					<input type="radio" style="display:none;" name="paymentCategory" id="checkbox-9" class="radio-btn" value="계좌이체">
 					</div>
                 </td>
             </tr>

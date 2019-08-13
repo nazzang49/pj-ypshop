@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import com.cafe24.ypshop.frontend.dto.CartDTO;
 import com.cafe24.ypshop.frontend.dto.JSONResult;
 import com.cafe24.ypshop.frontend.vo.CartVO;
+import com.cafe24.ypshop.frontend.vo.OrderVO;
 
 @Service
 public class UserOrderService {
@@ -58,7 +59,16 @@ public class UserOrderService {
 		return result.getData();
 	}
 	
+	public String addOrder(OrderVO orderVO) {
+		restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
+		JSONResultOrderReturnMsg result = restTemplate.postForObject("http://localhost:8090/ypshop-backend/api/order/add", orderVO, JSONResultOrderReturnMsg.class);
+		return result.getData();
+	}
+	
 	private static class JSONResultGoods extends JSONResult<Boolean> {
+	}
+	
+	private static class JSONResultOrderReturnMsg extends JSONResult<String> {
 	}
 	
 	private static class JSONResultOrderList extends JSONResult<Object> {

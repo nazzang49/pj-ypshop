@@ -68,6 +68,10 @@ var EC_SDE_SHOP_NUM = 1;var SHOP = {getLanguage : function() { return "ko_KR"; }
 	background:lightgray;
 }
 
+.eChkColor td{
+	vertical-align: middle;
+}
+
 </style>       
             
             
@@ -135,14 +139,14 @@ var EC_SDE_SHOP_NUM = 1;var SHOP = {getLanguage : function() { return "ko_KR"; }
 		var jsonArray = ${jsonArrayString};
 		
 		var htmls = '';
-		htmls += '<h2 style="float:left; margin-left:15px;">■ 주문상세</h2><br><table border="1" summary="" class="eChkColor" style="margin: 20px auto;"><caption>회원 목록</caption>';
-		htmls += '<thead><tr style="font-size:20px; color:#B3EAFF;"><th>'+orderNo+'번 주문 상세</th><th>상품 썸네일</th><th>상품명</th><th>상품옵션</th><th>상품가격</th><th>주문수량</th></tr></thead>';
+		htmls += '<h2 style="float:left; margin-left:15px;">■ '+orderNo+'번 주문 상세</h2><br><table border="1" summary="" class="eChkColor" style="margin: 20px auto;"><caption>회원 목록</caption>';
+		htmls += '<thead><tr style="font-size:20px; color:#B3EAFF;"><th>주문 상세 번호</th><th>상품 썸네일</th><th>상품명</th><th>상품옵션</th><th>상품가격</th><th>주문수량</th></tr></thead>';
 		htmls += '<tbody class="center">';
 		
 		for(var i=0;i<jsonArray.length;i++){
 			if(orderNo==jsonArray[i].orderNo){
 				var imgSrc = "${pageContext.request.contextPath }/assets"+jsonArray[i].imageUrl
-				htmls += '<td>'+jsonArray[i].no+'</td><td><img src='+imgSrc+'</td><td>${odvo.orderDate }</td><td>${odvo.paymentCategory }</td><td>${odvo.paymentPrice }</td><td>${odvo.orderAmount }</td></tr>'; 
+				htmls += '<tr style="font-size:17px;"><td>'+jsonArray[i].no+'</td><td><img src='+imgSrc+'/ style="width:150px; height:200px;"></td><td>'+jsonArray[i].productName+'</td><td>'+jsonArray[i].firstOptionName+' / '+jsonArray[i].secondOptionName+'</td><td>'+jsonArray[i].orderPrice+'</td><td>'+jsonArray[i].orderAmount+'</td></tr>'; 
 			}
 		}
 		
@@ -243,7 +247,7 @@ var EC_SDE_SHOP_NUM = 1;var SHOP = {getLanguage : function() { return "ko_KR"; }
                             <caption>회원 목록</caption>
                             
                             <thead>
-                            <tr style="font-size:25px;">
+                            <tr style="font-size:20px;">
                             	<th>주문 번호</th>
                                 <th>회원 아이디</th>
                                 <th>주문일자</th>                                   
@@ -256,7 +260,7 @@ var EC_SDE_SHOP_NUM = 1;var SHOP = {getLanguage : function() { return "ko_KR"; }
                             <tbody class="center">
                             
                             <c:forEach items="${orderList }" var="ovo" varStatus="status">
-                            <tr class="show-orderdetail" style="font-size:18px;" onclick="chkOrderDetail(${ovo.no})">
+                            <tr class="show-orderdetail" style="font-size:15px;" onclick="chkOrderDetail(${ovo.no})">
                                 <td>${ovo.no }</td>
 	                            <td>${ovo.memberId }</td>
 	                            <td>${ovo.orderDate }</td>

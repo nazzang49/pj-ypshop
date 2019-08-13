@@ -98,7 +98,7 @@ var EC_SDE_SHOP_NUM = 1;var SHOP = {getLanguage : function() { return "ko_KR"; }
     <h1 class="logo">
     <!-- 로고 클릭 시, 메인 이동 -->
         <a href="${pageContext.request.contextPath }">
-            <img src="//img.echosting.cafe24.com/ec/mode/influencer/common/h1_logo.png" alt="cafe24" />
+            <img src="//img.echosting.cafe24.com/ec/mode/influencer/common/h1_logo.png" alt="cafe24" style="vertical-align: top;"/>
             <span class="icoStandardMode">마이페이지</span>
         </a>
     </h1>

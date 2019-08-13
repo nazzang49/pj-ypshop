@@ -320,9 +320,9 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                   <thead>
-                                    <tr style="font-size:13px;">
+                                    <tr style="font-size:10px;">
                                       <th><input type="checkbox" id="allChk"></th>
-                                      <th>인덱스 번호</th>
+                                      <th>주문 번호</th>
                                       <th>회원 아이디</th>
                                       <th>주문자 이름</th>                                   
                                       <th>주문자 주소</th>
@@ -340,10 +340,10 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
                               </thead>
                               <tbody>
                               <c:forEach items="${orderList }" var="ovo" varStatus="status">
-                                <tr class="order-detail" onclick="chkOrderDetail()">
+                                <tr style="font-size:10px;" class="order-detail" onclick="chkOrderDetail()">
                                   <!-- 주문번호 -->
                                   <td><input type="checkbox" class="orderNo" value="${ovo.no }"></td>
-                                  <td>${status.count }</td>
+                                  <td>${ovo.no }</td>
                                   <td>${ovo.memberId }</td>
                                   <td>${ovo.customerName }</td>
                                   <td>${ovo.customerAddress }</td>

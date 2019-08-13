@@ -115,8 +115,8 @@ html[xmlns] .slides {display: block;}
 	-ms-transform: rotateX(360deg);
     transition: transform 2s;
 }
-.flex-control-thumbs {margin: 5px 0 0; position: static; overflow: hidden;}
-.flex-control-thumbs li {width: 25%; float: left; margin: 0;}
+.flex-control-thumbs {margin: 5px 0 0; position: static;}
+.flex-control-thumbs li {width: 40%; float: left; margin: 0;}
 .flex-control-thumbs img {width: 100%; display: block; opacity: .7; cursor: pointer;}
 .flex-control-thumbs img:hover {opacity: 1;}
 .flex-control-thumbs .flex-active {opacity: 1; cursor: default;}

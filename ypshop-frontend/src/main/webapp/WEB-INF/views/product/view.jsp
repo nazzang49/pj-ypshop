@@ -180,16 +180,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 		<!-- 이미지 슬라이더 -->
-		<div class="w3_agile_main_grids">
+		<div class="w3_agile_main_grids" style="width:90%;">
 			<div class="w3layouts_main_grid_left">
 				<section class="slider">
 					<div class="flexslider">
 						<ul class="slides">
 						<c:forEach items="${imageList }" var="ivo">
-							<li>
+							<li style="width:450px;">
 								<!-- 썸네일 이미지 -->
-								<div class="w3ls_main_grid_left_grid">
-									<img src="${pageContext.request.contextPath}/assets${ivo.url}" alt="상품 이미지" style="padding-right:48px;"/>
+								<div class="w3ls_main_grid_left_grid" style="width:450px;">
+									<img src="${pageContext.request.contextPath}/assets${ivo.url}" alt="상품 이미지" style="margin-right:250px; height:543px; width:400px;"/>
 								</div>
 							</li>
 						</c:forEach>

@@ -145,7 +145,7 @@ public class UserOrderController {
 	
 	@ApiOperation(value="주문 추가")
 	@PostMapping(value="/add")
-	public ResponseEntity<JSONResult> orderAdd(@ModelAttribute @Valid OrderVO orderVO,
+	public ResponseEntity<JSONResult> orderAdd(@RequestBody @Valid OrderVO orderVO,
 											   BindingResult br) {
 		
 		//본인 인증
@@ -161,12 +161,10 @@ public class UserOrderController {
 		}
 		
 		String returnMsg = userOrderService.주문추가(orderVO);
-		
-		System.out.println("리턴 메시지 : "+returnMsg);
-		
+				
 		Map<String, Object> data = new HashMap<>();
 		data.put("returnMsg", returnMsg);
-		JSONResult result = JSONResult.success(data);
+		JSONResult result = JSONResult.success(returnMsg);
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	
