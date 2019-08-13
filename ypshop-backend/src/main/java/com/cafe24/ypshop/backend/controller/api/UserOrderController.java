@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.cafe24.ypshop.backend.dto.CartDTO;
 import com.cafe24.ypshop.backend.dto.JSONResult;
 import com.cafe24.ypshop.backend.service.UserCartService;
 import com.cafe24.ypshop.backend.service.UserOrderService;
@@ -73,9 +75,28 @@ public class UserOrderController {
 	public JSONResult getCartList(@ModelAttribute CartVO cartVO) {
 
 		//본인 인증
-		
 				
 		List<CartVO> cartList = userCartService.장바구니목록(cartVO);
+		
+		Map<String, Object> data = new HashMap<>();
+		data.put("cartList", cartList);
+		JSONResult result = JSONResult.success(cartList);
+		return result;
+	}
+	
+	//회원별 장바구니 목록_주문 페이지
+	@ApiOperation(value="장바구니 목록")
+	@PostMapping(value="/cart/list")
+	public JSONResult getCartList(@RequestBody CartDTO cartDTO) {
+
+		
+		System.out.println("장바구니 목록 들어온다");
+		
+		//본인 인증
+		List<CartVO> cartList = userCartService.장바구니목록_주문페이지(cartDTO.getCartNoList());
+		
+		
+		System.out.println("선택된 장바구니 사이즈 : "+cartList.size());
 		
 		Map<String, Object> data = new HashMap<>();
 		data.put("cartList", cartList);
@@ -113,8 +134,6 @@ public class UserOrderController {
 	public JSONResult cartDelete(@RequestBody List<Long> cartNoList) {
 		
 		//본인 인증
-		
-		System.out.println("삭제 리스트 : "+cartNoList.get(0));
 		
 		boolean flag = userCartService.장바구니삭제(cartNoList);
 		
@@ -154,9 +173,14 @@ public class UserOrderController {
 	//주문 상세 목록 >> 주문 + 주문 상세 정보
 	@ApiOperation(value="주문 상세 목록")
 	@GetMapping(value="/list/{memberId}")
-	public JSONResult getOrderDetailList(@ModelAttribute OrderVO orderVO) {
+	public JSONResult getOrderDetailList(@PathVariable(value="memberId") String memberId,
+										 @RequestParam(value="period", required=true, defaultValue="-3") int period) {
 
 		//본인 인증
+		
+		OrderVO orderVO = new OrderVO();
+		orderVO.setMemberId(memberId);
+		orderVO.setPeriod(period);
 		
 		Map<String, Object> data = userOrderService.주문상세목록(orderVO);
 		

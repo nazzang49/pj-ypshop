@@ -105,9 +105,6 @@ public class MemberController {
 	@GetMapping("/mypage/{id}")
 	public String mypage(@PathVariable(value="id") String id, Model model) {
 		List<CartVO> cartList = memberService.cartList(id);
-		
-		System.out.println("장바구니 목록 사이즈 : "+cartList.size());
-			
 		model.addAttribute("cartList", cartList);
 		return "member/mypage";
 	}

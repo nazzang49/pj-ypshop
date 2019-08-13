@@ -9,15 +9,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
     <head>
+     	<script src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" >
         <!--[if IE 10]><meta http-equiv="X-UA-Compatible" content="IE=8" /><![endif]-->
         <title>Cafe24-Echosting Admin</title>
                 <link rel="stylesheet" type="text/css" href="//img.echosting.cafe24.com/css/ec/mode/influencer/common.css" media="all" charset="utf-8" />
 
-
-<link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
-
+		
     <script type="text/javascript">function getMultiShopUrl(sUrl)
         {
            if (SHOP.isMultiShop() === false) {
@@ -55,7 +54,22 @@ var EC_SDE_SHOP_NUM = 1;var SHOP = {getLanguage : function() { return "ko_KR"; }
                     }
                 };
             })();</script>
-            <script src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script> 
+           
+            
+            
+<style>
+
+.show-orderdetail{
+	-webkit-transition:0.5s;
+}
+
+.show-orderdetail:hover{
+	cursor:pointer;
+	background:lightgray;
+}
+
+</style>       
+            
             
             </head>
     <body class="ECInfluencer">
@@ -105,6 +119,42 @@ var EC_SDE_SHOP_NUM = 1;var SHOP = {getLanguage : function() { return "ko_KR"; }
     
 </div>
 
+<script>
+//주문 내역 클릭 >> 아래 주문 상세 표시
+
+ 
+
+	function chkOrderDetail(orderNo){
+		var component = $('.orderdetail'+orderNo).css('display');
+		if(component=='table-cell'){
+			$('.orderdetail'+orderNo).hide();
+			return;
+		}
+		
+		//json 형식 String으로 변환된 List 타입의 데이터 받음
+		var jsonArray = ${jsonArrayString};
+		
+		var htmls = '';
+		htmls += '<h2 style="float:left; margin-left:15px;">■ 주문상세</h2><br><table border="1" summary="" class="eChkColor" style="margin: 20px auto;"><caption>회원 목록</caption>';
+		htmls += '<thead><tr style="font-size:20px; color:#B3EAFF;"><th>'+orderNo+'번 주문 상세</th><th>상품 썸네일</th><th>상품명</th><th>상품옵션</th><th>상품가격</th><th>주문수량</th></tr></thead>';
+		htmls += '<tbody class="center">';
+		
+		for(var i=0;i<jsonArray.length;i++){
+			if(orderNo==jsonArray[i].orderNo){
+				var imgSrc = "${pageContext.request.contextPath }/assets"+jsonArray[i].imageUrl
+				htmls += '<td>'+jsonArray[i].no+'</td><td><img src='+imgSrc+'</td><td>${odvo.orderDate }</td><td>${odvo.paymentCategory }</td><td>${odvo.paymentPrice }</td><td>${odvo.orderAmount }</td></tr>'; 
+			}
+		}
+		
+		htmls += '</tbody></table>';
+		
+		$('.orderdetail'+orderNo).html(htmls);
+		$('.orderdetail'+orderNo).show();
+		
+	}
+	
+</script>
+
 <script language='Javascript'>
 
     function montionControlDisable ()
@@ -143,63 +193,8 @@ var EC_SDE_SHOP_NUM = 1;var SHOP = {getLanguage : function() { return "ko_KR"; }
     }
     }
 </script>
-
-<script>
-
-//장바구니 상품 여러개 주문
-$(function(){
-    $("#allChk").click(function(){
-        var chk = $(this).is(":checked");
-        if(chk) {
-        	$(".delete-cart").prop('checked', true);
-        	$('#update-btn').show();
-        	$('#select-status').show();
-        }else {
-        	$(".delete-cart").prop('checked', false);
-        	$('#update-btn').hide();
-        	$('#select-status').hide();
-        }
-    });
-    
-    $('.delete-cart').click(function(){
-    	
-    	//체크된 체크박스 확인
-    	var chkbox = document.getElementsByClassName('delete-cart');
-    	
-    	for(var i=0;i<chkbox.length;i++){
-    		if(chkbox[i].checked){
-    			$('#update-btn').show();
-    			$('#select-status').show();
-    			return;
-    		}
-    	}
-    	$('#update-btn').hide();
-    	$('#select-status').hide();
-    });
-    
-    //상품 주문 by ajax
-    $('#update-btn').click(function(){
-    	
-    	var chkbox = document.getElementsByClassName('delete-cart');
-    	var noList = [];
-    	var status = $('#select-status').val();
-    	
-    	
-    	for(var i=0;i<chkbox.length;i++){
-    		if(chkbox[i].checked){
-    			noList.push(chkbox[i].value);
-    		}
-    	}
-    		    	
-    	//mypage-orderform 페이지 window open
-    	window.open("${pageContext.request.contextPath}/member/order/orderform?noList="+noList, "popup", "width=1700, height=1000");
-    });
-});
-
-</script>
-
-
             <!-- GNB End -->
+
 
             </div><!-- //header -->
             <hr class="layout" />
@@ -223,11 +218,11 @@ $(function(){
 <div id="content">
     <div class="dashboardArea">
         
-        <h1 style="margin:30px 0;">[<sec:authentication property="principal.username"/>]님의 장바구니 리스트</h1>
+        <h1 style="margin:30px 0;">[<sec:authentication property="principal.username"/>]님의 주문 리스트</h1>
 
 		<div class="section" id="QA_profile2">
                     <div class="mTitle">
-                        <h2>장바구니 리스트</h2>
+                        <h2>주문 및 주문상세 리스트</h2>
                         <div class="cTip" code="CU.MM.MS.70"></div>
                     </div>
                     <div class="mState">
@@ -236,106 +231,52 @@ $(function(){
                                             </div>
                     <div class="mCtrl typeHeader">
                         <div class="gLeft">
-                        <script>
-                        
-                        	function deleteChecked(){
-                        		var noList = [];
-                        		
-                        		var chkList = document.getElementsByClassName('delete-cart');
-                        		
-                        		for(var i=0;i<chkList.length;i++){
-                        			if(chkList[i].checked==true){
-                        				noList.push(chkList[i].value);
-                        			}
-                        		}
-                        		
-                        		//장바구니 삭제 by ajax
-                        		$.ajax({
-                    				url:"${pageContext.request.contextPath }/api/order/cart/delete?noList="+noList,
-                    				type:"get",
-                    				dataType:"json",
-                    				success:function(response){
-                    					if(response.result!="success"){
-                    						alert("통신 실패");
-                    						return;
-                    					}
-                    					if(response.data==true){
-                    						alert("선택 상품 삭제 성공");
-                    						return;
-                    					}
-                    					alert("선택 상품 삭제 실패");
-                    				},
-                    				error:function(error){
-                    					console.log(error);
-                    				}
-                    			});
-                        		
-                        	}
-                        </script>
                             <a href="#none" onclick="setBlacklist();" class="btnNormal" style="display: none;"><span>불량회원 설정</span></a>
-                                                            <a href="javascript:deleteChecked()" class="btnNormal"><span><em class="icoDel"></em> 삭제</span></a>
                                                     </div>
                         
                     </div>
-                    		<script>
-                    			//장바구니 여러개 삭제
-                            	$(function(){
-								    $("#allChk").click(function(){
-								        var chk = $(this).is(":checked");
-								        if(chk) $(".delete-cart").prop('checked', true);
-								        else  $(".delete-cart").prop('checked', false);
-								    });
-								});
-                            </script>
-                    
                     <!-- 일반보기 -->
                     <div class="mBoard gScroll gCellNarrow">
+                   
                    
                         <table border="1" summary="" class="eChkColor">
                             <caption>회원 목록</caption>
                             
                             <thead>
                             <tr style="font-size:25px;">
-                                <th scope="col"><input type="checkbox" id="allChk"></th>
-                            <th>상품 썸네일</th>
-                            <th>상품명</th>
-                            <th>상품 가격</th>
-                            <th>상품 옵션</th>
-                            <th>수량</th>
-                                                            </tr>
-                            <script>Gui.set('sms')</script>
+                            	<th>주문 번호</th>
+                                <th>회원 아이디</th>
+                                <th>주문일자</th>                                   
+                                <th>결제방법</th>
+                                <th>결제금액</th>
+                                <th>주문상태</th>
+                            </tr>
                             </thead>
                              
                             <tbody class="center">
                             
-                           
-                            
-                            <c:forEach items="${cartList }" var="cvo" varStatus="status">
-                            <tr style="font-size:20px;">
-                            
-                            <!-- 장바구니 여러개 삭제 -->
-                            <td><input type="checkbox" name="no" class="delete-cart" value="${cvo.no }"></td>
-                            
-                            <td><img src="${pageContext.servletContext.contextPath}/assets${cvo.thumbnailUrl}" style="width:90px; height:90px;"></img></td>
-                            <td><a href="${pageContext.servletContext.contextPath}/product/view/${cvo.productNo}" style="text-decoration: underline;">${cvo.productName }</a></td>
-                            <td>${cvo.cartPrice }원</td>
-                            <td>${cvo.firstOptionName } / ${cvo.secondOptionName }</td>
-                            <td>${cvo.cartAmount }</td>
-                            
+                            <c:forEach items="${orderList }" var="ovo" varStatus="status">
+                            <tr class="show-orderdetail" style="font-size:18px;" onclick="chkOrderDetail(${ovo.no})">
+                                <td>${ovo.no }</td>
+	                            <td>${ovo.memberId }</td>
+	                            <td>${ovo.orderDate }</td>
+	                            <td>${ovo.paymentCategory }</td>
+	                            <td>${ovo.paymentPrice }</td>
+	                            <td>${ovo.status }</td>
+                            </tr>
+                            <!-- 주문 상세 내역 위치 -->
+                            <tr>
+                            	<td colspan='6' class="orderdetail${ovo.no }" style="display: none;"></td>
                             </tr>
                          
                             </c:forEach>
-                            
-                            
-                                                        </tbody>
+                			</tbody>
                         </table>
-                        <button class="btn btn-primary" style="float:right; display:none; margin:10px;" id="update-btn" onclick="updateStatus()">선택 상품 주문</button>
                         
                     </div>
                     <div class="mCtrl typeFooter">
                         <div class="gLeft">
                             <a href="#none" onclick="setBlacklist();" class="btnNormal" style="display: none;"><span>불량회원 설정</span></a>
-                                                            <a href="#none" onclick="delete_choice()" class="btnNormal"><span><em class="icoDel"></em> 삭제</span></a>
                                                     </div>
                         
                     </div>

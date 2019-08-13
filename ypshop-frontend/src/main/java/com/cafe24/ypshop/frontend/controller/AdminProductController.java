@@ -111,9 +111,7 @@ public class AdminProductController {
 		
 		//현재 상품의 옵션 목록 >> 조합
 		List<OptionVO> optionList = adminProductService.optionList(productNo);
-		
-		System.out.println("카테고리 리스트 사이즈 : "+optionList.size());
-		
+	
 		model.addAttribute("optionList", optionList);
 		model.addAttribute("productNo", productNo);
 		

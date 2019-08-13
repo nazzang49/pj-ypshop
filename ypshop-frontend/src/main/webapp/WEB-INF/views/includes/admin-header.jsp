@@ -18,7 +18,7 @@
 		</select>
 		<!--search-box, 회원 기준-->
 		<input type="text" placeholder="search" name="searchKwd"
-			style="margin-top: 8px; height: 42px;">
+			style="margin-top: 8px; height: 42px; margin-left:10px;">
 		<button class="btn btn-info" type="submit"
 			style="height: 45px;">검색</button>
 	</form>

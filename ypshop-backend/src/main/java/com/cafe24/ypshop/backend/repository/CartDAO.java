@@ -24,6 +24,11 @@ public class CartDAO {
 		return sqlSession.selectList("cart.selectAllByMemberId", cartVO);
 	}
 	
+	//(회원) 장바구니 목록_주문 페이지
+	public List<CartVO> selectAllByCartNoList(List<Long> cartNoList) {
+		return sqlSession.selectList("cart.selectAllByCartNoList", cartNoList);
+	}
+	
 	//(회원) 장바구니 수정
 	public boolean update(CartVO cartVO) {
 		return sqlSession.update("cart.update", cartVO)==1;

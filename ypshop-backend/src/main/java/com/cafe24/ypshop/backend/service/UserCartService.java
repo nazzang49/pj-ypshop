@@ -23,6 +23,11 @@ public class UserCartService {
 		return cartDao.selectAllByMemberId(cartVO);
 	}
 	
+	//장바구니 목록_주문 페이지
+	public List<CartVO> 장바구니목록_주문페이지(List<Long> cartNoList) {
+		return cartDao.selectAllByCartNoList(cartNoList);
+	}
+	
 	//장바구니 수정
 	public boolean 장바구니수정(CartVO cartVO) {
 		return cartDao.update(cartVO);

@@ -34,6 +34,32 @@
 	]]>
 	</select>
 	
+	<!-- 장바구니 목록_주문 페이지 -->
+	<select id="selectAllByCartNoList" resultType="cartvo" parameterType="list">
+	<![CDATA[
+		select A.no, A.firstOptionName, o1.name as secondOptionName, A.productOptionNo, A.cartAmount, A.cartPrice, A.productName, A.thumbnailUrl, A.productNo
+		from product_option po1, option o1,
+			(select c.no, c.cartAmount, c.cartPrice, c.productOptionNo, p.name as productName, p.no as productNo, o.name as firstOptionName, i.url as thumbnailUrl
+			 from cart c, product p, product_option po, option o, image i
+			 where c.productOptionNo=po.no
+			 and po.firstOptionNo=o.no
+			 and po.productNo=p.no
+			 and p.no=i.productNo
+			 and i.repOrBasic='R'
+			 and
+			 ]]>
+			 <foreach collection="list" item="cartNo"  open="(" close=")" separator="or">
+			 <![CDATA[
+				c.no = #{cartNo}
+             ]]>	
+        	 </foreach>
+			 <![CDATA[
+			 ) A
+		where A.productOptionNo=po1.no
+		and po1.secondOptionNo=o1.no
+	]]>
+	</select>
+	
 	<!-- 장바구니 수정 -->
 	<update id="update" parameterType="cartvo">
 	<![CDATA[
